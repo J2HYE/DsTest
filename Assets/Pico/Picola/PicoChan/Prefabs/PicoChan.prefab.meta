@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 69f400b67a6969c44b4032356e7ffc59
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 220038
+  packageName: PicoChan
+  packageVersion: 1.1.0
+  assetPath: Assets/Picola/PicoChan/Prefabs/PicoChan.prefab
+  uploadId: 697236

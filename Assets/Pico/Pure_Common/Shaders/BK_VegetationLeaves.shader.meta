@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0f96a2937f6bace459a5fdaac39c0fb3
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269085
+  packageName: 'Pure Nature 2 : Meadows'
+  packageVersion: 2.0
+  assetPath: Assets/BK/Pure_Common/Shaders/BK_VegetationLeaves.shader
+  uploadId: 698480

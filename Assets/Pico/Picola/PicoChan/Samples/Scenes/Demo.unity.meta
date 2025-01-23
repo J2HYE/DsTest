@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b24383e6ff2e3d849bae01a12924f499
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 220038
+  packageName: PicoChan
+  packageVersion: 1.1.0
+  assetPath: Assets/Picola/PicoChan/Samples/Scenes/Demo.unity
+  uploadId: 697236

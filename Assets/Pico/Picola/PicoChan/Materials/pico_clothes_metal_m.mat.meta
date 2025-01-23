@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 71688a23f533c4f40882469dd387e67f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 220038
+  packageName: PicoChan
+  packageVersion: 1.1.0
+  assetPath: Assets/Picola/PicoChan/Materials/pico_clothes_metal_m.mat
+  uploadId: 697236

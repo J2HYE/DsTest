@@ -1,0 +1,211 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90062c853d589b6499a00bda1cf84ee7, type: 3}
+  m_Name: SpeechDataBase
+  m_EditorClassIdentifier: 
+  speechData:
+  - keyChar: A
+    blendShapeWeights:
+    - 100
+    - 0
+    - 0
+    - 0
+    - 0
+  - keyChar: B
+    blendShapeWeights:
+    - 100
+    - 0
+    - 50
+    - 0
+    - 0
+  - keyChar: C
+    blendShapeWeights:
+    - 50
+    - 50
+    - 0
+    - 100
+    - 0
+  - keyChar: D
+    blendShapeWeights:
+    - 0
+    - 0
+    - 0
+    - 50
+    - 0
+  - keyChar: E
+    blendShapeWeights:
+    - 0
+    - 0
+    - 0
+    - 100
+    - 0
+  - keyChar: F
+    blendShapeWeights:
+    - 100
+    - 0
+    - 0
+    - 0
+    - 100
+  - keyChar: G
+    blendShapeWeights:
+    - 0
+    - 0
+    - 50
+    - 50
+    - 0
+  - keyChar: H
+    blendShapeWeights:
+    - 0
+    - 50
+    - 0
+    - 50
+    - 0
+  - keyChar: I
+    blendShapeWeights:
+    - 0
+    - 100
+    - 0
+    - 0
+    - 0
+  - keyChar: J
+    blendShapeWeights:
+    - 0
+    - 50
+    - 100
+    - 0
+    - 0
+  - keyChar: K
+    blendShapeWeights:
+    - 0
+    - 0
+    - 50
+    - 100
+    - 0
+  - keyChar: L
+    blendShapeWeights:
+    - 0
+    - 100
+    - 0
+    - 50
+    - 0
+  - keyChar: M
+    blendShapeWeights:
+    - 100
+    - 0
+    - 0
+    - 0
+    - 50
+  - keyChar: N
+    blendShapeWeights:
+    - 0
+    - 50
+    - 0
+    - 0
+    - 50
+  - keyChar: O
+    blendShapeWeights:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 100
+  - keyChar: P
+    blendShapeWeights:
+    - 100
+    - 0
+    - 0
+    - 0
+    - 0
+  - keyChar: Q
+    blendShapeWeights:
+    - 0
+    - 0
+    - 50
+    - 0
+    - 100
+  - keyChar: R
+    blendShapeWeights:
+    - 0
+    - 100
+    - 0
+    - 0
+    - 50
+  - keyChar: S
+    blendShapeWeights:
+    - 0
+    - 50
+    - 0
+    - 100
+    - 0
+  - keyChar: T
+    blendShapeWeights:
+    - 0
+    - 50
+    - 0
+    - 50
+    - 0
+  - keyChar: U
+    blendShapeWeights:
+    - 0
+    - 0
+    - 100
+    - 0
+    - 0
+  - keyChar: V
+    blendShapeWeights:
+    - 100
+    - 0
+    - 0
+    - 0
+    - 50
+  - keyChar: W
+    blendShapeWeights:
+    - 0
+    - 0
+    - 50
+    - 0
+    - 100
+  - keyChar: X
+    blendShapeWeights:
+    - 0
+    - 50
+    - 0
+    - 100
+    - 0
+  - keyChar: Y
+    blendShapeWeights:
+    - 0
+    - 100
+    - 0
+    - 50
+    - 0
+  - keyChar: Z
+    blendShapeWeights:
+    - 0
+    - 50
+    - 0
+    - 100
+    - 0
+  - keyChar: Space
+    blendShapeWeights:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - keyChar: Hyphen
+    blendShapeWeights:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0

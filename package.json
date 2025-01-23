@@ -1,0 +1,14 @@
+{
+  "name": "Ds Project",
+  "version": "0.1.0",
+  "description": "Ds Project using @primer/css",
+  "dependencies": {
+    "@primer/css": "17.0.1"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "build": "echo 'Add build script here'",
+    "test": "echo 'Add test script here'"
+  }
+}

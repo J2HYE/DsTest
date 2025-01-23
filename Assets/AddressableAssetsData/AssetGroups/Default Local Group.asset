@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_GUID: db797d008b89a3b46a6cdc8f5bd151e3
+  m_SerializeEntries:
+  - m_GUID: 12bfdddd3aefefd41854f4534945697e
+    m_Address: Assets/Images/ItemIcons
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprites
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 483553874c67b384faa36c10d9b61340
+    m_Address: Assets/Sound/SFXClip
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SFX
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eae4f479f8ee42b49b3dfa2b7f812e1c
+    m_Address: Assets/Sound/MusicClip
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Music
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: e9afe2d152eeb57479eab53a0fa3b502, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 71460fed4443056488e5ac55712b7255, type: 2}
+    - {fileID: 11400000, guid: 8c55e82e885b0f44b8432db961830fff, type: 2}

@@ -1,0 +1,351 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c1d7051b94e224fab8b62268918be4, type: 3}
+  m_Name: CharacterList
+  m_EditorClassIdentifier: 
+  players:
+  - characterName: Hero
+    characterType: 0
+    prefab: {fileID: 0}
+    strength: 10
+    agility: 8
+    vitality: 15
+    intelligence: 12
+    speed: 5
+    attackSpeed: 1.2
+    stamina: 100
+    staminaCurrent: 100
+    staminaRecoveryRate: 0.1
+    mpRecoveryRate: 0.1
+    level: 1
+    currentExperience: 0
+    experienceToLevelUp: 100
+    maxHp: 150
+    currentHp: 150
+    maxMp: 125
+    currentMp: 125
+    physicalDefense: 25
+    magicDefense: 24
+    physicalDamage: 20
+    magicDamage: 36
+    criticalChance: 0.08
+    baseDamage: 30
+    skills:
+    - Dash
+    - Slash
+    gold: 0
+  monsters:
+  - characterName: Mushroom
+    characterType: 1
+    prefab: {fileID: 1382258774799692, guid: ac4b96d130307034f9e992d5cd02153f, type: 3}
+    strength: 7
+    agility: 11
+    vitality: 8
+    intelligence: 3
+    speed: 2
+    attackSpeed: 2
+    stamina: 10
+    staminaCurrent: 0
+    staminaRecoveryRate: 0.1
+    mpRecoveryRate: 0.1
+    level: 1
+    currentExperience: 0
+    experienceToLevelUp: 0
+    maxHp: 0
+    currentHp: 0
+    maxMp: 0
+    currentMp: 0
+    physicalDefense: 0
+    magicDefense: 0
+    physicalDamage: 0
+    magicDamage: 0
+    criticalChance: 0
+    baseDamage: 0
+    dropItems:
+    - Item001
+    - Main_Quest001
+    experienceReward: 50
+    goldReward: 10
+    instance: {fileID: 0}
+  - characterName: SlimeRabbit
+    characterType: 1
+    prefab: {fileID: 1773656247975474, guid: aa477004f21649040b0b911f94e97df3, type: 3}
+    strength: 8
+    agility: 16
+    vitality: 7
+    intelligence: 2
+    speed: 3
+    attackSpeed: 2
+    stamina: 15
+    staminaCurrent: 0
+    staminaRecoveryRate: 1
+    mpRecoveryRate: 0
+    level: 1
+    currentExperience: 0
+    experienceToLevelUp: 0
+    maxHp: 0
+    currentHp: 0
+    maxMp: 0
+    currentMp: 0
+    physicalDefense: 0
+    magicDefense: 0
+    physicalDamage: 0
+    magicDamage: 0
+    criticalChance: 0
+    baseDamage: 0
+    dropItems:
+    - Item001
+    - Main_Quest001
+    experienceReward: 55
+    goldReward: 12
+    instance: {fileID: 0}
+  - characterName: Bear
+    characterType: 1
+    prefab: {fileID: 2788726836488354371, guid: d0f8dd4dc93173d438445bfcb26904f7, type: 3}
+    strength: 17
+    agility: 26
+    vitality: 15
+    intelligence: 6
+    speed: 2.5
+    attackSpeed: 1.5
+    stamina: 20
+    staminaCurrent: 0
+    staminaRecoveryRate: 2
+    mpRecoveryRate: 0
+    level: 1
+    currentExperience: 0
+    experienceToLevelUp: 0
+    maxHp: 0
+    currentHp: 0
+    maxMp: 0
+    currentMp: 0
+    physicalDefense: 0
+    magicDefense: 0
+    physicalDamage: 0
+    magicDamage: 0
+    criticalChance: 0
+    baseDamage: 0
+    dropItems:
+    - Item026
+    experienceReward: 150
+    goldReward: 50
+    instance: {fileID: 0}
+  - characterName: ZombieGorilla
+    characterType: 1
+    prefab: {fileID: 0}
+    strength: 20
+    agility: 31
+    vitality: 13
+    intelligence: 7
+    speed: 2
+    attackSpeed: 1.3
+    stamina: 25
+    staminaCurrent: 0
+    staminaRecoveryRate: 3
+    mpRecoveryRate: 0
+    level: 1
+    currentExperience: 0
+    experienceToLevelUp: 0
+    maxHp: 0
+    currentHp: 0
+    maxMp: 0
+    currentMp: 0
+    physicalDefense: 0
+    magicDefense: 0
+    physicalDamage: 0
+    magicDamage: 0
+    criticalChance: 0
+    baseDamage: 0
+    dropItems: []
+    experienceReward: 200
+    goldReward: 75
+    instance: {fileID: 0}
+  - characterName: Devil
+    characterType: 1
+    prefab: {fileID: 0}
+    strength: 27
+    agility: 41
+    vitality: 20
+    intelligence: 21
+    speed: 3
+    attackSpeed: 2
+    stamina: 30
+    staminaCurrent: 0
+    staminaRecoveryRate: 5
+    mpRecoveryRate: 0
+    level: 1
+    currentExperience: 0
+    experienceToLevelUp: 0
+    maxHp: 0
+    currentHp: 0
+    maxMp: 0
+    currentMp: 0
+    physicalDefense: 0
+    magicDefense: 0
+    physicalDamage: 0
+    magicDamage: 0
+    criticalChance: 0
+    baseDamage: 0
+    dropItems: []
+    experienceReward: 300
+    goldReward: 100
+    instance: {fileID: 0}
+  - characterName: Golem
+    characterType: 1
+    prefab: {fileID: 0}
+    strength: 37
+    agility: 51
+    vitality: 10
+    intelligence: 11
+    speed: 1
+    attackSpeed: 0.8
+    stamina: 50
+    staminaCurrent: 0
+    staminaRecoveryRate: 2
+    mpRecoveryRate: 0
+    level: 1
+    currentExperience: 0
+    experienceToLevelUp: 0
+    maxHp: 0
+    currentHp: 0
+    maxMp: 0
+    currentMp: 0
+    physicalDefense: 0
+    magicDefense: 0
+    physicalDamage: 0
+    magicDamage: 0
+    criticalChance: 0
+    baseDamage: 0
+    dropItems: []
+    experienceReward: 400
+    goldReward: 120
+    instance: {fileID: 0}
+  - characterName: Bulldog
+    characterType: 1
+    prefab: {fileID: 0}
+    strength: 32
+    agility: 46
+    vitality: 17
+    intelligence: 9
+    speed: 2.8
+    attackSpeed: 1.8
+    stamina: 35
+    staminaCurrent: 0
+    staminaRecoveryRate: 4
+    mpRecoveryRate: 0
+    level: 1
+    currentExperience: 0
+    experienceToLevelUp: 0
+    maxHp: 0
+    currentHp: 0
+    maxMp: 0
+    currentMp: 0
+    physicalDefense: 0
+    magicDefense: 0
+    physicalDamage: 0
+    magicDamage: 0
+    criticalChance: 0
+    baseDamage: 0
+    dropItems: []
+    experienceReward: 350
+    goldReward: 90
+    instance: {fileID: 0}
+  - characterName: MophanS
+    characterType: 2
+    prefab: {fileID: 0}
+    strength: 52
+    agility: 71
+    vitality: 25
+    intelligence: 26
+    speed: 4
+    attackSpeed: 3
+    stamina: 60
+    staminaCurrent: 0
+    staminaRecoveryRate: 10
+    mpRecoveryRate: 0
+    level: 1
+    currentExperience: 0
+    experienceToLevelUp: 0
+    maxHp: 0
+    currentHp: 0
+    maxMp: 0
+    currentMp: 0
+    physicalDefense: 0
+    magicDefense: 0
+    physicalDamage: 0
+    magicDamage: 0
+    criticalChance: 0
+    baseDamage: 0
+    dropItems: []
+    experienceReward: 1000
+    goldReward: 500
+    instance: {fileID: 0}
+  - characterName: MophanSub1
+    characterType: 1
+    prefab: {fileID: 0}
+    strength: 42
+    agility: 56
+    vitality: 23
+    intelligence: 16
+    speed: 3.5
+    attackSpeed: 2.5
+    stamina: 50
+    staminaCurrent: 0
+    staminaRecoveryRate: 8
+    mpRecoveryRate: 0
+    level: 1
+    currentExperience: 0
+    experienceToLevelUp: 0
+    maxHp: 0
+    currentHp: 0
+    maxMp: 0
+    currentMp: 0
+    physicalDefense: 0
+    magicDefense: 0
+    physicalDamage: 0
+    magicDamage: 0
+    criticalChance: 0
+    baseDamage: 0
+    dropItems: []
+    experienceReward: 800
+    goldReward: 300
+    instance: {fileID: 0}
+  - characterName: MophanSub2
+    characterType: 1
+    prefab: {fileID: 0}
+    strength: 47
+    agility: 61
+    vitality: 23
+    intelligence: 19
+    speed: 3.7
+    attackSpeed: 2.6
+    stamina: 55
+    staminaCurrent: 0
+    staminaRecoveryRate: 9
+    mpRecoveryRate: 0
+    level: 1
+    currentExperience: 0
+    experienceToLevelUp: 0
+    maxHp: 0
+    currentHp: 0
+    maxMp: 0
+    currentMp: 0
+    physicalDefense: 0
+    magicDefense: 0
+    physicalDamage: 0
+    magicDamage: 0
+    criticalChance: 0
+    baseDamage: 0
+    dropItems: []
+    experienceReward: 850
+    goldReward: 350
+    instance: {fileID: 0}
