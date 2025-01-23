@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 3b9b55e63c63e6342a851cb0024917d6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18022
+  packageName: Stone Frog
+  packageVersion: 1.0.1
+  assetPath: Assets/BagIdea/GUIScript.cs
+  uploadId: 6918

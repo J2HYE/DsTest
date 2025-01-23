@@ -1,0 +1,78 @@
+using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class MainCutSceneManager : BaseManager<MainCutSceneManager>
+{
+
+    [SerializeField] private Transform timeLineManager;
+    [SerializeField] private Transform fadeBgTransform;
+    private Image fadeBg;
+    public AnimationCurve curve;
+    private int id;
+
+    
+    public void OnCutScene(int id)// 1 : 메인1, 2 : 메인2
+    {
+        if(this.id > 0)
+        {
+            Debug.Log($"컷 씬 진행중 이따 신호 보내세요");    
+            return;
+        }
+        this.id = id;
+        StartCoroutine(CutSceneFadeOut());
+    }
+
+    protected override void Start() 
+    {
+        base.Start();
+        fadeBg = fadeBgTransform.GetComponent<Image>();
+    }
+    
+    IEnumerator CutSceneFadeOut()
+    {
+        // 1초 동안 이미지의 알파값이 a 1->0으로
+        float t = 0;
+        while (t < 1f)
+        {
+            t += Time.deltaTime;
+            float a = curve.Evaluate(t);
+            fadeBg.color = new Color(0f, 0f, 0f, a); // (r ,g ,b 는 검은색)
+
+            yield return 0f;
+        }
+        CutSceneStart();
+    }
+
+    private void CutSceneStart()
+    {
+        
+        Debug.Log($"메인{id}컷 씬 시작");
+        fadeBgTransform.gameObject.SetActive(false);
+        timeLineManager.GetChild(id-1).gameObject.SetActive(true);
+    }
+    public void CutSceneEndSignal()
+    {
+        timeLineManager.GetChild(id-1).gameObject.SetActive(false);
+        id = 0;
+        Debug.Log($"메인{id}컷 씬 종료됨");
+        fadeBgTransform.gameObject.SetActive(true);
+        StartCoroutine(CutSceneFadeIn());
+    }
+    private IEnumerator CutSceneFadeIn()
+    {
+        // 1초 동안 이미지의 알파값이 a 1->0으로
+        float t = 1f;
+        while (t > 0f)
+        {
+            t -= Time.deltaTime;
+            float a = curve.Evaluate(t);
+            fadeBg.color = new Color(0f, 0f, 0f, a); // (r ,g ,b 는 검은색)
+            yield return 0f;
+        }
+    }
+    protected override void HandleGameStateChange(GameSystemState newState, object additionalData)
+    {
+
+    }
+}
