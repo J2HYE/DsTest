@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9fe9ba9d26f6a544fbb02b1e945872f8
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64248
+  packageName: 'Little Dragons: Tiger'
+  packageVersion: 3.9a
+  assetPath: Assets/Malbers Animations/Common/Shaders/Mask8Realistic.shader
+  uploadId: 639431

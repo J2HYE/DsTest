@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 64ce74c36ec896d42a70b7451202a4da
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64248
+  packageName: 'Little Dragons: Tiger'
+  packageVersion: 3.9a
+  assetPath: Assets/Malbers Animations/Common/Shaders/Golem Shader.shader
+  uploadId: 639431

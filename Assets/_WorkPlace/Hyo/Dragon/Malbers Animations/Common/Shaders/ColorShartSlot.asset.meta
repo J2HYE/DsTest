@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 231fe18505db4a84b9c478d379c9247d
+timeCreated: 1530225461
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64248
+  packageName: 'Little Dragons: Tiger'
+  packageVersion: 3.9a
+  assetPath: Assets/Malbers Animations/Common/Shaders/ColorShartSlot.asset
+  uploadId: 639431
