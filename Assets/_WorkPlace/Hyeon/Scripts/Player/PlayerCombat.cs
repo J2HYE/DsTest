@@ -6,9 +6,9 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     private PlayerController controller;
+    public WeaponManager weapon;
     private PlayerData playerData;
-    public GameObject sword;
-    private Collider swordCollider;
+    public Collider weaponCollider;
     [SerializeField] private float attackPerceptionRange = 5f;
     [SerializeField] private float skillPerceptionRange = 5f;
 
@@ -16,11 +16,11 @@ public class PlayerCombat : MonoBehaviour
     private Transform closestMonster;
 
     public bool CanReceiveInput { get; set; } = true;
+    public bool hasWeapon;
 
     public bool inputReceived = false;
 
     public Quaternion targetRotation;
-    public Collider SwordCollider => swordCollider;
 
     public HashSet<GameObject> DamagedTargets { get; set; } = new HashSet<GameObject>();
     private static readonly int[] AttackStateHash = {
@@ -37,14 +37,23 @@ public class PlayerCombat : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<PlayerController>();
-        swordCollider = sword.GetComponent<Collider>();
+        //weaponCollider = currentWeapon.GetComponent<Collider>();
         playerData = controller.playerData;
 
-        swordCollider.enabled = false;
+        if(weaponCollider != null)
+        {
+            weaponCollider.enabled = false;
+        }
     }
 
     private void Update()
     {
+        ////////////////////////////////////////////////////////////
+        // if (controller.uiCheck) return;
+        // controller.uiCheck UI 켜져있을때 막기위한 추가 확인조건
+        /// JWS 2025.01.27 13:00 수정
+        if (controller.uiCheck) return;
+
         //Debug.Log($"Current CanMove : {controller.CanMove}");
 
         HandleAttackInput();
@@ -55,7 +64,8 @@ public class PlayerCombat : MonoBehaviour
 
     private void HandleAttackInput()
     {
-        if (InputManager.InputActions.actions["Attack"].triggered && CanReceiveInput)
+
+        if (InputManager.InputActions.actions["Attack"].triggered && CanReceiveInput && hasWeapon)
         {
             Debug.Log("Attack");
             inputReceived = true;
@@ -181,11 +191,6 @@ public class PlayerCombat : MonoBehaviour
         dir.y = 0f;
         targetRotation = Quaternion.LookRotation(dir);
         controller.transform.rotation = targetRotation;
-    }
-
-    public void ToggleSwordVisible()
-    {
-        sword.SetActive(!sword.activeSelf);
     }
 
     private void OnDrawGizmosSelected()

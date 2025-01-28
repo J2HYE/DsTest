@@ -16,11 +16,7 @@ public class Rock : InteractableOb
     {
         base.Interact(toolTag); // 기본 Interact 호출
 
-        if (toolTag == "Axe") // 도끼로 타격
-        {
-            Debug.Log("도끼로 돌을 때림!");
-        }
-        else if (toolTag == "Pickaxe") // 곡괭이로 타격
+        if (toolTag == "Pickaxe") // 곡괭이로 타격
         {
             Debug.Log("곡괭이로 돌을 때림!");
         }

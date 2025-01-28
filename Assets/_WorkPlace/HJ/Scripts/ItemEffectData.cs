@@ -10,35 +10,38 @@ public class ItemEffect
     public float duration;              //아이템 지속 시간
     public GameObject effectParticle;   //이펙트 사용시 파티클 프리팹
 
+    [Header("초기화 해야하는 아이템은 체크 해제")]
+    public bool isAlreadyInitialize = false;
+
     //초기화
     public void Initialize(Item item)
     {
+        if (isAlreadyInitialize)
+            return;
+
         Debug.Log($"{item.name} 아이템 이펙트 초기화");
 
         SetEffectTypeByItemType(item);
         SetItemSize(item);
         AddEffectParticle();
-        if(effectType == EffectType.Equip)
+        if (effectType == EffectType.Equip)
         {
             ApplyGradeBonus(item);
         }
-        else if(effectType == EffectType.Hp || effectType == EffectType.Mp)
+        else if (effectType == EffectType.Hp || effectType == EffectType.Mp)
         {
             SetEffectAmount(item);
         }
-        else if(effectType == EffectType.Buff)
+        else if (effectType == EffectType.Buff)
         {
             SetAmountDuration(item);
         }
+
+        isAlreadyInitialize = true;
     }
 
-    /// <summary>
-    /// TODO
-    /// 1. 이펙트 타입별로 파티클 프리팹 알아서 적용되도록(완료)
-    /// 2. 아이템 사이즈를 item에서 어떻게 받아올지 구상(완)
-    /// 3. 아이템 사이즈와 등급에 따라 duration을 얼마나 줄지 구상(완)
-    /// 4. 이펙트 초기화를 어느 시점에서 해야될지
-    /// </summary>
+
+
     public class MultiValue
     {
         public float bonusPercnetage;

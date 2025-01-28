@@ -1,15 +1,21 @@
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private GameObject itemPrefab;
     [SerializeField] private Transform itemsParent;
+    [SerializeField] private GameObject itemInfoObject;
+    [SerializeField] private TextMeshProUGUI[] itemInfoTextField;
+    [SerializeField] private Image itemInfoImageField;
+
     private Button[] buttons;
-    private int currentButtonIndex = 0;
+    private int currentButtonIndex = 6;
     private Dictionary<string, List<Item>> categorizedItems = new Dictionary<string, List<Item>>();
+
+   
 
     private void Awake()
     {
@@ -19,12 +25,18 @@ public class InventoryUI : MonoBehaviour
     private void OnEnable()
     {
         AddButtonListeners();
-        UpdateUI();
+        OnButtonClick(currentButtonIndex);
     }
 
     private void OnDisable()
     {
         RemoveButtonListeners();
+        currentButtonIndex = 6;
+    }
+
+    private void Start()
+    {
+
     }
 
     private void CategorizeItems()
@@ -46,42 +58,52 @@ public class InventoryUI : MonoBehaviour
     {
         CategorizeItems();
         ClearUI();
-        // 기본 검증
         if (buttons == null || buttons.Length == 0)
         {
             Debug.LogWarning("버튼이 설정되지 않았거나 버튼 배열이 비어있습니다.");
             return;
         }
-        if (InventoryManager.InventoryList.Count == 0)
+        switch (currentButtonIndex)
         {
-            Debug.LogWarning("인벤토리가 비어있습니다.");
-            return;
-        }
-        if (!System.Enum.IsDefined(typeof(CategotyItemType), currentButtonIndex))
-        {
-            Debug.LogError($"유효하지 않은 카테고리 인덱스: {currentButtonIndex}");
-            return;
-        }
+            case 7:
+                Debug.Log("제거 처리로직 필요");
+                break;
 
-        string selectedTag = ((CategotyItemType)currentButtonIndex).ToString();
-        if (selectedTag == CategotyItemType.전체아이템.ToString())
-        {
-            foreach (var category in categorizedItems.Values)
-            {
-                foreach (var item in category)
+            case 8:
+                GameStateMachine.Instance.ChangeState(GameSystemState.MainMenu);
+                break;
+
+            case 9:
+                Debug.Log("장착 처리로직 필요");
+                break;
+
+            default:
+                if (currentButtonIndex >= 0 && currentButtonIndex < 7)
                 {
-                    CreateItemUI(item);
+                    string selectedTag = ((CategotyItemType)currentButtonIndex).ToString();
+
+                    if (selectedTag == CategotyItemType.전체아이템.ToString())
+                    {
+                        foreach (var category in categorizedItems.Values)
+                        {
+                            foreach (var item in category)
+                            {
+                                CreateItemUI(item);
+                            }
+                        }
+                    }
+                    else if (categorizedItems.ContainsKey(selectedTag))
+                    {
+                        foreach (var item in categorizedItems[selectedTag])
+                        {
+                            CreateItemUI(item);
+                        }
+                    }
                 }
-            }
-        }
-        else if (categorizedItems.ContainsKey(selectedTag))
-        {
-            foreach (var item in categorizedItems[selectedTag])
-            {
-                CreateItemUI(item);
-            }
+                break;
         }
     }
+
 
     private void ClearUI()
     {
@@ -94,9 +116,10 @@ public class InventoryUI : MonoBehaviour
     private void CreateItemUI(Item item)
     {
         var inventoryItem = Instantiate(itemPrefab, itemsParent);
-        inventoryItem.GetComponentInChildren<TextMeshProUGUI>().text = item.ToStringTMPro();
-        if (item.sprite != null ) inventoryItem.GetComponentsInChildren<Image>()[1].sprite = item.sprite;
-        Debug.Log(item.ToStringTMPro());
+        inventoryItem.GetComponent<InventoryTooltip>().currentItem = item;
+        inventoryItem.GetComponent<InventoryTooltip>().InventorytooltipWindow = itemInfoObject;
+        inventoryItem.GetComponent<InventoryTooltip>().textPoint = itemInfoTextField;
+        inventoryItem.GetComponent<InventoryTooltip>().ItemImage = itemInfoImageField;
     }
 
     public void AddButtonListeners()
@@ -104,6 +127,11 @@ public class InventoryUI : MonoBehaviour
         for (int i = 0; i < buttons.Length; i++)
         {
             int index = i;
+            if (index >= 0 && index < 7)
+            {
+                Animator buttonAnimator = buttons[index].animator;
+                buttonAnimator.SetTrigger("Idle");
+            }
             buttons[i].onClick.RemoveAllListeners();
             buttons[i].onClick.AddListener(() => OnButtonClick(index));
         }
@@ -120,17 +148,22 @@ public class InventoryUI : MonoBehaviour
     private void OnButtonClick(int buttonIndex)
     {
         currentButtonIndex = buttonIndex;
+        if (currentButtonIndex >= 0 && currentButtonIndex < 7)
+        {
+            Animator buttonAnimator = buttons[buttonIndex].animator;
+            buttonAnimator.SetTrigger("Selected");
+        }
         UpdateUI();
     }
 }
 
 public enum CategotyItemType
 {
-    전체아이템,
-    소비아이템,   // 소비형 (예: 포션류)
-    재료아이템,   // 재료형 (예: 비늘, 꽃 등)
-    무기아이템,    // 장비형 (예: 무기류)
-    방어아이템,    // 장비형 (예: 방어구류)
-    퀘스트아이템,    // 퀘스트용
-    특수아이템    // 버프증가, 스킬효과등 특수효과템들.
+    무기,         // Weapon
+    방어구,       // Armor
+    소모품,       // Consumable
+    퀘스트,       // QuestItem
+    제작재료,     // Material
+    장신구,        // Accessory
+    전체아이템
 }

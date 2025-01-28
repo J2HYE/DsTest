@@ -9,39 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: b186db147679f6e438a89c164da859d8, type: 3}
   m_Name: SkillList
-  m_EditorClassIdentifier: Assembly-CSharp::SkillList
+  m_EditorClassIdentifier: 
   skillList:
   - skillType: 0
     skillName: Fire
     damage: 10
-    cooldown: 3
+    cooldown: 5
     energyCost: 10
     effectPrefab: {fileID: 1000011113172478, guid: 4b9e1e5074422484cb2d2aca777ef525, type: 3}
     activeTriggerName: Skill_1
     particleDelay: 0.5
-  - skillType: 0
-    skillName: Water
-    damage: 10
-    cooldown: 3
-    energyCost: 10
-    effectPrefab: {fileID: 0}
-    activeTriggerName: Skill_1
-    particleDelay: 0
-  - skillType: 0
-    skillName: eee
-    damage: 10
-    cooldown: 3
-    energyCost: 10
-    effectPrefab: {fileID: 0}
-    activeTriggerName: Skill_1
-    particleDelay: 0
-  - skillType: 0
-    skillName: fff
-    damage: 10
-    cooldown: 3
-    energyCost: 10
-    effectPrefab: {fileID: 0}
-    activeTriggerName: Skill_1
-    particleDelay: 0

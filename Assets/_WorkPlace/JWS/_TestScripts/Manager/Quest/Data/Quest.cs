@@ -13,7 +13,8 @@ public class Quest
     public string questType;
     public string name;
     public string description;
-    public string npcid;
+    public string targetID;
+    public string questGiver;
     public int acceptCount;
     [Header("퀘스트 상태정보")]
     public bool isCompleted;
@@ -29,10 +30,14 @@ public class Quest
         this.name = name;
         this.description = description;
         this.isCompleted = false;
-        this.requiredConditions = requiredConditions;
+        this.requiredConditions = requiredConditions ?? new Dictionary<string, QuestCondition>(); // null 방지
         this.progress = new Dictionary<string, int>();
-        this.rewards = rewards;
+        this.rewards = rewards ?? new List<Reward>();
         this.acceptCount = 0;
+        foreach (string condition in requiredConditions.Keys)
+        {
+            this.progress.Add(condition, 0);
+        }
     }
 
     public string ToStringTMPro()
@@ -136,10 +141,4 @@ public enum QuestConditionType
     Explore,  // 지역 탐험
     Kill,     // 몬스터 처치
     Meet      // NPC 만남
-}
-
-[CreateAssetMenu(fileName = "QuestList", menuName = "Ds Project/QuestList")]
-public class QuestList : ScriptableObject
-{
-    public List<Quest> questList = new List<Quest>();
 }

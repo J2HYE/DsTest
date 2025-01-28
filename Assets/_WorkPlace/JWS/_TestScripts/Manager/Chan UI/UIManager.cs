@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -17,9 +16,14 @@ public class UIManager : BaseManager<UIManager>
     [SerializeField] private GameObject dialogWindow;
     [SerializeField] private GameObject questWindow;
     [SerializeField] private GameObject inventoryUI;
+    [SerializeField] private GameObject shopUI;
     [SerializeField] private GameObject interactTextUI;
     [SerializeField] private GameObject historyLog;
     [SerializeField] private GameObject historyWindow;
+    [SerializeField] private GameObject infoMessageWindow;
+    [SerializeField] private GameObject InventorytooltipWindow;
+    [SerializeField] private GameObject characterStaus;
+    [SerializeField] private GameObject quickSlot;
     [SerializeField] private Transform questListParent;
     private PickUpItemTextDisplay pickUpItemTextDisplay;
     public GameObject DisplaySpeechWindow => dialogWindow;
@@ -32,6 +36,7 @@ public class UIManager : BaseManager<UIManager>
     public static MainButtonUI MainButtonUI;
     public static InteractPopupUI InteractPopupUI;
     public static HistoryUI HistoryUI;
+    public static ShopUI ShopUI;
     public static HistoryWindowUI HistoryWindowUI;
 
     protected override void OnEnable()
@@ -45,27 +50,36 @@ public class UIManager : BaseManager<UIManager>
         mainCanvas.SetActive(true);
         dialogWindow.SetActive(false);
         questWindow.SetActive(false);
+        shopUI.SetActive(false);
+        infoMessageWindow.SetActive(false);
         inventoryUI.gameObject.SetActive(false);
         historyWindow.gameObject.SetActive(false);
+        InventorytooltipWindow.SetActive(false);
+        characterStaus.SetActive(false);
         HistoryManager = new HistoryManager();
         HistoryUI = historyLog.GetComponent<HistoryUI>();
         HistoryWindowUI = historyWindow.GetComponent<HistoryWindowUI>();
+        ShopUI = shopUI.GetComponent<ShopUI>();
     }
 
     private void Update()
     {
-        if (IsUIWindowOpen()/* || IsPointerOverUI()*/)
+        CheckInputStat();
+    }
+
+    private void CheckInputStat()
+    {
+        // if (IsUIWindowOpen() || IsPointerOverUI())
+        if (IsUIWindowOpen())
         {
-            InputManager.InputActions.actions["Attack"].Disable(); // UI가 열려 있을 때 공격 비활성화
-            InputManager.InputActions.actions["Interact"].Disable(); // UI가 열려 있을 때 공격 비활성화
+            InputManager.InputActions.actions["Interact"].Disable();
         }
         else
         {
-            InputManager.InputActions.actions["Interact"].Enable(); // UI가 열려 있을 때 공격 비활성화
-            InputManager.InputActions.actions["Attack"].Enable(); // UI가 닫혀 있을 때 공격 활성화
+            InputManager.InputActions.actions["Interact"].Enable();
+            InputManager.InputActions.actions["Move"].Enable();
         }
-        InputManager.InputActions.actions["Inventory"].Enable();
-        InputManager.InputActions.actions["Quest"].Enable();
+        if (infoMessageWindow.activeSelf && Input.anyKey) TogglinfoMessageWindow("");
     }
 
     private bool IsPointerOverUI()
@@ -83,24 +97,53 @@ public class UIManager : BaseManager<UIManager>
     {
         dialogWindow.SetActive(!dialogWindow.activeSelf);
         mainCanvas.SetActive(!mainCanvas.activeSelf);
+        quickSlot.SetActive(false);
     }
 
     public void ToggleHistorylog()
     {
         historyWindow.SetActive(!historyWindow.activeSelf);
         mainCanvas.SetActive(!mainCanvas.activeSelf);
+        quickSlot.SetActive(false);
     }
 
     public void ToggleInventory()
     {
         inventoryUI.gameObject.SetActive(!inventoryUI.gameObject.activeSelf);
         mainCanvas.SetActive(!mainCanvas.activeSelf);
+        quickSlot.SetActive(true);
     }
 
     public void ToggleQuestWindow()
     {
         questWindow.gameObject.SetActive(!questWindow.gameObject.activeSelf);
         mainCanvas.SetActive(!mainCanvas.activeSelf);
+        quickSlot.SetActive(false);
+    }
+    
+    public void ToggleStatusWindow()
+    {
+        characterStaus.gameObject.SetActive(!characterStaus.gameObject.activeSelf);
+        mainCanvas.SetActive(!mainCanvas.activeSelf);
+        quickSlot.SetActive(false);
+    }
+        
+    public void TogglShopWindow(NPCData nPCData)
+    {
+        shopUI.gameObject.SetActive(!shopUI.gameObject.activeSelf);
+        mainCanvas.SetActive(!mainCanvas.activeSelf);
+        quickSlot.SetActive(false);
+        if (shopUI.gameObject.activeSelf) ShopUI.SetShopInfo(nPCData);
+    }
+
+    public void TogglinfoMessageWindow(string message)
+    {
+        infoMessageWindow.gameObject.SetActive(!infoMessageWindow.gameObject.activeSelf);
+        if (infoMessageWindow.gameObject.activeSelf)
+        {
+            Debug.Log("토글 : " + message);
+            infoMessageWindow.transform.GetComponentInChildren<TextMeshProUGUI>().text = message;
+        }
     }
 
     public void InventoryUpdate()
@@ -131,7 +174,7 @@ public class UIManager : BaseManager<UIManager>
             }
 
             bool isMainQuestAdded = false;
-
+            List<Quest> completQuest = new List<Quest>();
             foreach (var quest in QuestManager.QuestDatabase)
             {
                 GameObject questObjPrefab;
@@ -148,21 +191,39 @@ public class UIManager : BaseManager<UIManager>
                 var questObj = Instantiate(questObjPrefab, questListParent);
                 questObj.transform.SetSiblingIndex(quest.questType == "메인퀘스트" ? 0 : questListParent.childCount);
                 DisplayQuestTextAtPrefab(questObj, quest);
+                if (quest.isCompleted) completQuest.Add(quest);
+            }
+
+            foreach (var quest in completQuest)
+            {
+                if (quest.questType == "메인퀘스트")
+                {
+                    QuestManager.Instance.CompleteQuest(quest);
+                    //Destroy(gameObj, 2f);
+                }
             }
         }
     }
 
     private void DisplayQuestTextAtPrefab(GameObject gameObj, Quest quest)
     {
+        QuestDistanceCheck distanceCheck = gameObj.GetComponent<QuestDistanceCheck>();
         TextMeshProUGUI[] subDisplay = gameObj.GetComponentsInChildren<TextMeshProUGUI>(includeInactive: true);
-        string text = quest.description;
-        if (text.Length > 20)
+        if (distanceCheck == null)
         {
-            text = text.Substring(0, 20) + "...";
+            distanceCheck = gameObj.AddComponent<QuestDistanceCheck>();
         }
-        subDisplay[0].text = text;
-        subDisplay[2].text = quest.ToStringTMPro();
-        if (quest.isCompleted) { subDisplay[3].gameObject.SetActive(true); }
+        distanceCheck.SetQuest(quest);
+        if (subDisplay.Length > 0)
+        {
+            distanceCheck.SetUIText(subDisplay[0]);
+        }
+        if (quest.isCompleted && quest.questType != "메인퀘스트")
+        {
+            if (subDisplay.Length > 3)
+                subDisplay[3].gameObject.SetActive(true);
+        }
+        Canvas.ForceUpdateCanvases();
     }
 
     public void DisplayDialogWindow(NPCData nPCData)
@@ -193,9 +254,7 @@ public class UIManager : BaseManager<UIManager>
         acceptButton.onClick.RemoveAllListeners();
         subDisplay[0].text = title;
 
-        // Check if it is a completed main quest
         bool isCompletedMainQuest = quest.questType == "메인퀘스트" && QuestManager.CompletedQuests.Exists(q => q.id == quest.id);
-
         if (isCompletedMainQuest)
         {
             SetupDialog(
@@ -229,7 +288,6 @@ public class UIManager : BaseManager<UIManager>
                 () => HandleQuest(quest, canAccept)
             );
         }
-        Debug.Log("Quest dialog setup complete.");
     }
 
     private void SetupDialog(Button button, TextMeshProUGUI display, string buttonText, string message, UnityEngine.Events.UnityAction onClickAction)
@@ -290,8 +348,12 @@ public class UIManager : BaseManager<UIManager>
     {
         EventSystem.current.SetSelectedGameObject(null);
         mainCanvas.SetActive(true);
+        quickSlot.SetActive(true);
         dialogWindow.SetActive(false);
         questWindow.SetActive(false);
+        characterStaus.SetActive(false);
+        shopUI.SetActive(false);
+        infoMessageWindow.SetActive(false);
         inventoryUI.gameObject.SetActive(false);
         historyWindow.gameObject.SetActive(false);
     }
@@ -307,8 +369,6 @@ public class UIManager : BaseManager<UIManager>
         var go = Instantiate(Instance.damagePopUpPrefab, finalPosition, Quaternion.identity);
         TextMeshProUGUI displayText = go.GetComponentInChildren<TextMeshProUGUI>();
         displayText.text = text;
-
-        Debug.Log("출력위치 : " + targetPosition);
         if (Instance.tagColors.TryGetValue(msgTag, out string colorCode))
         {
             if (ColorUtility.TryParseHtmlString(colorCode, out Color color))
@@ -325,12 +385,13 @@ public class UIManager : BaseManager<UIManager>
 
     public bool IsUIWindowOpen()
     {
-        return dialogWindow.activeSelf || questWindow.activeSelf || inventoryUI.gameObject.activeSelf || historyWindow.gameObject.activeSelf;
+        return shopUI.activeSelf || characterStaus.activeSelf || dialogWindow.activeSelf || questWindow.activeSelf || 
+            inventoryUI.gameObject.activeSelf || historyWindow.gameObject.activeSelf || infoMessageWindow.gameObject.activeSelf;
     }
 
     protected override void HandleGameStateChange(GameSystemState newState, object additionalData)
     {
-        UIClose();
+        if (newState != GameSystemState.InfoMessage) UIClose();
         #region Delete
 
         switch (newState)
@@ -339,12 +400,21 @@ public class UIManager : BaseManager<UIManager>
                 UIClose();
                 break;
             case GameSystemState.Inventory:
-
                 ToggleInventory();
                 break;
             case GameSystemState.QuestReview:
-
                 ToggleQuestWindow();
+                break;
+            case GameSystemState.StatusUI:
+                ToggleStatusWindow();
+                break;
+            case GameSystemState.Shopping:
+                NPCData npcData = additionalData as NPCData;
+                TogglShopWindow(npcData);
+                break;
+            case GameSystemState.InfoMessage:
+                string message = additionalData as string;
+                TogglinfoMessageWindow(message);
                 break;
         }
         #endregion

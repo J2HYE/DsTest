@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ public class GenerateData
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void InitializeItems(ItemList ItemDatabase)
     {
-        InitializeItemDatabase(ItemDatabase.itemList);
+        //InitializeItemDatabase(ItemDatabase.itemList);
     }
 
     private void InitializeItemDatabase(List<Item> ItemDatabase)
@@ -100,26 +101,44 @@ public class GenerateData
                 {
                     { "location_001", new QuestCondition(QuestConditionType.Explore, "location_001", "용사의 마지막 전투 장소", 1) }
                 },
-                new List<Reward> { new Reward("Item001", 1, 10, 10) }),
+                new List<Reward> 
+                {
+                    new Reward("Main_Quest001", 1, 10, 10),
+                    new Reward("Main_Quest002", 1, 10, 10),
+                    new Reward("Main_Quest003", 1, 10, 10),
+                    new Reward("Main_Quest004", 1, 10, 10),
+                    new Reward("Main_Quest005", 1, 10, 10)
+                }),
+
+            // 1장 - 1: 마울로 향해
+            new Quest("메인퀘스트", "quest101-1", "마을을 찾아가기",
+                "마을을 찾아 이동하기.",
+                new Dictionary<string, QuestCondition>
+                {
+                    { "location_0011", new QuestCondition(QuestConditionType.Explore, "location_0011", "마을을 찾아가기", 1) }
+                },
+                new List<Reward> { new Reward("Main_Quest001", 1, 10, 10) }),
 
             // 2장: 소년과 숲 속의 발견
             new Quest("메인퀘스트", "quest102", "숲 속의 알",
                 "숲에서 딸기를 모으고, 이상한 소리를 따라 알을 발견하세요.",
                 new Dictionary<string, QuestCondition>
                 {
-                    { "Item_strawberry", new QuestCondition(QuestConditionType.Collect, "Item_strawberry", "딸기", 5) },
-                    { "location_002", new QuestCondition(QuestConditionType.Explore, "location_002", "이상한 소리가 나는 장소", 1) }
+                    { "location_002", new QuestCondition(QuestConditionType.Explore, "location_002", "딸기밭 찾아가기", 1) },
+                    { "Item_strawberry", new QuestCondition(QuestConditionType.Collect, "Item_strawberry", "딸기", 10) },
+                    { "location_0022", new QuestCondition(QuestConditionType.Explore, "location_0022", "이상한 소리가 나는 장소", 1) },
+                    { "Main_Quest001", new QuestCondition(QuestConditionType.Collect, "Main_Quest001", "용의 알", 1) }
                 },
-                new List<Reward> { new Reward("Item002", 1, 15, 15) }),
+                new List<Reward> { new Reward("Main_Quest001", 1, 15, 15) }),
 
             // 3장: 알에서 태어난 생명체
             new Quest("메인퀘스트", "quest103", "알의 신비",
-                "알에서 깨어난 생명체를 몰래 숲으로 데려가세요.",
+                "알에서 깨어난 생명체를 몰래 숨길곳으로 데려가세요.",
                 new Dictionary<string, QuestCondition>
                 {
-                    { "location_003", new QuestCondition(QuestConditionType.Explore, "location_003", "숲의 은신처", 1) }
+                    { "location_003", new QuestCondition(QuestConditionType.Explore, "location_003", "알의 은신처", 1) }
                 },
-                new List<Reward> { new Reward("Item003", 1, 20, 20) }),
+                new List<Reward> { new Reward("Main_Quest001", 1, 20, 20) }),
 
             // 4장: 소년과 생물체의 우정
             new Quest("메인퀘스트", "quest104", "신비한 동물의 도움",
@@ -127,9 +146,9 @@ public class GenerateData
                 new Dictionary<string, QuestCondition>
                 {
                     { "location_004", new QuestCondition(QuestConditionType.Explore, "location_004", "숲 속의 나무", 1) },
-                    { "Item_wood", new QuestCondition(QuestConditionType.Collect, "Item_wood", "나무", 5) }
+                    { "Quest001", new QuestCondition(QuestConditionType.Collect, "Quest001", "나뭇가지", 5) }
                 },
-                new List<Reward> { new Reward("Item004", 1, 30, 30) }),
+                new List<Reward> { new Reward("Main_Quest001", 1, 30, 30) }),
 
             // 5장: 하급 마족의 위협
             new Quest("메인퀘스트", "quest105", "엄마를 지켜라",
@@ -138,17 +157,18 @@ public class GenerateData
                 {
                     { "Bear", new QuestCondition(QuestConditionType.Kill, "Bear", "하급 마족", 3) }
                 },
-                new List<Reward> { new Reward("Item005", 1, 40, 50) }),
+                new List<Reward> { new Reward("Main_Quest001", 1, 40, 50) }),
 
             // 6장: 숲 속에서 힘을 연마하다
             new Quest("메인퀘스트", "quest106", "새로운 힘",
                 "숲 속에서 나무와 돌을 공격하며 힘을 연마하세요.",
                 new Dictionary<string, QuestCondition>
                 {
+                    { "location_004", new QuestCondition(QuestConditionType.Explore, "location_004", "숲 속의 나무", 1) },
                     { "Item_rock", new QuestCondition(QuestConditionType.Collect, "Item_rock", "돌", 5) },
                     { "Item_tree", new QuestCondition(QuestConditionType.Collect, "Item_tree", "나무", 5) }
                 },
-                new List<Reward> { new Reward("", 0, 50, 20) }),
+                new List<Reward> { new Reward("Main_Quest001", 0, 50, 20) }),
 
             // 7장: 엄마의 복수를 실행해라
             new Quest("메인퀘스트", "quest107", "홀로서기",
@@ -157,7 +177,7 @@ public class GenerateData
                 {
                     { "Mushroom", new QuestCondition(QuestConditionType.Kill, "Mushroom", "하급 관리자", 3) }
                 },
-                new List<Reward> { new Reward("Item006", 1, 60, 60) }),
+                new List<Reward> { new Reward("Main_Quest001", 1, 60, 60) }),
 
             // 8장: 마을의 위험에 대비하라
             new Quest("메인퀘스트", "quest108", "강해지기 위한 연습",
@@ -166,7 +186,7 @@ public class GenerateData
                 {
                     { "location_005", new QuestCondition(QuestConditionType.Explore, "location_005", "위험구역", 1) }
                 },
-                new List<Reward> { new Reward("", 0, 70, 70) }),
+                new List<Reward> { new Reward("Main_Quest001", 0, 70, 70) }),
 
             // 9장: 마족과의 전투
             new Quest("메인퀘스트", "quest109", "마을을 지켜라",
@@ -176,7 +196,7 @@ public class GenerateData
                     { "Mushroom", new QuestCondition(QuestConditionType.Kill, "Mushroom", "하급 관리자", 3) },
                     { "SlimRabbit", new QuestCondition(QuestConditionType.Kill, "SlimRabbit", "중급 관리자 모파안", 1) }
                 },
-                new List<Reward> { new Reward("Item007", 1, 80, 80) }),
+                new List<Reward> { new Reward("Main_Quest001", 1, 80, 80) }),
 
             // 10장: 새로운 여정의 시작
             new Quest("메인퀘스트", "quest110", "마왕을 찾아서",
@@ -187,8 +207,8 @@ public class GenerateData
                 },
                 new List<Reward>
                 {
-                    new Reward("Item008", 1, 90, 90),
-                    new Reward("Item009", 1, 90, 90)
+                    new Reward("Main_Quest001", 1, 90, 90),
+                    new Reward("Main_Quest001", 1, 90, 90)
                 })
         };
         return questList;
@@ -202,11 +222,11 @@ public class GenerateData
                 "회복 포션 10개를 수집하세요.",
                 new Dictionary<string, QuestCondition>
                 {
-                    { "Item001", new QuestCondition(QuestConditionType.Collect, "Item001", "회복 포션", 10) }
+                    { "Main_Quest001", new QuestCondition(QuestConditionType.Collect, "Item001", "회복 포션", 10) }
                 },
                 new List<Reward>
                 {
-                    new Reward("Item001", 5, 100, 50)
+                    new Reward("Main_Quest001", 5, 100, 50)
                 }),
 
             new Quest("서브퀘스트", "quest002", "철검 제작 재료 수집",
@@ -458,97 +478,131 @@ public class GenerateData
     }
 
 
-
     public void GenerateRandomNPCs(int numberOfNPCs, List<Quest> availableQuests, List<Item> availableItems, List<Quest> baseDatabase, NPCList npcDataList)
     {
-        List<NPCData> mainNpcList = new List<NPCData>();
-        List<NPCData> npcList = new List<NPCData>();
-
-        for (int i = 0; i < 10; i++)
-        {
-            string npcName = $"메인퀘스트NPC {i + 1}";
-            NPCType npcType = NPCType.퀘스트;
-            NPCState npcState = NPCState.중립;
-            NPCData mainnpc = new NPCData
-            {
-                id = $"MainNPC_{i + 1}",
-                name = npcName,
-                npcType = npcType,
-                currentState = npcState,
-                quests = new Quest[1],
-                isQuestGiver = true,
-                isInteractable = true,
-                description = "메인퀘스트를 제공하는 NPC입니다."
-            };
-            mainnpc.quests[0] = baseDatabase[i];
-            mainNpcList.Add(mainnpc);
-        }
-        npcDataList.mainQuestNpcLists = mainNpcList;
+        List<Quest> mainQuest = GenerateMainQuestLists();
 
         for (int i = 0; i < numberOfNPCs; i++)
         {
             string npcName = $"NPC_{i + 1}";
-            NPCType npcType = (NPCType)Random.Range(0, System.Enum.GetValues(typeof(NPCType)).Length);
-            NPCState npcState = NPCState.중립;
+            NPCType npcType = (NPCType)UnityEngine.Random.Range(0, Enum.GetValues(typeof(NPCType)).Length);
+
             NPCData npc = new NPCData
             {
                 id = $"NPC_{i + 1}",
                 name = npcName,
                 npcType = npcType,
-                currentState = npcState
+                currentState = NPCState.중립
             };
-            switch (npcType)
-            {
-                case NPCType.상점:
-                    npc.isShop = true;
-                    npc.isInteractable = true;
-                    npc.items = GenerateRandomItems(availableItems, 3, 6); // 3~6개의 랜덤 아이템
-                    npc.description = "아이템을 판매하는 상점 NPC입니다.";
-                    break;
 
-                case NPCType.퀘스트:
-                    npc.isQuestGiver = true;
-                    npc.isInteractable = true;
-                    npc.quests = GenerateRandomQuests(availableQuests, 1, 3); // 1~3개의 랜덤 퀘스트
-                    npc.description = "퀘스트를 제공하는 NPC입니다.";
-                    break;
-
-                case NPCType.정보제공:
-                    npc.isInteractable = true;
-                    npc.description = "게임 정보를 제공하는 NPC입니다.";
-                    npc.dialogue = new[] { "저기 동굴에 보물이 있습니다.", "이 지역의 몬스터는 불에 약합니다." };
-                    break;
-
-                case NPCType.상호작용:
-                    npc.description = "특정 장치를 작동시키는 NPC입니다.";
-                    npc.isInteractable = true;
-                    npc.interactionCondition = "특정 아이템 필요";
-                    break;
-                case NPCType.힐러:
-                    npc.isInteractable = true;
-                    npc.description = "플레이어를 회복시켜주는 NPC입니다.";
-                    npc.dialogue = new[] { "필요한 치료가 있으신가요?", "안전을 기원합니다." };
-                    // npc.items = GenerateRandomItems(availableItems.Where(item => item.type == ItemType.회복형).ToList(), 2, 5);
-                    break;
-                case NPCType.적NPC:
-                    npc.currentState = NPCState.적;
-                    npc.description = "플레이어를 공격할 수 있는 적대적 NPC입니다.";
-                    break;
-
-                case NPCType.동료:
-                    npc.currentState = NPCState.동료;
-                    npc.description = "플레이어의 동료가 될 수 있는 NPC입니다.";
-                    break;
-
-                default:
-                    npc.isInteractable = true;
-                    npc.description = "일반 대화만 가능한 NPC입니다.";
-                    break;
-            }
-            npcList.Add(npc);
+            ConfigureNPC(npc, npcType, availableQuests, availableItems);
+            npcDataList.npcLists.Add(npc);
         }
-        npcDataList.npcLists = npcList;
+
+        npcDataList.mainQuestNpcLists = GenerateMainQuestNPCs(mainQuest);
+        npcDataList.shopNpcLists = CreateShopNPC();
     }
+
+    private List<NPCData> GenerateMainQuestNPCs(List<Quest> baseDatabase)
+    {
+        List<NPCData> mainNpcList = new List<NPCData>();
+        for (int i = 0; i < baseDatabase.Count; i++)
+        {
+            string npcName = $"메인퀘스트NPC {i + 1}";
+            NPCData mainnpc = new NPCData
+            {
+                id = $"MainNPC_{i + 1}",
+                name = npcName,
+                npcType = NPCType.퀘스트,
+                currentState = NPCState.중립,
+                quests = new[] { baseDatabase[i] },
+                isQuestGiver = true,
+                isInteractable = true,
+                description = "메인 퀘스트를 제공하는 NPC입니다."
+            };
+            mainNpcList.Add(mainnpc);
+        }
+        return mainNpcList;
+    }
+
+    private List<NPCData> CreateShopNPC()
+    {
+        List<NPCData> shopNpcList = new List<NPCData>();
+        for (int i = 0; i < 20 ; i++)
+        {
+            string npcName = $"상점NPC_{i + 1}";
+            var shopData = new ShopData
+            {
+                shopId = npcName,
+                shopName = npcName,
+                grade = 0, //(ItemGrade)UnityEngine.Random.Range(0, Enum.GetValues(typeof(ItemGrade)).Length),
+                type = (ItemType)UnityEngine.Random.Range(0, Enum.GetValues(typeof(ItemType)).Length),
+                //isSpecific = UnityEngine.Random.Range(0, 2) == 1
+            };
+            shopData.Initialize();
+
+            shopNpcList.Add(new NPCData
+            {
+                id = npcName,
+                name = npcName,
+                npcType = NPCType.상점,
+                currentState = NPCState.중립,
+                isShop = true,
+                isInteractable = true,
+                shopData = shopData,
+                description = "아이템을 판매하는 상점 NPC입니다."
+            });
+        }
+        return shopNpcList;
+    }
+
+    // NPC 구성
+    private void ConfigureNPC(NPCData npc, NPCType npcType, List<Quest> availableQuests, List<Item> availableItems)
+    {
+        switch (npcType)
+        {
+            case NPCType.퀘스트:
+                npc.isQuestGiver = true;
+                npc.isInteractable = true;
+                npc.quests = GenerateRandomQuests(availableQuests, 1, 3); // 1~3개의 랜덤 퀘스트
+                npc.description = "퀘스트를 제공하는 NPC입니다.";
+                break;
+
+            case NPCType.정보제공:
+                npc.isInteractable = true;
+                npc.description = "게임 정보를 제공하는 NPC입니다.";
+                npc.dialogue = new[] { "저기 동굴에 보물이 있습니다.", "이 지역의 몬스터는 불에 약합니다." };
+                break;
+
+            case NPCType.상호작용:
+                npc.description = "특정 장치를 작동시키는 NPC입니다.";
+                npc.isInteractable = true;
+                npc.interactionCondition = "특정 아이템 필요";
+                break;
+
+            case NPCType.힐러:
+                npc.isInteractable = true;
+                npc.description = "플레이어를 회복시켜주는 NPC입니다.";
+                npc.dialogue = new[] { "필요한 치료가 있으신가요?", "안전을 기원합니다." };
+                break;
+
+            case NPCType.적NPC:
+                npc.currentState = NPCState.적;
+                npc.description = "플레이어를 공격할 수 있는 적대적 NPC입니다.";
+                break;
+
+            case NPCType.동료:
+                npc.currentState = NPCState.동료;
+                npc.description = "플레이어의 동료가 될 수 있는 NPC입니다.";
+                break;
+
+            default:
+                npc.isInteractable = true;
+                npc.description = "일반 대화만 가능한 NPC입니다.";
+                break;
+        }
+    }
+
 
     private Item[] GenerateRandomItems(List<Item> availableItems, int min, int max)
     {
@@ -557,12 +611,12 @@ public class GenerateData
             Debug.LogWarning("아이템 목록이 비어 있습니다. 아이템을 생성할 수 없습니다.");
             return new Item[0]; // 빈 배열 반환
         }
-        int itemCount = Mathf.Clamp(Random.Range(min, max + 1), 0, availableItems.Count);
+        int itemCount = Mathf.Clamp(UnityEngine.Random.Range(min, max + 1), 0, availableItems.Count);
         Item[] items = new Item[itemCount];
 
         for (int i = 0; i < itemCount; i++)
         {
-            items[i] = availableItems[Random.Range(0, availableItems.Count)];
+            items[i] = availableItems[UnityEngine.Random.Range(0, availableItems.Count)];
         }
 
         return items;
@@ -587,14 +641,14 @@ public class GenerateData
 
     private Quest[] GenerateRandomQuests(List<Quest> availableQuests, int min, int max)
     {
-        int questCount = Random.Range(min, max + 1);
+        int questCount = UnityEngine.Random.Range(min, max + 1);
         Quest[] quests = new Quest[questCount];
 
         bool hasMainQuest = false;
 
         for (int i = 0; i < questCount; i++)
         {
-            Quest randomQuest = availableQuests[Random.Range(0, availableQuests.Count)];
+            Quest randomQuest = availableQuests[UnityEngine.Random.Range(0, availableQuests.Count)];
             if (randomQuest.questType == "메인퀘스트")
             {
                 if (hasMainQuest)
@@ -614,12 +668,12 @@ public class GenerateData
 
     private Quest[] GenerateRandomQuests(List<Quest> availableQuests, int min, int max, string questTypeFilter = null)
     {
-        int questCount = Random.Range(min, max + 1);
+        int questCount = UnityEngine.Random.Range(min, max + 1);
         Quest[] quests = new Quest[questCount];
 
         for (int i = 0; i < questCount; i++)
         {
-            Quest randomQuest = availableQuests[Random.Range(0, availableQuests.Count)];
+            Quest randomQuest = availableQuests[UnityEngine.Random.Range(0, availableQuests.Count)];
 
             if (!string.IsNullOrEmpty(questTypeFilter) && randomQuest.questType != questTypeFilter)
             {

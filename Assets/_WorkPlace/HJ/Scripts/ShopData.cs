@@ -1,7 +1,5 @@
-using UnityEngine;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 [Serializable]
 public class ShopData
@@ -10,6 +8,9 @@ public class ShopData
     public string shopName;                     //상점이름
     public ItemType type;                       //상점이 다루는 아이템 타입
     public ItemGrade grade;                     //상점이 다루는 아이템 등급
+    /// <summary>
+    /// UI에서 띄우는 아이템
+    /// </summary>
     public List<Item> availableItems;           //판매 아이템 리스트
     public float valueReductionRate = 0.7f;     //화폐가치 감소율
     public bool isInteractable = true;          //활성화 여부
@@ -18,7 +19,6 @@ public class ShopData
 
     public void Initialize()
     {
-        Debug.Log("상점 초기화");
         UpdateAvailableItems();
     }
 
@@ -28,7 +28,7 @@ public class ShopData
         availableItems = ItemManager.Instance.GetItemsByTypeAndGrade(type, grade);
 
         //판매 아이템 리스트에서 퀘스트 아이템 제거
-        availableItems.RemoveAll(i => i.id.Contains("Quest"));
+        availableItems.RemoveAll(i => i.isQuestItem == true);
 
         if (isSpecific)
         {

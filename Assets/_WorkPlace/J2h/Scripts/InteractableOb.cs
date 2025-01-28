@@ -11,13 +11,16 @@ public abstract class InteractableOb : MonoBehaviour
 
     public virtual void Interact(string toolTag)
     {
-        hitCount++;
-        Debug.Log($"현재 타격 수: {hitCount}/{maxHits}");
-
-        if (hitCount >= maxHits)
+        if(toolTag == "Axe")
         {
-            DropItems();  // 아이템 드롭
-            DestroyObject(); // 오브젝트 파괴
+            hitCount++;
+            Debug.Log($"현재 타격 수: {hitCount}/{maxHits}");
+
+            if (hitCount >= maxHits)
+            {
+                DropItems();  // 아이템 드롭
+                DestroyObject(); // 오브젝트 파괴
+            }
         }
     }
 

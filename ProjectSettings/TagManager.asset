@@ -7,7 +7,9 @@ TagManager:
   - Ground
   - Monster
   - PickUpItem
-  - CinemachineTarget
+  - Animal
+  - Dragon
+  - FieldItem
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - Ds Player
   - Water
   - UI
-  - 
+  - Dragon
   - 
   - 
   - 
@@ -29,6 +31,7 @@ TagManager:
   - 
   - 
   - 
+  - ItemBox
   - 
   - 
   - 
@@ -38,12 +41,14 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - PostProcess
   - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Button_Layer
+    uniqueID: 3871785045
     locked: 0
   m_RenderingLayers:
   - Default

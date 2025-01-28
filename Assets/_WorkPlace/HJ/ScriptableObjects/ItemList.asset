@@ -13,29 +13,31 @@ MonoBehaviour:
   m_Name: ItemList
   m_EditorClassIdentifier: 
   itemList:
-  - id: Main_Quest001
-    name: "\uC6A9\uC0AC\uC758 \uAC80\uC758 \uC870\uAC01"
-    description: "\uC6A9\uC0AC\uAC00 \uB0A8\uAE34 \uAC80\uC758 \uD55C \uC870\uAC01\uC785\uB2C8\uB2E4."
-    type: 3
-    grade: 2
+  - id: Item_radish
+    name: "\uBB34"
+    description: "\uC6A9\uC758 \uB465\uC9C0 \uADFC\uCC98\uC5D0 \uBD84\uD3EC\uB418\uC5B4
+      \uC788\uB294 \uC544\uC774\uD15C\uC774\uB2E4."
+    type: 4
     costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 0
+    quantity: 0
+    maxStack: 15
+    isDiscardable: 1
     isStackable: 1
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 94d59a1802e9a4e4faa4ec7d093d14da, type: 3}
     dropChance: 0
     effect:
       effectType: 0
       itemSize: 0
       duration: 0
       effectParticle: {fileID: 0}
+      isAlreadyInitialize: 1
+    isQuestItem: 1
     itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
       MaxHealth: 0
       MaxMana: 0
       PhysicalAttack: 0
@@ -45,34 +47,38 @@ MonoBehaviour:
       CriticalChance: 0
       AttackSpeed: 0
       Evasion: 0
+    grade: 0
     equipmentSlot: 0
+    weaponType: 0
+    isEquired: 0
     consumableType: 0
     effectAmount: 0
-    questId: 
-  - id: Main_Quest002
-    name: "\uC2E0\uBE44\uD55C \uC54C"
-    description: "\uC232\uC5D0\uC11C \uBC1C\uACAC\uD55C \uC2E0\uBE44\uB85C\uC6B4
-      \uC0DD\uBB3C\uCCB4\uC758 \uC54C\uC785\uB2C8\uB2E4."
-    type: 3
-    grade: 4
+    questId: Main1
+  - id: Item_beat
+    name: "\uBE44\uD2B8"
+    description: "\uC6A9\uC758 \uB465\uC9C0 \uADFC\uCC98\uC5D0 \uBD84\uD3EC\uB418\uC5B4
+      \uC788\uB294 \uC544\uC774\uD15C\uC774\uB2E4."
+    type: 4
     costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 0
+    quantity: 0
+    maxStack: 15
+    isDiscardable: 1
     isStackable: 1
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: a2072f0990eb1fd44906f0af2d104e55, type: 3}
     dropChance: 0
     effect:
       effectType: 0
       itemSize: 0
       duration: 0
       effectParticle: {fileID: 0}
+      isAlreadyInitialize: 1
+    isQuestItem: 1
     itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
       MaxHealth: 0
       MaxMana: 0
       PhysicalAttack: 0
@@ -82,71 +88,79 @@ MonoBehaviour:
       CriticalChance: 0
       AttackSpeed: 0
       Evasion: 0
+    grade: 0
     equipmentSlot: 0
+    weaponType: 0
+    isEquired: 0
     consumableType: 0
     effectAmount: 0
-    questId: 
-  - id: Main_Quest003
+    questId: Main1
+  - id: Item_egg
+    name: "\uC6A9\uC758 \uC54C"
+    description: "\uC6A9\uC758 \uC54C"
+    type: 3
+    costValue: 0
+    quantity: 0
+    maxStack: 1
+    isDiscardable: 0
+    isStackable: 0
+    sprite: {fileID: 21300000, guid: c01059c98feb7b14380ee55e8917e663, type: 3}
+    dropChance: 0
+    effect:
+      effectType: 0
+      itemSize: 0
+      duration: 0
+      effectParticle: {fileID: 0}
+      isAlreadyInitialize: 1
+    isQuestItem: 1
+    itemStat:
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
+      MaxHealth: 0
+      MaxMana: 0
+      PhysicalAttack: 0
+      MagicAttack: 0
+      PhysicalDefense: 0
+      MagicDefense: 0
+      CriticalChance: 0
+      AttackSpeed: 0
+      Evasion: 0
+    grade: 0
+    equipmentSlot: 0
+    weaponType: 0
+    isEquired: 0
+    consumableType: 0
+    effectAmount: 0
+    questId: Main1
+  - id: Item_axe
     name: "\uB3C4\uB07C"
-    description: "\uB098\uBB34\uB97C \uC790\uB974\uB294 \uB370 \uD544\uC694\uD55C
-      \uAE30\uBCF8 \uB3C4\uAD6C\uC785\uB2C8\uB2E4."
-    type: 4
-    grade: 0
+    description: "\uB098\uBB34\uB97C \uCE90\uAE30 \uC704\uD55C \uB3C4\uAD6C 4\uC7A5
+      \uBA54\uC778\uD018\uC2A4\uD2B8\uB97C \uD558\uAE30 \uC704\uD574 \uC9D1\uC744
+      \uB098\uC124 \uC2DC \uC9D1\uC5D0\uC11C \uAC00\uC838\uAC08 \uC218 \uC788\uB2E4."
+    type: 0
     costValue: 0
-    quantity: 1
-    maxStack: 99
+    quantity: 0
+    maxStack: 1
     isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Main_Quest004
-    name: "\uB098\uBB34\uC644\uB4DC"
-    description: "\uB098\uBB34\uB85C \uB9CC\uB4E0 \uAC04\uB2E8\uD55C \uB9C8\uBC95
-      \uC9C0\uD321\uC774\uC785\uB2C8\uB2E4."
-    type: 5
-    grade: 1
-    costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
+    isStackable: 0
+    sprite: {fileID: 21300000, guid: 74ab574faec9b1e44b00791d1bac4820, type: 3}
     dropChance: 0
     effect:
       effectType: 1
       itemSize: 0
       duration: 0
       effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 1
     itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
       MaxHealth: 0
       MaxMana: 0
       PhysicalAttack: 0
@@ -156,28 +170,199 @@ MonoBehaviour:
       CriticalChance: 0
       AttackSpeed: 0
       Evasion: 0
+    grade: 0
+    equipmentSlot: 3
+    weaponType: 0
+    isEquired: 0
+    consumableType: 0
+    effectAmount: 0
+    questId: Main2
+  - id: Item_pickaxe
+    name: "\uACE1\uAD2D\uC774"
+    description: "\uB3CC\uC744 \uCE90\uAE30 \uC704\uD55C \uB3C4\uAD6C\n\uCC44\uC11D\uC7A5
+      \uD544\uB4DC\uC5D0 \uB4DC\uB86D\uB418\uC5B4 \uC788\uB2E4."
+    type: 0
+    costValue: 0
+    quantity: 0
+    maxStack: 1
+    isDiscardable: 1
+    isStackable: 0
+    sprite: {fileID: 21300000, guid: aee65029c05f72e44934c03ee996cf2e, type: 3}
+    dropChance: 0
+    effect:
+      effectType: 1
+      itemSize: 0
+      duration: 0
+      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 1
+    itemStat:
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
+      MaxHealth: 0
+      MaxMana: 0
+      PhysicalAttack: 0
+      MagicAttack: 0
+      PhysicalDefense: 0
+      MagicDefense: 0
+      CriticalChance: 0
+      AttackSpeed: 0
+      Evasion: 0
+    grade: 0
     equipmentSlot: 0
+    weaponType: 0
+    isEquired: 0
+    consumableType: 0
+    effectAmount: 0
+    questId: Main2
+  - id: Item_rock
+    name: "\uB3CC"
+    description: "\uCC44\uC11D\uC7A5\uC758 \uBC14\uC704\uB97C \uACE1\uAD2D\uC774\uB85C
+      \uCEA4\uC744 \uC2DC \uB098\uC624\uB294 \uC544\uC774\uD15C"
+    type: 4
+    costValue: 0
+    quantity: 0
+    maxStack: 15
+    isDiscardable: 1
+    isStackable: 1
+    sprite: {fileID: 21300000, guid: 17e7e917beed5b24fb583e4627ea5593, type: 3}
+    dropChance: 0
+    effect:
+      effectType: 1
+      itemSize: 0
+      duration: 0
+      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 1
+    itemStat:
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
+      MaxHealth: 0
+      MaxMana: 0
+      PhysicalAttack: 0
+      MagicAttack: 0
+      PhysicalDefense: 0
+      MagicDefense: 0
+      CriticalChance: 0
+      AttackSpeed: 0
+      Evasion: 0
+    grade: 0
+    equipmentSlot: 0
+    weaponType: 0
+    isEquired: 0
+    consumableType: 0
+    effectAmount: 0
+    questId: Main2
+  - id: Item_branch
+    name: "\uB098\uBB47\uAC00\uC9C0"
+    description: "\uC6A9\uACFC \uB098\uBB34\uB97C \uCE98 \uB54C \uB098\uC624\uB294
+      \uC544\uC774\uD15C\n\uCD94\uD6C4 \uCEF7\uC2E0 \uBB34\uAE30\uB85C \uC0AC\uC6A9"
+    type: 3
+    costValue: 0
+    quantity: 0
+    maxStack: 15
+    isDiscardable: 0
+    isStackable: 1
+    sprite: {fileID: 21300000, guid: a265eba468eb9af44938766dfc4e076c, type: 3}
+    dropChance: 0
+    effect:
+      effectType: 0
+      itemSize: 0
+      duration: 0
+      effectParticle: {fileID: 0}
+      isAlreadyInitialize: 1
+    isQuestItem: 1
+    itemStat:
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
+      MaxHealth: 0
+      MaxMana: 0
+      PhysicalAttack: 0
+      MagicAttack: 0
+      PhysicalDefense: 0
+      MagicDefense: 0
+      CriticalChance: 0
+      AttackSpeed: 0
+      Evasion: 0
+    grade: 0
+    equipmentSlot: 0
+    weaponType: 0
+    isEquired: 0
     consumableType: 0
     effectAmount: 0
     questId: 
-  - id: Main_Quest005
+  - id: Item_woodwand
+    name: "\uC644\uB4DC"
+    description: "\uC6A9\uACFC \uB098\uBB34\uB97C \uCE98 \uB54C \uC6A9\uC774 \uC8FC\uC6CC\uC624\uB294
+      \uC544\uC774\uD15C\n\uC2A4\uD0AC \uACF5\uACA9\uC774 \uAC00\uB2A5\uD55C \uBB34\uAE30\uC774\uB098
+      \uBE5B\uC758 \uD30C\uB3D9 \uC2B5\uB4DD \uC774\uC804\uC5D0\uB294 \uC0AC\uC6A9
+      \uBD88\uAC00\uD558\uB2E4"
+    type: 0
+    costValue: 0
+    quantity: 0
+    maxStack: 1
+    isDiscardable: 1
+    isStackable: 0
+    sprite: {fileID: 21300000, guid: d7b94954ac7586c4a8961f3c187971ae, type: 3}
+    dropChance: 0
+    effect:
+      effectType: 1
+      itemSize: 0
+      duration: 0
+      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 1
+    itemStat:
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
+      MaxHealth: 0
+      MaxMana: 0
+      PhysicalAttack: 0
+      MagicAttack: 0
+      PhysicalDefense: 0
+      MagicDefense: 0
+      CriticalChance: 0
+      AttackSpeed: 0
+      Evasion: 0
+    grade: 0
+    equipmentSlot: 3
+    weaponType: 0
+    isEquired: 0
+    consumableType: 0
+    effectAmount: 0
+    questId: Main6
+  - id: Item_sword1
     name: "\uC218\uB828\uC6A9 \uAC80"
-    description: "\uCD08\uBCF4 \uC804\uC0AC\uAC00 \uC0AC\uC6A9\uD558\uB294 \uAE30\uBCF8
-      \uAC80\uC785\uB2C8\uB2E4."
+    description: "\uBC29\uC5D0 \uC228\uACA8\uB454 \uC218\uB828\uC6A9 \uAC80\uC774\uB2E4.\n\uD798\uC744
+      \uAE68\uB2EB\uACE0 \uC5F0\uC2B5\uD558\uB7EC \uAC08 \uB54C \uC4F0\uB294 \uBB34\uAE30\uB85C
+      \uC77C\uBC18\uACF5\uACA9\uC774 \uAC00\uB2A5\uD558\uB2E4."
     type: 0
-    grade: 0
     costValue: 0
-    quantity: 1
-    maxStack: 99
+    quantity: 0
+    maxStack: 1
     isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
+    isStackable: 0
+    sprite: {fileID: 21300000, guid: 157a42f10fcde194ba8799584bc45e78, type: 3}
     dropChance: 0
     effect:
       effectType: 1
       itemSize: 0
       duration: 0
       effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 1
     itemStat:
       Strength: 1
       Dexterity: 1
@@ -193,34 +378,40 @@ MonoBehaviour:
       CriticalChance: 0
       AttackSpeed: 0
       Evasion: 0
-    equipmentSlot: 0
+    grade: 0
+    equipmentSlot: 3
+    weaponType: 0
+    isEquired: 0
     consumableType: 0
     effectAmount: 0
-    questId: 
-  - id: Main_Quest006
-    name: "\uBE5B\uC758 \uD3ED\uBC1C \uC2A4\uD0AC\uBD81"
-    description: "\uBE5B\uC758 \uD3ED\uBC1C \uC2A4\uD0AC\uC744 \uD574\uAE08\uD560
-      \uC218 \uC788\uB294 \uC544\uC774\uD15C\uC785\uB2C8\uB2E4."
-    type: 3
-    grade: 2
+    questId: Main6
+  - id: Item_wavelight
+    name: "\uBE5B\uC758 \uD30C\uB3D9 \uC2A4\uD0AC\uBD81"
+    description: "\uC5F0\uC2B5 \uC2DC \uC77C\uC815 \uB808\uBCA8\uC744 \uB2EC\uC131\uD558\uBA74
+      \uC2A4\uD0AC\uBD81\uC744 \uC5BB\uC744 \uC218 \uC788\uB2E4.\n\uC2A4\uD0AC\uBD81
+      \uC0AC\uC6A9\uC2DC \uBE5B\uC758 \uD30C\uB3D9 \uC2A4\uD0AC\uC744 \uC5BB\uC73C\uBA70
+      \uC644\uB4DC\uB97C \uC0AC\uC6A9\uD560 \uC218 \uC788\uB2E4."
+    type: 2
     costValue: 0
-    quantity: 1
+    quantity: 0
     maxStack: 99
-    isDiscardable: 0
+    isDiscardable: 1
     isStackable: 1
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 070dc378e09bf304dbfd8bbb3f18ca88, type: 3}
     dropChance: 0
     effect:
       effectType: 0
       itemSize: 0
       duration: 0
-      effectParticle: {fileID: 0}
+      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 1
     itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
       MaxHealth: 0
       MaxMana: 0
       PhysicalAttack: 0
@@ -230,34 +421,39 @@ MonoBehaviour:
       CriticalChance: 0
       AttackSpeed: 0
       Evasion: 0
+    grade: 0
     equipmentSlot: 0
+    weaponType: 0
+    isEquired: 0
     consumableType: 0
     effectAmount: 0
-    questId: 
-  - id: Main_Quest007
-    name: "\uD68C\uBCF5\uC758 \uBC18\uC9C0"
-    description: "\uC790\uB3D9 \uCCB4\uB825 \uD68C\uBCF5 \uD6A8\uACFC\uB97C \uC81C\uACF5\uD558\uB294
-      \uBC18\uC9C0\uC785\uB2C8\uB2E4."
-    type: 5
-    grade: 4
+    questId: Main6
+  - id: Item_sword2
+    name: "\uB300\uAC80"
+    description: "\uD558\uAE09\uB9C8\uC871\uB4E4\uC744 \uCC98\uCE58\uD55C \uB4A4
+      \uB9C8\uC744npc\uC5D0\uAC8C\uC11C \uC5BB\uC744 \uC218 \uC788\uB294 \uBB34\uAE30\uC774\uB2E4.\n\uC218\uB828\uC6A9
+      \uAC80\uBCF4\uB2E4 \uAC15\uB825\uD558\uB2E4."
+    type: 0
     costValue: 0
-    quantity: 1
-    maxStack: 99
+    quantity: 0
+    maxStack: 1
     isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
+    isStackable: 0
+    sprite: {fileID: 21300000, guid: f9544ddce1d80194f820ba3795b7c374, type: 3}
     dropChance: 0
     effect:
       effectType: 1
       itemSize: 0
       duration: 0
       effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 1
     itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
       MaxHealth: 0
       MaxMana: 0
       PhysicalAttack: 0
@@ -267,252 +463,39 @@ MonoBehaviour:
       CriticalChance: 0
       AttackSpeed: 0
       Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Main_Quest008
-    name: "\uB9C8\uC655\uC758 \uC704\uCE58 \uB2E8\uC11C"
-    description: "\uB9C8\uC655\uC758 \uC131\uC73C\uB85C \uAC00\uB294 \uAE38\uC5D0
-      \uB300\uD55C \uB2E8\uC11C\uAC00 \uB2F4\uAE34 \uC9C0\uB3C4\uC785\uB2C8\uB2E4."
-    type: 3
-    grade: 3
-    costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 0
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Main_Quest009
-    name: "\uCD08\uAE09 \uACF5\uACA9 \uC2A4\uD06C\uB864"
-    description: "\uCD08\uAE09 \uACF5\uACA9 \uC2A4\uD0AC\uC744 \uBC30\uC6B0\uB294
-      \uB370 \uD544\uC694\uD55C \uC2A4\uD06C\uB864\uC785\uB2C8\uB2E4."
-    type: 3
-    grade: 1
-    costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 0
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Main_Quest010
-    name: "\uC804\uC124\uC758 \uC99D\uD45C"
-    description: "\uC804\uC124\uC801\uC778 \uC804\uC0AC\uAC00 \uB0A8\uAE34 \uC99D\uD45C\uC785\uB2C8\uB2E4."
-    type: 3
-    grade: 4
-    costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 0
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 10
-  - id: Quest041
-    name: "\uB9C8\uBC95 \uBCF4\uC11D"
-    description: "\uD76C\uADC0\uD55C \uD018\uC2A4\uD2B8 \uC544\uC774\uD15C\uC785\uB2C8\uB2E4."
-    type: 3
-    grade: 2
-    costValue: 0
-    quantity: 1
-    maxStack: 1
-    isDiscardable: 0
-    isStackable: 0
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Quest042
-    name: "\uBCF4\uBB3C \uC9C0\uB3C4"
-    description: "\uC228\uACA8\uC9C4 \uBCF4\uBB3C\uC758 \uC704\uCE58\uB97C \uC54C\uB824\uC90D\uB2C8\uB2E4."
-    type: 3
-    grade: 2
-    costValue: 0
-    quantity: 1
-    maxStack: 1
-    isDiscardable: 0
-    isStackable: 0
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Quest043
-    name: "\uD669\uAE08 \uC5F4\uC1E0"
-    description: "\uD2B9\uC815\uD55C \uBB38\uC744 \uC5F4 \uC218 \uC788\uB294 \uC5F4\uC1E0\uC785\uB2C8\uB2E4."
-    type: 3
-    grade: 1
-    costValue: 0
-    quantity: 1
-    maxStack: 1
-    isDiscardable: 0
-    isStackable: 0
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Quest044
-    name: "\uC783\uC5B4\uBC84\uB9B0 \uD3B8\uC9C0"
-    description: "\uB204\uAD70\uAC00\uC5D0\uAC8C \uC804\uB2EC\uD574\uC57C \uD560
-      \uD3B8\uC9C0\uC785\uB2C8\uB2E4."
-    type: 3
     grade: 0
+    equipmentSlot: 3
+    weaponType: 1
+    isEquired: 0
+    consumableType: 0
+    effectAmount: 0
+    questId: Main6
+  - id: Item_basicwand
+    name: "\uAE30\uBCF8\uC644\uB4DC"
+    description: "\uD558\uAE09\uB9C8\uC871\uB4E4\uC744 \uCC98\uCE58\uD55C \uB4A4
+      \uB9C8\uC744npc\uC5D0\uAC8C\uC11C \uC5BB\uC744 \uC218 \uC788\uB294 \uBB34\uAE30\uC774\uB2E4.\n\uB098\uBB34\uC644\uB4DC\uBCF4\uB2E4
+      \uAC15\uB825\uD558\uB2E4."
+    type: 0
     costValue: 0
-    quantity: 1
+    quantity: 0
     maxStack: 1
-    isDiscardable: 0
+    isDiscardable: 1
     isStackable: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: d7b94954ac7586c4a8961f3c187971ae, type: 3}
     dropChance: 0
     effect:
-      effectType: 0
+      effectType: 1
       itemSize: 0
       duration: 0
-      effectParticle: {fileID: 0}
+      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 1
     itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
       MaxHealth: 0
       MaxMana: 0
       PhysicalAttack: 0
@@ -522,33 +505,204 @@ MonoBehaviour:
       CriticalChance: 0
       AttackSpeed: 0
       Evasion: 0
-    equipmentSlot: 0
+    grade: 0
+    equipmentSlot: 3
+    weaponType: 0
+    isEquired: 0
     consumableType: 0
     effectAmount: 0
-    questId: 
-  - id: Quest045
-    name: "\uC783\uC5B4\uBC84\uB9B0 \uBC18\uC9C0"
-    description: "\uADC0\uC911\uD55C \uBC18\uC9C0\uB85C \uBCF4\uC785\uB2C8\uB2E4."
+    questId: Main6
+  - id: Item_middlewand
+    name: "\uC911\uD615\uC644\uB4DC"
+    description: "\uD558\uAE09\uB9C8\uC871\uB4E4\uC744 \uCC98\uCE58\uD55C \uB4A4
+      \uB9C8\uC744npc\uC5D0\uAC8C\uC11C \uC5BB\uC744 \uC218 \uC788\uB294 \uBB34\uAE30\uC774\uB2E4.\n\uB098\uBB34\uC644\uB4DC\uBCF4\uB2E4
+      \uAC15\uB825\uD558\uB2E4."
+    type: 0
+    costValue: 0
+    quantity: 0
+    maxStack: 1
+    isDiscardable: 1
+    isStackable: 0
+    sprite: {fileID: 21300000, guid: d7b94954ac7586c4a8961f3c187971ae, type: 3}
+    dropChance: 0
+    effect:
+      effectType: 1
+      itemSize: 0
+      duration: 0
+      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 1
+    itemStat:
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
+      MaxHealth: 0
+      MaxMana: 0
+      PhysicalAttack: 0
+      MagicAttack: 0
+      PhysicalDefense: 0
+      MagicDefense: 0
+      CriticalChance: 0
+      AttackSpeed: 0
+      Evasion: 0
+    grade: 0
+    equipmentSlot: 3
+    weaponType: 0
+    isEquired: 0
+    consumableType: 0
+    effectAmount: 0
+    questId: Main6
+  - id: Item_shield
+    name: "\uB098\uBB34\uBC29\uD328"
+    description: "\uD558\uAE09\uB9C8\uC871\uB4E4\uC744 \uCC98\uCE58\uD55C \uB4A4
+      \uB9C8\uC744 npc\uC5D0\uAC8C\uC11C \uC5BB\uC744 \uC218 \uC788\uB294 \uBC29\uC5B4\uAD6C\uC774\uB2E4."
+    type: 1
+    costValue: 0
+    quantity: 0
+    maxStack: 1
+    isDiscardable: 1
+    isStackable: 0
+    sprite: {fileID: 21300000, guid: 30ccc6e7a56885043a387a53c672d93f, type: 3}
+    dropChance: 0
+    effect:
+      effectType: 1
+      itemSize: 0
+      duration: 0
+      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 1
+    itemStat:
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
+      MaxHealth: 0
+      MaxMana: 0
+      PhysicalAttack: 0
+      MagicAttack: 0
+      PhysicalDefense: 0
+      MagicDefense: 0
+      CriticalChance: 0
+      AttackSpeed: 0
+      Evasion: 0
+    grade: 0
+    equipmentSlot: 0
+    weaponType: 0
+    isEquired: 0
+    consumableType: 0
+    effectAmount: 0
+    questId: Main6
+  - id: Item_oldglove
+    name: "\uB0A1\uC740\uC7A5\uAC11"
+    description: "\uD558\uAE09\uB9C8\uC871\uB4E4\uC744 \uCC98\uCE58\uD55C \uB4A4
+      \uB9C8\uC744 npc\uC5D0\uAC8C\uC11C \uC5BB\uC744 \uC218 \uC788\uB294 \uBC29\uC5B4\uAD6C\uC774\uB2E4."
+    type: 1
+    costValue: 0
+    quantity: 0
+    maxStack: 1
+    isDiscardable: 1
+    isStackable: 0
+    sprite: {fileID: 21300000, guid: fc851a8008d450444afa7a197ed4ac3e, type: 3}
+    dropChance: 0
+    effect:
+      effectType: 1
+      itemSize: 0
+      duration: 0
+      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 1
+    itemStat:
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
+      MaxHealth: 0
+      MaxMana: 0
+      PhysicalAttack: 0
+      MagicAttack: 0
+      PhysicalDefense: 0
+      MagicDefense: 0
+      CriticalChance: 0
+      AttackSpeed: 0
+      Evasion: 0
+    grade: 0
+    equipmentSlot: 3
+    weaponType: 0
+    isEquired: 0
+    consumableType: 0
+    effectAmount: 0
+    questId: Main6
+  - id: Item_oldarmor
+    name: "\uB0A1\uC740\uAC11\uC637"
+    description: "\uD558\uAE09\uB9C8\uC871\uB4E4\uC744 \uCC98\uCE58\uD55C \uB4A4
+      \uB9C8\uC744 npc\uC5D0\uAC8C\uC11C \uC5BB\uC744 \uC218 \uC788\uB294 \uBC29\uC5B4\uAD6C\uC774\uB2E4."
+    type: 1
+    costValue: 0
+    quantity: 0
+    maxStack: 1
+    isDiscardable: 1
+    isStackable: 0
+    sprite: {fileID: 21300000, guid: 04d69fb3082fa4845bf0c244ddebbce1, type: 3}
+    dropChance: 0
+    effect:
+      effectType: 1
+      itemSize: 0
+      duration: 0
+      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 1
+    itemStat:
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
+      MaxHealth: 0
+      MaxMana: 0
+      PhysicalAttack: 0
+      MagicAttack: 0
+      PhysicalDefense: 0
+      MagicDefense: 0
+      CriticalChance: 0
+      AttackSpeed: 0
+      Evasion: 0
+    grade: 0
+    equipmentSlot: 2
+    weaponType: 0
+    isEquired: 0
+    consumableType: 0
+    effectAmount: 0
+    questId: Main6
+  - id: Item_demonsymbol
+    name: "\uB9C8\uC871\uC758 \uC99D\uD45C"
+    description: "\uBAA8\uD30C\uC548 \uBCF4\uC0C1 \uC544\uC774\uD15C\uC774\uB2E4.
+      \n\uB9C8\uC871\uC774 \uC9C0\uBC30\uD558\uB294 \uB9C8\uC744\uB85C \uC774\uB3D9
+      \uC2DC \uC0AC\uC6A9 \uAC00\uB2A5\uD558\uB2E4."
     type: 3
-    grade: 2
     costValue: 0
-    quantity: 1
+    quantity: 0
     maxStack: 1
     isDiscardable: 0
     isStackable: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 2fd4b8b055580384891584a97f8563f4, type: 3}
     dropChance: 0
     effect:
-      effectType: 0
+      effectType: 1
       itemSize: 0
       duration: 0
-      effectParticle: {fileID: 0}
+      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 1
     itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
       MaxHealth: 0
       MaxMana: 0
       PhysicalAttack: 0
@@ -558,34 +712,40 @@ MonoBehaviour:
       CriticalChance: 0
       AttackSpeed: 0
       Evasion: 0
-    equipmentSlot: 0
+    grade: 0
+    equipmentSlot: 2
+    weaponType: 0
+    isEquired: 0
     consumableType: 0
     effectAmount: 0
-    questId: 
-  - id: Quest046
-    name: "\uACE0\uB300 \uC720\uBB3C"
-    description: "\uACE0\uB300\uC758 \uBE44\uBC00\uC744 \uB2F4\uACE0 \uC788\uB294
-      \uC720\uBB3C\uC785\uB2C8\uB2E4."
+    questId: Main6
+  - id: Item_mpamap
+    name: "\uB9C8\uC871\uC758 \uC9C0\uB3C4"
+    description: "\uBAA8\uD30C\uC548\uC774 \uD50C\uB808\uC774\uC5B4\uC758 \uB9C8\uC744\uB85C
+      \uC62C \uB54C \uC0AC\uC6A9\uD55C \uC9C0\uB3C4\uB85C \uBAA8\uD30C\uC548 \uBCF4\uC0C1
+      \uC544\uC774\uD15C\uC774\uB2E4. \n\uBAA8\uD30C\uC548\uC774 \uC774\uB3D9\uD55C
+      \uD1B5\uB85C\uB97C \uD655\uC778 \uD560 \uC218 \uC788\uB2E4. UI"
     type: 3
-    grade: 4
     costValue: 0
-    quantity: 1
+    quantity: 0
     maxStack: 1
     isDiscardable: 0
     isStackable: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: f3408bd61ae8ca049986c54d790ecd68, type: 3}
     dropChance: 0
     effect:
-      effectType: 0
+      effectType: 1
       itemSize: 0
       duration: 0
-      effectParticle: {fileID: 0}
+      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 1
     itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
       MaxHealth: 0
       MaxMana: 0
       PhysicalAttack: 0
@@ -595,177 +755,37 @@ MonoBehaviour:
       CriticalChance: 0
       AttackSpeed: 0
       Evasion: 0
-    equipmentSlot: 0
+    grade: 0
+    equipmentSlot: 2
+    weaponType: 0
+    isEquired: 0
     consumableType: 0
     effectAmount: 0
-    questId: 
-  - id: Quest047
-    name: "\uC601\uD63C\uC758 \uC218\uC815"
-    description: "\uC601\uD63C\uC774 \uAE43\uB4E0 \uD76C\uADC0\uD55C \uC218\uC815\uC785\uB2C8\uB2E4."
-    type: 3
-    grade: 2
-    costValue: 0
-    quantity: 1
-    maxStack: 1
-    isDiscardable: 0
-    isStackable: 0
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Quest048
-    name: "\uACE0\uB300 \uC5F4\uC1E0"
-    description: "\uACE0\uB300 \uC720\uC801\uC758 \uBB38\uC744 \uC5EC\uB294 \uC5F4\uC1E0\uC785\uB2C8\uB2E4."
-    type: 3
-    grade: 2
-    costValue: 0
-    quantity: 1
-    maxStack: 1
-    isDiscardable: 0
-    isStackable: 0
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Quest049
-    name: "\uACE0\uBE14\uB9B0\uC758 \uC190\uB3C4\uB07C"
-    description: "\uACE0\uBE14\uB9B0\uC5D0\uAC8C\uC11C \uBE7C\uC557\uC740 \uB3C4\uB07C\uC785\uB2C8\uB2E4."
-    type: 3
-    grade: 1
-    costValue: 0
-    quantity: 1
-    maxStack: 1
-    isDiscardable: 0
-    isStackable: 0
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Quest050
-    name: "\uC804\uC124\uC758 \uC99D\uD45C"
-    description: "\uC804\uC124\uC801\uC778 \uC804\uC0AC\uC758 \uC99D\uD45C\uC785\uB2C8\uB2E4."
-    type: 3
-    grade: 4
-    costValue: 0
-    quantity: 1
-    maxStack: 1
-    isDiscardable: 0
-    isStackable: 0
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item001
-    name: "\uD68C\uBCF5 \uD3EC\uC158"
-    description: "\uCCB4\uB825\uC744 \uD68C\uBCF5\uD569\uB2C8\uB2E4."
+    questId: Main6
+  - id: Item_healthpotion
+    name: "\uC18C\uD615 \uCCB4\uB825 \uD3EC\uC158"
+    description: "\uCCB4\uB825 \uD68C\uBCF5 \uC544\uC774\uD15C"
     type: 2
-    grade: 0
     costValue: 0
-    quantity: 1
+    quantity: 0
     maxStack: 99
     isDiscardable: 1
     isStackable: 1
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 6f10c96627053eb438d435a8c3695b42, type: 3}
     dropChance: 0
     effect:
-      effectType: 0
-      itemSize: 0
+      effectType: 2
+      itemSize: 1
       duration: 0
-      effectParticle: {fileID: 0}
+      effectParticle: {fileID: 6331275906715107345, guid: a67f46416ee8ebd4a893b3ae465afc08, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 0
     itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
       MaxHealth: 0
       MaxMana: 0
       PhysicalAttack: 0
@@ -775,33 +795,78 @@ MonoBehaviour:
       CriticalChance: 0
       AttackSpeed: 0
       Evasion: 0
-    equipmentSlot: 0
+    grade: 0
+    equipmentSlot: 2
+    weaponType: 0
+    isEquired: 0
     consumableType: 1
-    effectAmount: 0
-    questId: 
-  - id: Item002
-    name: "\uB9C8\uB098 \uD3EC\uC158"
-    description: "\uB9C8\uB098\uB97C \uD68C\uBCF5\uD569\uB2C8\uB2E4."
+    effectAmount: 100
+    questId: Main6
+  - id: Item_manapotion
+    name: "\uC18C\uD615 \uB9C8\uB098 \uD3EC\uC158"
+    description: "\uB9C8\uB098 \uD68C\uBCF5 \uC544\uC774\uD15C"
     type: 2
+    costValue: 0
+    quantity: 0
+    maxStack: 99
+    isDiscardable: 1
+    isStackable: 1
+    sprite: {fileID: 21300000, guid: 35c69d4db8da7124e8908daabf15dc39, type: 3}
+    dropChance: 0
+    effect:
+      effectType: 3
+      itemSize: 1
+      duration: 0
+      effectParticle: {fileID: 6331275906715107345, guid: 44545d2ae115d314197058f7c8b41220, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 0
+    itemStat:
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
+      MaxHealth: 0
+      MaxMana: 0
+      PhysicalAttack: 0
+      MagicAttack: 0
+      PhysicalDefense: 0
+      MagicDefense: 0
+      CriticalChance: 0
+      AttackSpeed: 0
+      Evasion: 0
     grade: 0
+    equipmentSlot: 2
+    weaponType: 0
+    isEquired: 0
+    consumableType: 2
+    effectAmount: 100
+    questId: Main6
+  - id: Item_necklace1
+    name: "\uBAA9\uAC78\uC774"
+    description: "\uACF5\uACA9\uB825\uC744 \uB192\uC5EC\uC8FC\uB294 \uC544\uC774\uD15C\uC73C\uB85C
+      \uC99D\uAC00\uAC12\uC740 \uB79C\uB364\uC774\uB2E4."
+    type: 5
     costValue: 0
-    quantity: 5
-    maxStack: 99
+    quantity: 0
+    maxStack: 1
     isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
+    isStackable: 0
+    sprite: {fileID: 21300000, guid: fd200ec822ccb6f41b6ddd7f4f57a7db, type: 3}
     dropChance: 0
     effect:
-      effectType: 0
+      effectType: 1
       itemSize: 0
       duration: 0
-      effectParticle: {fileID: 0}
+      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 0
     itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
       MaxHealth: 0
       MaxMana: 0
       PhysicalAttack: 0
@@ -811,940 +876,38 @@ MonoBehaviour:
       CriticalChance: 0
       AttackSpeed: 0
       Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item003
-    name: "\uD798\uC758 \uBB3C\uC57D"
-    description: "\uC77C\uC2DC\uC801\uC73C\uB85C \uD798\uC744 \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
-    type: 2
-    grade: 1
-    costValue: 0
-    quantity: 3
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item004
-    name: "\uC18D\uB3C4\uC758 \uBB3C\uC57D"
-    description: "\uC77C\uC2DC\uC801\uC73C\uB85C \uC774\uB3D9 \uC18D\uB3C4\uB97C
-      \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
-    type: 2
-    grade: 1
-    costValue: 0
-    quantity: 2
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item005
-    name: "\uC0DD\uBA85\uC758 \uBB3C\uC57D"
-    description: "\uC0DD\uBA85\uB825\uC744 \uD68C\uBCF5\uD569\uB2C8\uB2E4."
-    type: 2
-    grade: 2
-    costValue: 0
-    quantity: 8
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item006
-    name: "\uC800\uD56D\uC758 \uBB3C\uC57D"
-    description: "\uC0C1\uD0DC \uC774\uC0C1 \uC800\uD56D\uB825\uC744 \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
-    type: 2
-    grade: 2
-    costValue: 0
-    quantity: 4
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item007
-    name: "\uC815\uD654\uC758 \uBB3C\uC57D"
-    description: "\uC911\uB3C5\uACFC \uAC19\uC740 \uC0C1\uD0DC \uC774\uC0C1\uC744
-      \uC81C\uAC70\uD569\uB2C8\uB2E4."
-    type: 2
-    grade: 2
-    costValue: 0
-    quantity: 3
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item008
-    name: "\uD3ED\uBC1C \uBB3C\uC57D"
-    description: "\uC801\uC5D0\uAC8C \uD070 \uD53C\uD574\uB97C \uC785\uD788\uB294
-      \uBB3C\uC57D\uC785\uB2C8\uB2E4."
-    type: 2
-    grade: 2
-    costValue: 0
-    quantity: 2
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item009
-    name: "\uB3C5 \uBB3C\uC57D"
-    description: "\uC801\uC744 \uC911\uB3C5\uC2DC\uD0A4\uB294 \uBB3C\uC57D\uC785\uB2C8\uB2E4."
-    type: 2
-    grade: 1
-    costValue: 0
-    quantity: 6
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item010
-    name: "\uCCB4\uB825\uC758 \uBB3C\uC57D"
-    description: "\uCCB4\uB825\uC744 \uB300\uD3ED \uD68C\uBCF5\uD569\uB2C8\uB2E4."
-    type: 2
-    grade: 2
-    costValue: 0
-    quantity: 5
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item011
-    name: "\uD798\uC758 \uBB18\uC57D"
-    description: "\uD798\uC744 \uC601\uAD6C\uC801\uC73C\uB85C \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
-    type: 2
-    grade: 3
-    costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item012
-    name: "\uB9C8\uB825\uC758 \uBB18\uC57D"
-    description: "\uB9C8\uB825\uC744 \uC601\uAD6C\uC801\uC73C\uB85C \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
-    type: 2
-    grade: 3
-    costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item013
-    name: "\uBD88\uBA78\uC758 \uBB18\uC57D"
-    description: "\uBD88\uBA78\uC758 \uD6A8\uACFC\uB97C \uC81C\uACF5\uD569\uB2C8\uB2E4."
-    type: 2
-    grade: 5
-    costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item014
-    name: "\uD22C\uBA85 \uBB3C\uC57D"
-    description: "\uC77C\uC815 \uC2DC\uAC04 \uB3D9\uC548 \uD22C\uBA85 \uC0C1\uD0DC\uB97C
-      \uC720\uC9C0\uD569\uB2C8\uB2E4."
-    type: 2
-    grade: 1
-    costValue: 0
-    quantity: 3
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item015
-    name: "\uACF5\uACA9\uB825 \uC99D\uAC00 \uBB3C\uC57D"
-    description: "\uACF5\uACA9\uB825\uC744 \uC77C\uC2DC\uC801\uC73C\uB85C \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
-    type: 2
-    grade: 1
-    costValue: 0
-    quantity: 4
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item016
-    name: "\uBC29\uC5B4\uB825 \uC99D\uAC00 \uBB3C\uC57D"
-    description: "\uBC29\uC5B4\uB825\uC744 \uC77C\uC2DC\uC801\uC73C\uB85C \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
-    type: 2
-    grade: 1
-    costValue: 0
-    quantity: 4
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item017
-    name: "\uCE58\uC720 \uD3EC\uC158"
-    description: "\uC989\uAC01\uC801\uC73C\uB85C \uCCB4\uB825\uC744 \uD68C\uBCF5\uD569\uB2C8\uB2E4."
-    type: 2
     grade: 0
+    equipmentSlot: 2
+    weaponType: 0
+    isEquired: 0
+    consumableType: 2
+    effectAmount: 100
+    questId: Main6
+  - id: Item_ring1
+    name: "\uBC18\uC9C0"
+    description: "\uCE58\uBA85\uD0C0 \uD655\uB960\uC744 \uB192\uC5EC\uC8FC\uB294
+      \uC544\uC774\uD15C\uC73C\uB85C \uC99D\uAC00\uAC12\uC740 \uB79C\uB364\uC774\uB2E4."
+    type: 5
     costValue: 0
-    quantity: 10
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item018
-    name: "\uC18D\uC131 \uAC15\uD654 \uBB3C\uC57D"
-    description: "\uD2B9\uC815 \uC18D\uC131\uC744 \uAC15\uD654\uD569\uB2C8\uB2E4."
-    type: 2
-    grade: 2
-    costValue: 0
-    quantity: 3
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item019
-    name: "\uC2E0\uC18D \uBB3C\uC57D"
-    description: "\uCE90\uB9AD\uD130\uC758 \uD589\uB3D9 \uC18D\uB3C4\uB97C \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
-    type: 2
-    grade: 1
-    costValue: 0
-    quantity: 2
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item020
-    name: "\uC804\uD22C \uD3EC\uC158"
-    description: "\uC804\uD22C \uB2A5\uB825\uC744 \uAC15\uD654\uD569\uB2C8\uB2E4."
-    type: 2
-    grade: 2
-    costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item021
-    name: "\uC6A9\uC758 \uBE44\uB298"
-    description: "\uD76C\uADC0\uD55C \uC6A9\uC758 \uBE44\uB298\uC785\uB2C8\uB2E4."
-    type: 4
-    grade: 2
-    costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item022
-    name: "\uC218\uC815 \uC870\uAC01"
-    description: "\uD76C\uADC0\uD55C \uC218\uC815 \uC870\uAC01\uC785\uB2C8\uB2E4."
-    type: 4
-    grade: 2
-    costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item023
-    name: "\uC720\uB839\uC758 \uB208"
-    description: "\uC720\uB839\uC73C\uB85C\uBD80\uD130 \uC5BB\uC740 \uD76C\uADC0\uD55C
-      \uC7AC\uB8CC\uC785\uB2C8\uB2E4."
-    type: 4
-    grade: 2
-    costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item024
-    name: "\uAC70\uBBF8\uC758 \uB3C5"
-    description: "\uAC70\uBBF8\uB85C\uBD80\uD130 \uCC44\uCDE8\uD55C \uB3C5\uC785\uB2C8\uB2E4."
-    type: 4
-    grade: 2
-    costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item025
-    name: "\uB291\uB300\uC758 \uC1A1\uACF3\uB2C8"
-    description: "\uB291\uB300\uC758 \uB0A0\uCE74\uB85C\uC6B4 \uC1A1\uACF3\uB2C8\uC785\uB2C8\uB2E4."
-    type: 4
-    grade: 2
-    costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item026
-    name: "\uBD88\uAF43\uC758 \uACB0\uC815"
-    description: "\uBD88\uC758 \uC815\uB839\uC73C\uB85C\uBD80\uD130 \uC5BB\uC740
-      \uACB0\uC815\uC785\uB2C8\uB2E4."
-    type: 4
-    grade: 2
-    costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item027
-    name: "\uB9C8\uBC95\uC758 \uC789\uD06C"
-    description: "\uB9C8\uBC95 \uC8FC\uBB38\uC744 \uC4F0\uB294 \uB370 \uD544\uC694\uD55C
-      \uC789\uD06C\uC785\uB2C8\uB2E4."
-    type: 4
-    grade: 1
-    costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item028
-    name: "\uACE0\uB300 \uC11D\uD310"
-    description: "\uACE0\uB300\uC758 \uBE44\uBC00\uC774 \uC0C8\uACA8\uC9C4 \uC11D\uD310\uC785\uB2C8\uB2E4."
-    type: 4
-    grade: 4
-    costValue: 0
-    quantity: 1
+    quantity: 0
     maxStack: 1
     isDiscardable: 1
     isStackable: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: f819ae0f9f5f7414a9035db0ed6966d3, type: 3}
     dropChance: 0
     effect:
-      effectType: 0
+      effectType: 1
       itemSize: 0
       duration: 0
-      effectParticle: {fileID: 0}
+      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 0
     itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
+      Strength: 1
+      Dexterity: 1
+      Intelligence: 1
+      Vitality: 1
+      Luck: 1
       MaxHealth: 0
       MaxMana: 0
       PhysicalAttack: 0
@@ -1754,99 +917,32 @@ MonoBehaviour:
       CriticalChance: 0
       AttackSpeed: 0
       Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item029
-    name: "\uC740 \uC870\uAC01"
-    description: "\uC740\uC73C\uB85C \uB9CC\uB4E0 \uC791\uC740 \uC870\uAC01\uC785\uB2C8\uB2E4."
-    type: 4
-    grade: 1
-    costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item030
-    name: "\uD669\uAE08 \uAC00\uB8E8"
-    description: "\uD76C\uADC0\uD55C \uD669\uAE08 \uAC00\uB8E8\uC785\uB2C8\uB2E4."
-    type: 4
-    grade: 2
-    costValue: 0
-    quantity: 1
-    maxStack: 99
-    isDiscardable: 1
-    isStackable: 1
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item031
-    name: "\uCCA0\uAC80"
-    description: "\uAE30\uBCF8\uC801\uC778 \uAC80\uC785\uB2C8\uB2E4."
-    type: 0
     grade: 0
+    equipmentSlot: 2
+    weaponType: 0
+    isEquired: 0
+    consumableType: 2
+    effectAmount: 100
+    questId: Main6
+  - id: Item_jewel
+    name: "\uBCF4\uC11D"
+    description: "\uD68C\uD53C\uC728\uB97C \uB192\uC5EC\uC8FC\uB294 \uC544\uC774\uD15C\uC73C\uB85C
+      \uC99D\uAC00\uAC12\uC740 \uB79C\uB364\uC774\uB2E4."
+    type: 5
     costValue: 0
-    quantity: 1
+    quantity: 0
     maxStack: 1
     isDiscardable: 1
     isStackable: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 41bf7c76c60b2f24db8286df6ffe3859, type: 3}
     dropChance: 0
     effect:
       effectType: 1
       itemSize: 0
       duration: 0
       effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
+      isAlreadyInitialize: 1
+    isQuestItem: 0
     itemStat:
       Strength: 1
       Dexterity: 1
@@ -1862,408 +958,10 @@ MonoBehaviour:
       CriticalChance: 0
       AttackSpeed: 0
       Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item032
-    name: "\uAC15\uCCA0 \uBC29\uD328"
-    description: "\uC801\uC758 \uACF5\uACA9\uC744 \uB9C9\uC544\uC8FC\uB294 \uAC15\uCCA0
-      \uBC29\uD328\uC785\uB2C8\uB2E4."
-    type: 1
-    grade: 1
-    costValue: 0
-    quantity: 1
-    maxStack: 1
-    isDiscardable: 1
-    isStackable: 0
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 1
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
-    itemStat:
-      Strength: 1
-      Dexterity: 1
-      Intelligence: 1
-      Vitality: 1
-      Luck: 1
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item033
-    name: "\uAC00\uC8FD \uAC11\uC637"
-    description: "\uAE30\uBCF8\uC801\uC778 \uBC29\uC5B4\uAD6C\uC785\uB2C8\uB2E4."
-    type: 1
     grade: 0
-    costValue: 0
-    quantity: 1
-    maxStack: 1
-    isDiscardable: 1
-    isStackable: 0
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 1
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
-    itemStat:
-      Strength: 1
-      Dexterity: 1
-      Intelligence: 1
-      Vitality: 1
-      Luck: 1
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item034
-    name: "\uC740\uAC80"
-    description: "\uC740\uC73C\uB85C \uC81C\uC791\uB41C \uAC80\uC785\uB2C8\uB2E4."
-    type: 0
-    grade: 2
-    costValue: 0
-    quantity: 1
-    maxStack: 1
-    isDiscardable: 1
-    isStackable: 0
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 1
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
-    itemStat:
-      Strength: 1
-      Dexterity: 1
-      Intelligence: 1
-      Vitality: 1
-      Luck: 1
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item035
-    name: "\uB8EC\uAC80"
-    description: "\uB9C8\uBC95\uC758 \uB8EC\uC774 \uC0C8\uACA8\uC9C4 \uAC80\uC785\uB2C8\uB2E4."
-    type: 0
-    grade: 3
-    costValue: 0
-    quantity: 1
-    maxStack: 1
-    isDiscardable: 1
-    isStackable: 0
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 1
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
-    itemStat:
-      Strength: 1
-      Dexterity: 1
-      Intelligence: 1
-      Vitality: 1
-      Luck: 1
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item036
-    name: "\uB9C8\uBC95 \uB9DD\uD1A0"
-    description: "\uB9C8\uBC95 \uBC29\uC5B4\uB825\uC744 \uC99D\uAC00\uC2DC\uD0A4\uB294
-      \uB9DD\uD1A0\uC785\uB2C8\uB2E4."
-    type: 1
-    grade: 3
-    costValue: 0
-    quantity: 1
-    maxStack: 1
-    isDiscardable: 1
-    isStackable: 0
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 1
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
-    itemStat:
-      Strength: 1
-      Dexterity: 1
-      Intelligence: 1
-      Vitality: 1
-      Luck: 1
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item037
-    name: "\uAE30\uC0AC\uC758 \uAC11\uC637"
-    description: "\uAE30\uC0AC\uB4E4\uC774 \uC0AC\uC6A9\uD558\uB294 \uACE0\uAE09
-      \uBC29\uC5B4\uAD6C\uC785\uB2C8\uB2E4."
-    type: 1
-    grade: 2
-    costValue: 0
-    quantity: 1
-    maxStack: 1
-    isDiscardable: 1
-    isStackable: 0
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 1
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
-    itemStat:
-      Strength: 1
-      Dexterity: 1
-      Intelligence: 1
-      Vitality: 1
-      Luck: 1
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item038
-    name: "\uC804\uC124\uC758 \uAC80"
-    description: "\uC804\uC124\uC801\uC778 \uC804\uC0AC\uB4E4\uC774 \uC0AC\uC6A9\uD588\uB358
-      \uAC80\uC785\uB2C8\uB2E4."
-    type: 0
-    grade: 4
-    costValue: 0
-    quantity: 1
-    maxStack: 1
-    isDiscardable: 1
-    isStackable: 0
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 1
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
-    itemStat:
-      Strength: 1
-      Dexterity: 1
-      Intelligence: 1
-      Vitality: 1
-      Luck: 1
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item039
-    name: "\uACE0\uB300 \uBC29\uD328"
-    description: "\uACE0\uB300 \uBB38\uC591\uC774 \uC0C8\uACA8\uC9C4 \uBC29\uD328\uC785\uB2C8\uB2E4."
-    type: 1
-    grade: 4
-    costValue: 0
-    quantity: 1
-    maxStack: 1
-    isDiscardable: 1
-    isStackable: 0
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 1
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
-    itemStat:
-      Strength: 1
-      Dexterity: 1
-      Intelligence: 1
-      Vitality: 1
-      Luck: 1
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item040
-    name: "\uB9C8\uBC95 \uAC80"
-    description: "\uB9C8\uBC95 \uACF5\uACA9\uB825\uC744 \uAC00\uC9C4 \uAC80\uC785\uB2C8\uB2E4."
-    type: 0
-    grade: 2
-    costValue: 0
-    quantity: 1
-    maxStack: 1
-    isDiscardable: 1
-    isStackable: 0
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 1
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
-    itemStat:
-      Strength: 1
-      Dexterity: 1
-      Intelligence: 1
-      Vitality: 1
-      Luck: 1
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 0
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 0
-    effectAmount: 0
-    questId: 
-  - id: Item041
-    name: "\uB300\uD615 \uACF5\uC18D \uBC84\uD504 \uD3EC\uC158"
-    description: "\uB300\uD615\uC0AC\uC774\uC988\uC758 \uACF5\uC18D \uBC84\uD504
-      \uD3EC\uC158"
-    type: 2
-    grade: 0
-    costValue: 0
-    quantity: 1
-    maxStack: 1
-    isDiscardable: 1
-    isStackable: 0
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 1
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
-    itemStat:
-      Strength: 0
-      Dexterity: 0
-      Intelligence: 0
-      Vitality: 0
-      Luck: 0
-      MaxHealth: 0
-      MaxMana: 0
-      PhysicalAttack: 0
-      MagicAttack: 0
-      PhysicalDefense: 0
-      MagicDefense: 0
-      CriticalChance: 0
-      AttackSpeed: 1
-      Evasion: 0
-    equipmentSlot: 0
-    consumableType: 3
-    effectAmount: 10
-    questId: 
-  - id: Item042
-    name: "\uD55C\uC190\uAC80"
-    description: "\uC77C\uBC18 \uB4F1\uAE09\uC758 \uD55C\uC190\uAC80"
-    type: 0
-    grade: 0
-    costValue: 0
-    quantity: 1
-    maxStack: 1
-    isDiscardable: 1
-    isStackable: 0
-    sprite: {fileID: 0}
-    dropChance: 0
-    effect:
-      effectType: 0
-      itemSize: 0
-      duration: 0
-      effectParticle: {fileID: 0}
-    itemStat:
-      Strength: 10
-      Dexterity: 10
-      Intelligence: 10
-      Vitality: 10
-      Luck: 10
-      MaxHealth: 200
-      MaxMana: 200
-      PhysicalAttack: 100
-      MagicAttack: 100
-      PhysicalDefense: 100
-      MagicDefense: 100
-      CriticalChance: 20
-      AttackSpeed: 20
-      Evasion: 20
-    equipmentSlot: 1
-    consumableType: 3
-    effectAmount: 10
-    questId: 
+    equipmentSlot: 2
+    weaponType: 0
+    isEquired: 0
+    consumableType: 2
+    effectAmount: 100
+    questId: Main6

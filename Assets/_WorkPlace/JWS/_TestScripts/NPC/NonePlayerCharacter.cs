@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class NonePlayerCharacter : MonoBehaviour
@@ -12,7 +11,9 @@ public class NonePlayerCharacter : MonoBehaviour
 
     private CapsuleCollider capsuleCollider;
     private InterActText interActText = null;
-    private float interactionRadius = 2f;
+    private Transform targetlook;
+    private float interactionRadius = 4f;
+    private float turnSpeed = 5f;
     private bool isPlayerInRange = false;
     private bool isInitNPC = false;
 
@@ -36,18 +37,37 @@ public class NonePlayerCharacter : MonoBehaviour
                 GetMainNpcData();
             }
         }
-        if (isPlayerInRange && InputManager.InputActions.actions["Interact"].triggered)
+        if (isPlayerInRange)
         {
-            // CameraManager.SetCameraTarget(transform);
-            QuestManager.Instance.UpdateQuestProgress( QuestConditionType.Meet, currentNPCData.id);
-            Interact();
+            if (UIManager.Instance.IsUIWindowOpen())
+            {
+                if (interActText.gameObject.activeSelf) interActText.gameObject.SetActive(false);
+            }
+            else
+            {
+                SmoothLookAt(targetlook, turnSpeed);
+                if (!interActText.gameObject.activeSelf) interActText.gameObject.SetActive(true);
+                if (InputManager.InputActions.actions["Interact"].triggered)
+                {
+                    QuestManager.Instance.UpdateQuestProgress(QuestConditionType.Meet, currentNPCData.id);
+                    Interact();
+                }
+            }
         }
+    }
+
+    void SmoothLookAt(Transform targetlook, float rotationSpeed)
+    {
+        Vector3 targetPosition = new Vector3(targetlook.position.x, transform.position.y, targetlook.position.z);
+        Vector3 direction = targetPosition - transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
 
     private void GetMainNpcData()
     {
-        List<NPCData> npclist = isMainQuest ? QuestManager.NpcDatabase.mainQuestNpcLists : QuestManager.NpcDatabase.npcLists;
+        List < NPCData> npclist = isMainQuest ? QuestManager.NpcDatabase.mainQuestNpcLists : QuestManager.NpcDatabase.npcLists;
         if (!isMainQuest)
         {
             foreach (NPCData npcData in npclist)
@@ -63,6 +83,13 @@ public class NonePlayerCharacter : MonoBehaviour
         }
         else
         {
+            isInitNPC = true;
+            currentNPCData = npclist[mainIndex - 1];
+            currentNPCData.currentNPC = this.gameObject;
+        }
+        if (npcType == NPCType.상점)
+        {
+            npclist = QuestManager.NpcDatabase.shopNpcLists;
             isInitNPC = true;
             currentNPCData = npclist[mainIndex - 1];
             currentNPCData.currentNPC = this.gameObject;
@@ -95,6 +122,7 @@ public class NonePlayerCharacter : MonoBehaviour
                 interActText.InteractTextSetting(msg, 1);
                 break;
         }
+        Canvas.ForceUpdateCanvases();
     }
 
 
@@ -159,8 +187,7 @@ public class NonePlayerCharacter : MonoBehaviour
 
     private void OpenShop()
     {
-        Debug.Log($"{currentNPCData.name}의 상점을 열었습니다.");
-        // 상점열며 처음여는지 재방문확인하는 로직과 상점오픈 로직
+        GameStateMachine.Instance.ChangeState(GameSystemState.Shopping, currentNPCData);
     }
 
     private void GiveQuest()
@@ -170,10 +197,7 @@ public class NonePlayerCharacter : MonoBehaviour
             Debug.Log("퀘스트가 없습니다.");
             return;
         }
-
-        Debug.Log("Interacting with NPC: " + gameObject.name);
         UIManager.Instance.DisplayQuestDialogWindow(currentNPCData.name, currentNPCData.quests[0]);
-        Debug.Log($"{currentNPCData.name}은(는) 퀘스트를 제공합니다.");
         // 스토리 진행후 퀘스트를 제공하는 방식의 로직
     }
 
@@ -216,7 +240,7 @@ public class NonePlayerCharacter : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = true;
-            interActText.gameObject.SetActive(true);
+            targetlook = other.transform;
         }
     }
 
@@ -225,7 +249,8 @@ public class NonePlayerCharacter : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = false;
-            interActText.gameObject.SetActive(false);
+            targetlook = null;
+            if (interActText.gameObject.activeSelf) interActText.gameObject.SetActive(false);
             UIManager.Instance.UIClose();
         }
     }

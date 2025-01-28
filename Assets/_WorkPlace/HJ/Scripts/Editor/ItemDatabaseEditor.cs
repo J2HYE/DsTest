@@ -27,6 +27,13 @@ public class ItemDatabaseEditor : Editor
             AddNewItem();
         }
 
+        //전체 이펙트 초기화 버튼
+        if(GUILayout.Button("Initialize All Effects"))
+        {
+            ItemList itemList = (ItemList)target;
+            itemList.InitializeAllEffects();
+        }
+
 
         //아이템 리스트를 박스 안에 표시
         EditorGUILayout.BeginVertical("box"); //박스 시작
@@ -36,13 +43,14 @@ public class ItemDatabaseEditor : Editor
         {
             SerializedProperty itemProperty = itemsProperty.GetArrayElementAtIndex(i);
             string itemId = itemProperty.FindPropertyRelative("id").stringValue;
+            string itemName = itemProperty.FindPropertyRelative("name").stringValue;
 
             //왼쪽, 오른쪽 여백 추가
             EditorGUILayout.BeginHorizontal();
             GUILayout.Space(15); //왼쪽 여백
 
             EditorGUILayout.BeginVertical(); //아이템 컨텐츠
-            foldouts[i] = EditorGUILayout.Foldout(foldouts[i], itemId); //아이템 id 표시
+            foldouts[i] = EditorGUILayout.Foldout(foldouts[i], itemId + " " + itemName); //아이템 id 표시
             if (foldouts[i])
             {
                 DrawItemEditor(itemProperty, i);
@@ -73,7 +81,6 @@ public class ItemDatabaseEditor : Editor
         EditorGUILayout.PropertyField(itemProperty.FindPropertyRelative("name"));
         EditorGUILayout.PropertyField(itemProperty.FindPropertyRelative("description"));
         EditorGUILayout.PropertyField(itemProperty.FindPropertyRelative("type"));
-        EditorGUILayout.PropertyField(itemProperty.FindPropertyRelative("grade"));
         EditorGUILayout.PropertyField(itemProperty.FindPropertyRelative("costValue"));
         EditorGUILayout.PropertyField(itemProperty.FindPropertyRelative("quantity"));
         EditorGUILayout.PropertyField(itemProperty.FindPropertyRelative("maxStack"));
@@ -81,21 +88,34 @@ public class ItemDatabaseEditor : Editor
         EditorGUILayout.PropertyField(itemProperty.FindPropertyRelative("isStackable"));
         EditorGUILayout.PropertyField(itemProperty.FindPropertyRelative("sprite"));
         EditorGUILayout.PropertyField(itemProperty.FindPropertyRelative("dropChance"));
+        EditorGUILayout.PropertyField(itemProperty.FindPropertyRelative("isQuestItem"));
 
         //아이템 타입
         ItemType itemType = (ItemType)itemProperty.FindPropertyRelative("type").enumValueIndex;
+        EquipmentSlot itemEquireType = (EquipmentSlot)itemProperty.FindPropertyRelative("equipmentSlot").enumValueIndex;
         ConsumableType consumableType = (ConsumableType)itemProperty.FindPropertyRelative("consumableType").enumValueIndex;
 
         //아이템 타입에 따른 동적 속성
         switch (itemType)
         {
             case ItemType.무기:
+                DrawPropertyIfExists(itemProperty, "weaponType");
+                DrawPropertyIfExists(itemProperty, "equipmentSlot");
+                DrawPropertyIfExists(itemProperty, "grade");
+                DrawPropertyIfExists(itemProperty, "effect");
+                DrawPropertyIfExists(itemProperty, "itemStat");
+                DrawPropertyIfExists(itemProperty, "durability");
+                break;
             case ItemType.장신구:
+                DrawPropertyIfExists(itemProperty, "equipmentSlot");
+                DrawPropertyIfExists(itemProperty, "grade");
                 DrawPropertyIfExists(itemProperty, "effect");
                 DrawPropertyIfExists(itemProperty, "itemStat");
                 DrawPropertyIfExists(itemProperty, "durability");
                 break;
             case ItemType.방어구:
+                DrawPropertyIfExists(itemProperty, "equipmentSlot");
+                DrawPropertyIfExists(itemProperty, "grade");
                 DrawPropertyIfExists(itemProperty, "effect");
                 DrawPropertyIfExists(itemProperty, "itemStat");
                 DrawPropertyIfExists(itemProperty, "durability");
@@ -117,6 +137,19 @@ public class ItemDatabaseEditor : Editor
         }
 
         GUILayout.Space(10);
+
+        // 아이템 초기화 버튼
+        if (GUILayout.Button("Initialize Item"))
+        {
+            var itemList = (ItemList)itemProperty.serializedObject.targetObject;
+            itemList.InitializeItem(index); // InitializeItem 호출
+
+            // 에디터 업데이트: 수정된 내용을 반영
+            itemProperty.serializedObject.Update();
+            EditorUtility.SetDirty(itemList); // 변경 사항 반영
+            itemProperty.serializedObject.ApplyModifiedProperties();
+        }
+
 
         // 아이템 복사 버튼
         if (GUILayout.Button("Duplicate Item"))

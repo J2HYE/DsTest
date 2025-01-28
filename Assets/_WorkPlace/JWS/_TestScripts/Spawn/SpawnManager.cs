@@ -111,7 +111,6 @@ public class SpawnManager : MonoBehaviour
             {
                 float distance = Vector3.Distance(GameManager.playerTransform.position, spawner.SpawnData.spawnPosition);
 
-                // 거리별 컬러 지정
                 string distanceColor;
                 if (distance < 60)
                     distanceColor = "green";

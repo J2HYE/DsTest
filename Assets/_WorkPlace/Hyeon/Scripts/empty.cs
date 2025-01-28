@@ -3,7 +3,6 @@ using UnityEngine;
 public class empty : MonoBehaviour
 {
     PlayerController controller;
-    Collider swrodcollider;
 
     void OnFootstep(AnimationEvent animationEvent)
     {
@@ -17,12 +16,12 @@ public class empty : MonoBehaviour
 
     private void EnableCollider()
     {
-        transform.GetComponentInParent<PlayerCombat>().SwordCollider.enabled = true;
+        transform.GetComponentInParent<PlayerCombat>().weaponCollider.enabled = true;
     }
 
     private void DisableCollider()
     {
-        transform.GetComponentInParent<PlayerCombat>().SwordCollider.enabled = false;
+        transform.GetComponentInParent<PlayerCombat>().weaponCollider.enabled = false;
     }
 
     private void EnableComboInput()

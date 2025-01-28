@@ -9,51 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 4de5851d9a68694418d4d727c02eff67, type: 3}
   m_Name: SpawnnerList
-  m_EditorClassIdentifier: Assembly-CSharp::SpawnnerList
-  spawnMonsterDataLists:
-  - spwanName: Mushroom
-    spwanType: 2
-    spawnStyle: 1
-    spaawnSize: {x: 30, y: 30}
-    spawnPosition: {x: -364.1, y: 15.047, z: 180.5}
-    spawnObjects:
-    - Mushroom
-    autoSpawn: 1
-    initialDelay: 60
-    spawnInterval: 0.05
-    maxSpawnCount: 10
-    detectionDistance: 100
-    triggerType: 0
-    activeObjectCount: 0
-  - spwanName: Bear
-    spwanType: 2
-    spawnStyle: 2
-    spaawnSize: {x: 30, y: 30}
-    spawnPosition: {x: -276.8, y: 15.047, z: 255.5}
-    spawnObjects:
-    - Bear
-    autoSpawn: 1
-    initialDelay: 60
-    spawnInterval: 0.05
-    maxSpawnCount: 3
-    detectionDistance: 100
-    triggerType: 0
-    activeObjectCount: 0
-  - spwanName: SlimeRabbit
-    spwanType: 2
-    spawnStyle: 1
-    spaawnSize: {x: 30, y: 30}
-    spawnPosition: {x: -187.9, y: 15.047, z: 252.6}
-    spawnObjects:
-    - SlimeRabbit
-    autoSpawn: 1
-    initialDelay: 60
-    spawnInterval: 0.05
-    maxSpawnCount: 10
-    detectionDistance: 100
-    triggerType: 0
-    activeObjectCount: 0
+  m_EditorClassIdentifier: 
+  spawnMonsterDataLists: []
   spawnNPCDataLists: []
   spawnBossDataLists: []

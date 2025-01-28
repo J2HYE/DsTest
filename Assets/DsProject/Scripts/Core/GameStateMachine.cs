@@ -22,9 +22,6 @@ public class GameStateMachine : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // 상태 유지
-            
-            // 게임 시작 상태 전달
             OnGameStateChanged?.Invoke(currentState, null);
         }
         else

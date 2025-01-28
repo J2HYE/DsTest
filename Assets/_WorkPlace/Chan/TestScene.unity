@@ -2792,6 +2792,7 @@ MonoBehaviour:
     stamina: 0
     staminaCurrent: 0
     staminaRecoveryRate: 0
+    mpRecoveryRate: 0
     level: 0
     currentExperience: 0
     experienceToLevelUp: 0

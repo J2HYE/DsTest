@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 1062504621528591952}
   - component: {fileID: 5897653195460980692}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MainName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -263,7 +263,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -0.33918, z: -0.2865448, w: 0}
+  m_margin: {x: 0, y: -0.33918, z: 7.6164246, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -303,7 +303,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 454.7362, y: 32.5}
+  m_AnchoredPosition: {x: 260, y: 32.5}
   m_SizeDelta: {x: 185.5276, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4954503431423187874
@@ -417,6 +417,7 @@ GameObject:
   - component: {fileID: 7018884372738282610}
   - component: {fileID: 4903797045496262235}
   - component: {fileID: 4583507625500417651}
+  - component: {fileID: 5177289850230461827}
   m_Layer: 5
   m_Name: MainQuestContents
   m_TagString: Untagged
@@ -441,10 +442,10 @@ RectTransform:
   - {fileID: 4002234533126688500}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1095, y: 115}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -120.98999}
+  m_SizeDelta: {x: 700, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &7018884372738282610
 CanvasRenderer:
@@ -601,6 +602,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &5177289850230461827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2612860732477827289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &3784725029724219614
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,7 +684,7 @@ MonoBehaviour:
   m_text: New Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c3c44b6abf861d641aad4940d5562906, type: 2}
-  m_sharedMaterial: {fileID: 2642637886802314515, guid: b5786132bbb6e964190c977dc31d2ddf, type: 2}
+  m_sharedMaterial: {fileID: -2993662013883948283, guid: c3c44b6abf861d641aad4940d5562906, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

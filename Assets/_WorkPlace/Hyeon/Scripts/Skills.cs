@@ -1,13 +1,5 @@
-using System.Collections.Generic;
 using System;
 using UnityEngine;
-
-
-[CreateAssetMenu(fileName = "SkillList", menuName = "Ds Project/Skill")]
-public class SkillList : ScriptableObject
-{
-    public List<Skills> skillList;
-}
 
 [Serializable]
 public class Skills

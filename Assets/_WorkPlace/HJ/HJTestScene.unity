@@ -207,9 +207,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 819675116}
-  - component: {fileID: 819675118}
-  - component: {fileID: 819675119}
   - component: {fileID: 819675120}
+  - component: {fileID: 819675122}
   - component: {fileID: 819675121}
   m_Layer: 0
   m_Name: TestObject
@@ -233,74 +232,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &819675118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 819675114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdc46745a926673489cfec940f691974, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shops:
-  - shopId: 1
-    shopName: "\uC77C\uBC18 \uBB34\uAE30 \uC0C1\uC810"
-    type: 0
-    grade: 0
-    availableItems: []
-    valueReductionRate: 0.7
-    isInteractable: 0
-    isSpecific: 1
-    addToItemIds:
-    - Main_Quest010
-  - shopId: 2
-    shopName: "\uBC29\uC5B4\uAD6C \uD76C\uADC0 \uC0C1\uC810"
-    type: 1
-    grade: 2
-    availableItems: []
-    valueReductionRate: 0.7
-    isInteractable: 0
-    isSpecific: 1
-    addToItemIds:
-    - Item013
-    - Item001
-  - shopId: 3
-    shopName: "\uC18C\uBAA8\uD488 \uC5D0\uD53D \uC0C1\uC810"
-    type: 2
-    grade: 3
-    availableItems: []
-    valueReductionRate: 0.7
-    isInteractable: 0
-    isSpecific: 1
-    addToItemIds:
-    - Item021
-  - shopId: 4
-    shopName: "\uC81C\uC791\uC7AC\uB8CC \uACE0\uAE09 \uC0C1\uC810"
-    type: 4
-    grade: 1
-    availableItems: []
-    valueReductionRate: 0.7
-    isInteractable: 0
-    isSpecific: 0
-    addToItemIds: []
---- !u!114 &819675119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 819675114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d03b9f8597b717243a1d5f4208357cb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemList: {fileID: 11400000, guid: 52b689f559397b84288a75b54e7ec4fb, type: 2}
-  itemSpriteList: []
-  dropItemPrefab: {fileID: 5784722882407542849, guid: 8699b19efa8ab9745b919704ee5311b0, type: 3}
 --- !u!114 &819675120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,6 +244,86 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45cfabb38512a85428d90ce04b6e97a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  equippedWeapon:
+    id: 
+    name: 
+    description: 
+    type: 0
+    costValue: 0
+    quantity: 0
+    maxStack: 0
+    isDiscardable: 0
+    isStackable: 0
+    sprite: {fileID: 0}
+    dropChance: 0
+    effect:
+      effectType: 0
+      itemSize: 0
+      duration: 0
+      effectParticle: {fileID: 0}
+      isAlreadyInitialize: 0
+    isQuestItem: 0
+    itemStat:
+      Strength: 0
+      Dexterity: 0
+      Intelligence: 0
+      Vitality: 0
+      Luck: 0
+      MaxHealth: 0
+      MaxMana: 0
+      PhysicalAttack: 0
+      MagicAttack: 0
+      PhysicalDefense: 0
+      MagicDefense: 0
+      CriticalChance: 0
+      AttackSpeed: 0
+      Evasion: 0
+    grade: 0
+    equipmentSlot: 0
+    weaponType: 0
+    consumableType: 0
+    effectAmount: 0
+    questId: 
+  equippedAccessory:
+    id: 
+    name: 
+    description: 
+    type: 0
+    costValue: 0
+    quantity: 0
+    maxStack: 0
+    isDiscardable: 0
+    isStackable: 0
+    sprite: {fileID: 0}
+    dropChance: 0
+    effect:
+      effectType: 0
+      itemSize: 0
+      duration: 0
+      effectParticle: {fileID: 0}
+      isAlreadyInitialize: 0
+    isQuestItem: 0
+    itemStat:
+      Strength: 0
+      Dexterity: 0
+      Intelligence: 0
+      Vitality: 0
+      Luck: 0
+      MaxHealth: 0
+      MaxMana: 0
+      PhysicalAttack: 0
+      MagicAttack: 0
+      PhysicalDefense: 0
+      MagicDefense: 0
+      CriticalChance: 0
+      AttackSpeed: 0
+      Evasion: 0
+    grade: 0
+    equipmentSlot: 0
+    weaponType: 0
+    consumableType: 0
+    effectAmount: 0
+    questId: 
   effectParticleDuration: 1
   particlePositionOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &819675121
@@ -327,7 +338,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b4eae160cf19374ca40737029fe8673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testItemId: Item042
+  test: Weapon001
+--- !u!114 &819675122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819675114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ccc149cf84c8eb469e66daf4027dfa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: []
+  maxCapacity: 99
 --- !u!1 &878631027
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,7 +506,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1080276526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -968,7 +993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d03b9f8597b717243a1d5f4208357cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemList: {fileID: 11400000, guid: 09486d49e48af1441bb7f646a326401c, type: 2}
+  itemList: {fileID: 11400000, guid: 52b689f559397b84288a75b54e7ec4fb, type: 2}
   itemSpriteList: []
   dropItemPrefab: {fileID: 5784722882407542849, guid: 8699b19efa8ab9745b919704ee5311b0, type: 3}
 --- !u!1 &392156797089545995
@@ -3955,9 +3980,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcDataList: {fileID: 11400000, guid: 397ab20920f93174ba9f960f1f3fed4b, type: 2}
-  questList: {fileID: 11400000, guid: f494a51bdc053ae44a026da2446126e4, type: 2}
   npcDatabase: []
   questDatabase: []
+  mainQuestDatabase: []
+  subQuestDatabase: []
   completedQuests: []
 --- !u!4 &4154820678150360213
 Transform:
@@ -4025,6 +4051,7 @@ MonoBehaviour:
   interactTextUI: {fileID: 0}
   historyLog: {fileID: 0}
   historyWindow: {fileID: 0}
+  InventorytooltipWindow: {fileID: 0}
   questListParent: {fileID: 0}
 --- !u!1 &4258426661454167633
 GameObject:
@@ -4511,13 +4538,14 @@ GameObject:
   m_Component:
   - component: {fileID: 8964582253335680627}
   - component: {fileID: 519482296038218170}
+  - component: {fileID: 8964582253335680628}
   m_Layer: 0
   m_Name: InventoryManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &4772113493694323551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6689,6 +6717,7 @@ MonoBehaviour:
     stamina: 0
     staminaCurrent: 0
     staminaRecoveryRate: 0
+    mpRecoveryRate: 0
     level: 0
     currentExperience: 0
     experienceToLevelUp: 0
@@ -6704,6 +6733,23 @@ MonoBehaviour:
     baseDamage: 0
     skills: []
     gold: 0
+  dragonData:
+    characterName: 
+    prefab: {fileID: 0}
+    strength: 0
+    agility: 0
+    vitality: 0
+    intelligence: 0
+    speed: 0
+    attackSpeed: 0
+    bondLevel: 0
+    bondExperience: 0
+    bondThresholds: 
+    statModifier:
+      physicalDamageMultiplier: 1.5
+      magicDamageMultiplier: 2
+      criticalDamageMultiplier: 2
+      skillBonusMultiplier: 1.2
   characterTemplates: {fileID: 11400000, guid: 091e7d62338046b4a8e7ccb7f2fb75c2, type: 2}
   isInitialized: 0
 --- !u!222 &7632301858677678565
@@ -7102,7 +7148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &8240489917357363547
 GameObject:
   m_ObjectHideFlags: 0
@@ -7872,6 +7918,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4716981938979086783}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8964582253335680628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4723991108819901324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4eae160cf19374ca40737029fe8673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  test: Weapon001
 --- !u!224 &8985682301929742232
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7992,6 +8051,6 @@ SceneRoots:
   - {fileID: 192749826}
   - {fileID: 1941595876}
   - {fileID: 4154820678150360213}
-  - {fileID: 819675116}
   - {fileID: 1080276527}
+  - {fileID: 819675116}
   - {fileID: 4716981938979086783}

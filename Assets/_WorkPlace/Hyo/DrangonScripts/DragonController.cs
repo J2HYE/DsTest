@@ -1,9 +1,12 @@
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class DragonController : MonoBehaviour
 {
     private static readonly int TurnDirection = Animator.StringToHash("turnDirection");
     private static readonly int IsMoving = Animator.StringToHash("isMoving");
+    
+    private DragonData dragonData;           // 드래곤 데이터
 
     private Transform player;             // 따라다닐 플레이어
     private Animator animator;           // 용의 애니메이터
@@ -18,10 +21,23 @@ public class DragonController : MonoBehaviour
 
     private Vector3 offset;              // 플레이어와의 상대 위치
 
+    private void OnEnable()
+    {
+        GameManager.DragonTransform = transform;
+    }
+
     void Start()
     {
+        dragonData = CharacterManager.DragonData;
+        
         player = GameManager.playerTransform; // 플레이어 Transform 가져오기
         animator = GetComponent<Animator>(); // 애니메이터 가져오기
+        
+        if (dragonData == null)
+        {
+            Debug.LogError("DragonData가 CharacterManager에서 설정되지 않았습니다.");
+            return;
+        }
 
         if (player == null)
         {
@@ -42,7 +58,7 @@ public class DragonController : MonoBehaviour
 
     void Update()
     {
-        if (player == null) return;
+        if (player == null || dragonData == null) return;
 
         // 플레이어와의 거리 계산
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);

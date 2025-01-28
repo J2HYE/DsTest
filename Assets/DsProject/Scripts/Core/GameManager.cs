@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     private bool allManagersReady = false;
     
     public static Transform playerTransform;
+    public static Transform DragonTransform;
     
     public static event Action OnAllManagersReadyEvent;
 
@@ -50,10 +51,26 @@ public class GameManager : MonoBehaviour
         Debug.Log("모든 매니저가 준비 완료되었습니다. 게임 시작!");
         allManagersReady = true;
         OnAllManagersReadyEvent?.Invoke();
+        //GameStateMachine.Instance.ChangeState(GameSystemState.MainQuestPlay);
     }
     
     public bool CanChangeState()
     {
         return allManagersReady;
     }
+
+
+    ////////////////////////////////////////////////////////////
+    //  플레이어 숨기기 위한 코드 추가
+    /// JWS 2025.01.28 10:00 수정
+    ////////////////////////////////////////////////////////////
+    public static bool PlayerVisible(bool active)
+    {
+        if (playerTransform == null) return false;
+        playerTransform.GetChild(0).GetChild(1).gameObject.SetActive(active);
+        return true;
+    }
+    ////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////
+
 }

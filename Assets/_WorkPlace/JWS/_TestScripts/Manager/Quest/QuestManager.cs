@@ -4,14 +4,24 @@ using System.Collections.Generic;
 public class QuestManager : BaseManager<QuestManager>
 {
     [SerializeField] private NPCList npcDataList;
-    [SerializeField] private QuestList questList;
+    // [SerializeField] private QuestList questList;
     [SerializeField] private List<NPCData> npcDatabase = new List<NPCData>();
     [SerializeField] private List<Quest> questDatabase = new List<Quest>();
+    [SerializeField] private List<Quest> mainQuestDatabase = new List<Quest>();
+    [SerializeField] private List<Quest> subQuestDatabase = new List<Quest>();
     [SerializeField] private List<Quest> completedQuests = new List<Quest>();
+    [SerializeField] private Dictionary<string, Vector3> questConditionPoint = new Dictionary<string, Vector3>();
 
     public static List<Quest> QuestDatabase => Instance.questDatabase;
     public static List<Quest> CompletedQuests => Instance.completedQuests;
+    public static Dictionary<string, Vector3> QuestConditionPoint => Instance.questConditionPoint;
+
+    public static Vector3 GetQuestConditionPoint(string point) => Instance.questConditionPoint[point];
+
     public static NPCList NpcDatabase => Instance.npcDataList;
+
+    private int currentMainQuestIndex = 0;
+    public static int CurrentMainQuestIndex => Instance.currentMainQuestIndex;
 
 
     protected override void OnEnable()
@@ -23,10 +33,11 @@ public class QuestManager : BaseManager<QuestManager>
     {
         base.Start();
         GenerateData generater = new GenerateData();
-        questList.questList = generater.GenerateMainQuestLists();
-        questList.questList.AddRange(generater.GenerateQuestLists());
-        generater.GenerateRandomNPCs(100, questList.questList, ItemManager.ItemDatabase, questList.questList, npcDataList);
+        mainQuestDatabase = generater.GenerateMainQuestLists();
+        subQuestDatabase = generater.GenerateQuestLists();
+        generater.GenerateRandomNPCs(20, subQuestDatabase, ItemManager.ItemDatabase, subQuestDatabase, npcDataList);
         npcDatabase = npcDataList.npcLists;
+        GameStateMachine.Instance.ChangeState(GameSystemState.MainQuestPlay);
     }
 
     public Quest GiveQuests()
@@ -41,7 +52,7 @@ public class QuestManager : BaseManager<QuestManager>
         var npc = npcDatabase.Find(n => n.id == npcId.ToString());
         if (quest != null && npc != null)
         {
-            quest.npcid = npcId;
+            quest.targetID = npcId;
         }
     }
 
@@ -90,8 +101,8 @@ public class QuestManager : BaseManager<QuestManager>
         return quest;
     }
 
-    // TODO
-    // 모험, 처치, 만남떄 이곳을 호출하는부분 추가해줘야함.
+    //TODO
+    //모험, 처치, 만남떄 이곳을 호출하는부분 추가해줘야함.
     public void UpdateQuestProgress(QuestConditionType conditionType, string targetId, int quantity = 1)
     {
         for (int i = questDatabase.Count - 1; i >= 0; i--)
@@ -127,6 +138,50 @@ public class QuestManager : BaseManager<QuestManager>
         }
     }
 
+    //public void UpdateQuestProgress(QuestConditionType conditionType, string targetId, int quantity = 1)
+    //{
+    //    bool questUpdated = false;
+
+    //    for (int i = questDatabase.Count - 1; i >= 0; i--)
+    //    {
+    //        Quest quest = questDatabase[i];
+    //        if (quest.isCompleted) continue;
+
+    //        foreach (var conditionKeyValue in quest.requiredConditions)
+    //        {
+    //            var conditionId = conditionKeyValue.Key;
+    //            var condition = conditionKeyValue.Value;
+
+    //            if (condition.type == conditionType && condition.targetId == targetId)
+    //            {
+    //                if (!quest.progress.ContainsKey(conditionId))
+    //                {
+    //                    quest.progress[conditionId] = 0;
+    //                }
+
+    //                quest.progress[conditionId] += quantity;
+    //                if (quest.progress[conditionId] >= condition.requiredQuantity)
+    //                {
+    //                    quest.progress[conditionId] = condition.requiredQuantity;
+    //                    condition.isCompleted = true;
+    //                    UIManager.SystemGameMessage($"[QuestManager] 퀘스트 조건 '{condition.targetName}' 완료!", MessageTag.아이템_획득);
+    //                }
+    //            }
+    //        }
+
+    //        if (IsQuestCompleted(quest))
+    //        {
+    //            quest.isCompleted = true;
+    //            questUpdated = true;
+    //            UIManager.SystemGameMessage($"[QuestManager] 퀘스트 '{quest.name}' 완료!", MessageTag.아이템_획득);
+    //        }
+    //    }
+
+    //    if (questUpdated)
+    //    {
+    //        UIManager.Instance.QuestUpdate();
+    //    }
+    //}
 
     private bool IsQuestCompleted(Quest quest)
     {
@@ -197,19 +252,49 @@ public class QuestManager : BaseManager<QuestManager>
                 UIManager.SystemGameMessage($"[QuestManager] 골드 {reward.gold} 지급됨.", MessageTag.금화_획득);
             }
         }
-
-        if (quest.questType != "메인퀘스트") quest.isCompleted = false;
+        if (quest.questType == "메인퀘스트" && mainQuestDatabase.Count > currentMainQuestIndex)
+        {
+            currentMainQuestIndex++;
+            GameStateMachine.Instance.ChangeState(GameSystemState.MainQuestPlay);
+        }
+        if (quest.questType != "메인퀘스트")
+        {
+            quest.isCompleted = false;
+        }
         UIManager.SystemGameMessage($"[QuestManager] 퀘스트 '{quest.name}' 보상이 지급되었습니다.", MessageTag.퀘스트);
         UIManager.Instance.QuestUpdate();
     }
 
     public Quest GenerateQuests()
     {
-        return questList.questList[Random.Range(0, questList.questList.Count)];
+        return subQuestDatabase[Random.Range(0, subQuestDatabase.Count)];
     }
 
-    protected override void HandleGameStateChange(global::GameSystemState newState, object additionalData)
+    private void MainQuestSequenceStart(int index)
     {
+        if (index == 0 || (index > 0 && mainQuestDatabase[index-1].isCompleted))
+        {
+            mainQuestDatabase[index].questGiver = "메인퀘스터";
+            AddQuest(mainQuestDatabase[index]);
+            currentMainQuestIndex = index;
+        }
+    }
 
+    public static string GetDistanceColor(float distance)
+    {
+        if (distance < 60) return "green";
+        if (distance < 100) return "yellow";
+        return "red";
+    }
+
+    protected override void HandleGameStateChange(GameSystemState newState, object additionalData)
+    {
+        switch(newState)
+        {
+            case GameSystemState.MainQuestPlay:
+                GameStateMachine.Instance.ChangeState(GameSystemState.MainMenu);
+                MainQuestSequenceStart(currentMainQuestIndex);
+                break;
+        }
     }
 }

@@ -32,6 +32,14 @@ public class ItemManager : BaseManager<ItemManager>
             GenerateData generateData = new GenerateData();
             generateData.InitializeItems(itemList);
         }
+        foreach (var item in itemList.itemList)
+        {
+            if (item.quantity == 0 ) item.quantity = 1;
+            if (item.type == ItemType.무기 || item.type == ItemType.방어구)
+            {
+                item.itemStat.Initialize();
+            }
+        }
     }
 
     public void AddItemLogic(string itemId, int quantity = 1)
@@ -112,6 +120,35 @@ public class ItemManager : BaseManager<ItemManager>
         // TODO
         // 추가 드롭 연출(필요 시)
         // CreateDroppedItemInWorld(item, quantity); ; 이런식의 연결함수 구현이 필요.
+    }
+
+    //아이템 구매
+    public void PurchaseItem(Item buyItem, int quantity = 1)
+    {
+        int amount = buyItem.costValue * quantity;
+        Debug.Log("플레이어 : " + amount + " , " + buyItem.costValue + " , " + quantity);
+        if (CharacterManager.PlayerCharacterData.gold < amount)
+        {
+            GameStateMachine.Instance.ChangeState(GameSystemState.InfoMessage, "보유한 금액 부족합니다.", true);
+            return;
+        }
+        if (InventoryManager.Instance.CanAddInventoryItem(buyItem.id, quantity) && CharacterManager.PlayerCharacterData.UseGold(amount))
+        {
+            AddItemLogic(buyItem.id, quantity);
+        }
+    }
+
+    public void SellItem(Item selltem, float valueReductionRate, int quantity = 1)
+    {
+        int totalQuantity = InventoryManager.InventoryList.Where(i => i.id == selltem.id).Sum(i => i.quantity);
+        if (totalQuantity < quantity)
+        {
+            GameStateMachine.Instance.ChangeState(GameSystemState.InfoMessage, "아이템 수량 부족.", true);
+            return;
+        }
+        int amount = ((int)(selltem.costValue * valueReductionRate) * quantity);
+        CharacterManager.PlayerCharacterData.AddGold(amount);
+        InventoryManager.Instance.RemoveItemLogic(selltem.id, quantity);
     }
 
     public Sprite GetItemSprite(string spriteName)

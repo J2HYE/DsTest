@@ -1517,7 +1517,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1506676752}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: HeathenEngineering.UX.Samples.ToggleSetAnimatorBoolean,
+          Assembly-CSharp
         m_MethodName: SetBoolean
         m_Mode: 0
         m_Arguments:

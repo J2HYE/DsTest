@@ -57,7 +57,7 @@ public class MainButtonUI : MonoBehaviour
                 GameStateMachine.Instance.ChangeState(GameSystemState.MainMenu);
                 break;
             case MainButtonType.StatusUI:
-                GameStateMachine.Instance.ChangeState(GameSystemState.MainMenu);
+                GameStateMachine.Instance.ChangeState(GameSystemState.StatusUI);
                 break;
             case MainButtonType.QuestUI:
                 GameStateMachine.Instance.ChangeState(GameSystemState.QuestReview);

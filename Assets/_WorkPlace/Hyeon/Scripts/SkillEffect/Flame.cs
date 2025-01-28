@@ -39,7 +39,9 @@ public class Flame : MonoBehaviour
             {
                 monsterHP = monster.currentHp;
                 // monster.TakeDamage(damage);
-                CombatManager.Instance.ProcessAttack(CharacterManager.PlayerCharacterData, monster, other.transform, true);
+                // 2025-01-27 HYO ProcessAttack 로직 변경으로 매개변수에 물리 공격인지 마법 공격인지 확인 추가 및 스킬 배율 추가 true = 마법데미지, false = 물리데미지, 2f = 스킬 데미지 배율 --------------
+                CombatManager.Instance.ProcessAttack(CharacterManager.PlayerCharacterData, monster, other.transform, true, true, 2f);
+                // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 Debug.Log($"Damaged: {monster.characterName}, monsterHP: {monsterHP}, monsterCurrentHP: {monster.currentHp}");
             }
         }

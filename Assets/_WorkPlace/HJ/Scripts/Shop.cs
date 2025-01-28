@@ -26,7 +26,7 @@ public class Shop : MonoBehaviour
     {
         if (isPlayerInRange && InputManager.InputActions.actions["Interact"].triggered)
         {
-            ShopManager.Instance.OpenShop(shopData);
+            // ShopManager.Instance.OpenShop(shopData);
         }
     }
 

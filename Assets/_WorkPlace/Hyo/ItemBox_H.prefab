@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7259724929507226231}
   - component: {fileID: 8563221139129065846}
   - component: {fileID: 6510117819926818957}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4784,7 +4784,7 @@ GameObject:
   - component: {fileID: 5070841731592554839}
   - component: {fileID: 4357926826159044613}
   - component: {fileID: 5892952147432297503}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: chest_01_hinge002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4872,7 +4872,7 @@ GameObject:
   - component: {fileID: 8549849422193082073}
   - component: {fileID: 4477343254259568676}
   - component: {fileID: 5986744628219385676}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: ItemBox_H
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4995,7 +4995,7 @@ GameObject:
   - component: {fileID: 6184582926470282108}
   - component: {fileID: 6184582926470282110}
   - component: {fileID: 6184582926470282111}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: ItemBoxParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9780,7 +9780,7 @@ GameObject:
   - component: {fileID: 6184582926599231055}
   - component: {fileID: 6184582926599231049}
   - component: {fileID: 6184582926599231054}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: stars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14580,7 +14580,7 @@ GameObject:
   - component: {fileID: 6184582927045096441}
   - component: {fileID: 6184582927045096443}
   - component: {fileID: 6184582927045096440}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: circles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19371,7 +19371,7 @@ GameObject:
   - component: {fileID: 6522618498682616253}
   - component: {fileID: 7858632389718769985}
   - component: {fileID: 8367448151524911469}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: chest_01_hinge001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19458,7 +19458,7 @@ GameObject:
   - component: {fileID: 3366029044639650092}
   - component: {fileID: 4581644227131759343}
   - component: {fileID: 9153722334036020874}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: chest_01_top001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19566,7 +19566,7 @@ GameObject:
   - component: {fileID: 6048152443787265510}
   - component: {fileID: 5480966652976171244}
   - component: {fileID: 142616492123697117}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: chest_01_bottom001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

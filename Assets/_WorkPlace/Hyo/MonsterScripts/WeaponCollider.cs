@@ -28,10 +28,11 @@ public class WeaponCollider : MonoBehaviour
                 monsterData,
                 transform.parent,
                 false
+                , false
             );
             
             // 충돌 처리 후 플래그 해제 (필요에 따라 설정)
-            Invoke(nameof(ResetAttackProcess), 0.1f); // 일정 시간 후 플래그 초기화
+            Invoke(nameof(ResetAttackProcess), 0.5f); // 일정 시간 후 플래그 초기화
         }
     }
     

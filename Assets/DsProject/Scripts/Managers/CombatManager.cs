@@ -8,15 +8,16 @@ public class CombatManager : BaseManager<CombatManager>
     }
     
     // 공격 처리 메서드
-    public void ProcessAttack(CharacterData player, CharacterData enemy, Transform enemyTransform, bool isPlayerAttacking)
+    public void ProcessAttack(CharacterData playerData, CharacterData monsterData, Transform defenderTransform, bool isPlayerAttacking, bool isMagicAttack, float skillMultiplier = 1f)
     {
         GameStateMachine.Instance.ChangeState(GameSystemState.Combat);
         
-        CharacterData attacker = isPlayerAttacking ? player : enemy;
-        CharacterData defender = isPlayerAttacking ? enemy : player;
-        Transform attackerTransform = isPlayerAttacking ? GameManager.playerTransform : enemyTransform;
-        Transform defenderTransform = isPlayerAttacking ? enemyTransform : GameManager.playerTransform;
-
+        // 공격자와 방어자 설정
+        CharacterData actualAttacker = isPlayerAttacking ? playerData : monsterData;
+        CharacterData actualDefender = isPlayerAttacking ? monsterData : playerData;
+        Transform attackerTransform = isPlayerAttacking ? GameManager.playerTransform : defenderTransform;
+        Transform defenderPosition = isPlayerAttacking ? defenderTransform : GameManager.playerTransform;
+        
         // 현재 타겟의 실제높이 계산을 위한부분
         Collider collider = defenderTransform.GetComponent<Collider>();
         float characterHeight = collider != null ? collider.bounds.size.y : 0f;
@@ -25,25 +26,81 @@ public class CombatManager : BaseManager<CombatManager>
         // 현재 타겟의 실제높이 계산을 위한부분
         Vector3 targetPosition = new Vector3(defenderTransform.position.x, targetHeight, defenderTransform.position.z);
 
-        if (defender == null || defender.currentHp <= 0)
+        if (actualDefender == null || actualDefender.currentHp <= 0)
         {
-            Debug.Log(defender.currentHp);
-            Debug.LogWarning($"{defender.characterName}는 이미 사망했습니다.");
+            Debug.Log(actualDefender.currentHp);
+            Debug.LogWarning($"{actualDefender.characterName}는 이미 사망했습니다.");
             return;
         }
-
-        int damage = CalculateDamage(attacker, defender);
-
-        defender.TakeDamage(damage, attackerTransform);
         
-
-        UIManager.DisplayPopupText(damage.ToString(), targetPosition, isPlayerAttacking ? MessageTag.적_피해 : MessageTag.플레이어_피해);
-
-        Debug.Log($"{attacker.characterName}가 {defender.characterName}에게 {damage}의 데미지를 입혔습니다.");
-        Debug.Log($"{defender.characterName}의 체력이 {defender.currentHp} 만큼 남았습니다.");
+        // 회피율 적용
+        if (Random.value < actualDefender.dodgeChance)
+        {
+            Debug.Log($"{actualDefender.characterName}는 공격을 회피했습니다.");
+            return; // 공격이 회피되어 데미지 없음
+        }
+        
+        // 방패 블락율 처리
+        if (actualDefender.hasShield)
+        {
+            // 방패 블록 확률이 적용되는 경우
+            if (Random.value < actualDefender.blockChance)
+            {
+                Debug.Log($"{actualDefender.characterName}는 방패로 공격을 차단했습니다!");
+                return; // 방패 차단
+            }
+        }
+        
+        // 크리티컬 체크: 물리 공격 또는 마법 공격에 대해 크리티컬 확률 계산
+        bool isCritical = Random.value < actualAttacker.criticalChance;
+        
+        // 기본 데미지 계산
+        float damage = 0f;
+        
+        if (isMagicAttack)
+        {
+            // 마법 공격
+            damage = actualAttacker.magicDamage * (1 - actualDefender.magicDamageReduction);
+        }
+        else
+        {
+            // 물리 공격
+            damage = actualAttacker.physicalDamage * (1 - actualDefender.physicalDamageReduction);
+        }
+        
+        // 스킬 배율이 있을 때만 적용 (배율이 없으면 기본값 1을 사용)
+        if (skillMultiplier > 1f)
+        {
+            damage *= skillMultiplier;
+        }
+        
+        // 크리티컬 데미지 배율 적용
+        if (isCritical)
+        {
+            damage *= actualAttacker.criticalDamage;
+            Debug.Log($"{actualAttacker.characterName}가 크리티컬 히트를 발생시켰습니다!");
+        }
+        
+        // 최소 데미지는 0으로 처리
+        int finalDamage = Mathf.Max(0, (int)damage);
+        
+        // 데미지 적용
+        if (damage > 0)
+        {
+            actualDefender.TakeDamage(finalDamage, attackerTransform);
+        }
+        
+        // UI에 데미지 텍스트 표시
+        if (damage > 0)
+        {
+            UIManager.DisplayPopupText(finalDamage.ToString(), targetPosition, isPlayerAttacking ? MessageTag.적_피해 : MessageTag.플레이어_피해);
+        }
+        
+        Debug.Log($"{actualAttacker.characterName}가 {actualDefender.characterName}에게 {finalDamage}의 데미지를 입혔습니다.");
+        Debug.Log($"{actualDefender.characterName}의 체력이 {actualDefender.currentHp} 만큼 남았습니다.");
 
         // 대상이 사망했는지 확인
-        if (defender.currentHp <= 0)
+        if (actualDefender.currentHp <= 0)
         {
             if (!isPlayerAttacking)
             {
@@ -52,28 +109,12 @@ public class CombatManager : BaseManager<CombatManager>
                 Debug.LogError("플레이어 사망");
                 return;
             }
-            HandleDefeated(defender, enemyTransform);
-            Debug.Log(attacker.ToStringForTMPro());
-            QuestManager.Instance.UpdateQuestProgress(QuestConditionType.Kill, defender.characterName, 1);
+            HandleDefeated(actualDefender, defenderPosition);
+            Debug.Log(actualAttacker.ToStringForTMPro());
+            QuestManager.Instance.UpdateQuestProgress(QuestConditionType.Kill, actualDefender.characterName, 1);
         }
-        
-        
     }
     
-    // 데미지 계산 메서드
-    private int CalculateDamage(CharacterData attacker, CharacterData defender)
-    {
-        // 공격자의 물리 공격력, 방어자의 물리 방어력 계산 로직
-        int damage = attacker.physicalDamage - defender.physicalDefense;
-
-        // 크리티컬 여부 체크
-        bool isCritical = Random.value < attacker.criticalChance;
-        damage = attacker.CalculateDamage(isCritical);
-        
-        // 데미지는 최소 0 이상
-        return Mathf.Max(0, damage);
-    }
-
     // 몬스터 사망 처리
     private void HandleDefeated(CharacterData defeatedCharacter, Transform defenderTransform)
     {

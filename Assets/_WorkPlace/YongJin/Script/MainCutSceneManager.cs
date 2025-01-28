@@ -7,6 +7,8 @@ public class MainCutSceneManager : BaseManager<MainCutSceneManager>
 
     [SerializeField] private Transform timeLineManager;
     [SerializeField] private Transform fadeBgTransform;
+    [SerializeField] private Transform Bg;
+    
     private Image fadeBg;
     public AnimationCurve curve;
     private int id;
@@ -19,6 +21,7 @@ public class MainCutSceneManager : BaseManager<MainCutSceneManager>
             Debug.Log($"컷 씬 진행중 이따 신호 보내세요");    
             return;
         }
+        Debug.Log($"컷 씬 시작");    
         this.id = id;
         StartCoroutine(CutSceneFadeOut());
     }
@@ -26,6 +29,11 @@ public class MainCutSceneManager : BaseManager<MainCutSceneManager>
     protected override void Start() 
     {
         base.Start();
+        for(int i = 0; i < timeLineManager.childCount; i++)
+        {
+            timeLineManager.GetChild(i).gameObject.SetActive(false);
+            
+        }
         fadeBg = fadeBgTransform.GetComponent<Image>();
     }
     
@@ -49,14 +57,18 @@ public class MainCutSceneManager : BaseManager<MainCutSceneManager>
         
         Debug.Log($"메인{id}컷 씬 시작");
         fadeBgTransform.gameObject.SetActive(false);
+        Bg.gameObject.SetActive(true);
+        
         timeLineManager.GetChild(id-1).gameObject.SetActive(true);
     }
     public void CutSceneEndSignal()
     {
+        
         timeLineManager.GetChild(id-1).gameObject.SetActive(false);
         id = 0;
         Debug.Log($"메인{id}컷 씬 종료됨");
         fadeBgTransform.gameObject.SetActive(true);
+        Bg.gameObject.SetActive(false);
         StartCoroutine(CutSceneFadeIn());
     }
     private IEnumerator CutSceneFadeIn()
