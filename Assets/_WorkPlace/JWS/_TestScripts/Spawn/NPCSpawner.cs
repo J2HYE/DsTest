@@ -122,21 +122,75 @@ public class NPCSpawner : MonoBehaviour
 
     private Vector3 CalculateSpawnPosition()
     {
-        switch (spawnData.spawnStyle)
+        const int maxAttempts = 10;
+        int attempts = 0;
+        Vector3 spawnPosition;
+        LayerMask obstacleMask = LayerMask.GetMask("Ground", "Obstacle", "Wall");
+        do
         {
-            case SpawnStyle.BoxArea:
-                return spawnData.spawnPosition + new Vector3(
-                    Random.Range(-spawnData.spaawnSize.x, spawnData.spaawnSize.x),
-                    0,
-                    Random.Range(-spawnData.spaawnSize.y, spawnData.spaawnSize.y)
-                );
-            case SpawnStyle.CircleArea:
-                Vector2 randomCircle = Random.insideUnitCircle * (spawnData.spaawnSize.x + spawnData.spaawnSize.y);
-                return spawnData.spawnPosition + new Vector3(randomCircle.x, 0, randomCircle.y);
-            default:
-                return spawnData.spawnPosition;
-        }
+            attempts++;
+
+            switch (spawnData.spawnStyle)
+            {
+                case SpawnStyle.BoxArea:
+                    spawnPosition = spawnData.spawnPosition + new Vector3(
+                        Random.Range(-spawnData.spaawnSize.x, spawnData.spaawnSize.x),
+                        0,
+                        Random.Range(-spawnData.spaawnSize.y, spawnData.spaawnSize.y)
+                    );
+                    break;
+
+                case SpawnStyle.CircleArea:
+                    Vector2 randomCircle = Random.insideUnitCircle * Mathf.Min(spawnData.spaawnSize.x, spawnData.spaawnSize.y);
+                    spawnPosition = spawnData.spawnPosition + new Vector3(randomCircle.x, 0, randomCircle.y);
+                    break;
+
+                default:
+                    spawnPosition = spawnData.spawnPosition;
+                    break;
+            }
+
+            if (Terrain.activeTerrain != null)
+            {
+                float terrainHeight = Terrain.activeTerrain.SampleHeight(spawnPosition);
+                spawnPosition.y = terrainHeight;
+                if (!IsOnTerrain(spawnPosition)) continue;
+            }
+
+            Collider[] colliders = Physics.OverlapSphere(spawnPosition, 1f, obstacleMask);
+
+            bool hasCollision = false;
+            foreach (Collider collider in colliders)
+            {
+                if (collider.gameObject == Terrain.activeTerrain?.gameObject) continue;
+                hasCollision = true;
+                break;
+            }
+
+            if (!hasCollision)
+            {
+                return spawnPosition;
+            }
+
+        } while (attempts < maxAttempts);
+
+        return spawnData.spawnPosition;
     }
+
+    private bool IsOnTerrain(Vector3 position)
+    {
+        Terrain terrain = Terrain.activeTerrain;
+        if (terrain == null) return false;
+
+        Vector3 terrainPosition = terrain.transform.position;
+        TerrainData terrainData = terrain.terrainData;
+
+        return position.x >= terrainPosition.x &&
+               position.x <= terrainPosition.x + terrainData.size.x &&
+               position.z >= terrainPosition.z &&
+               position.z <= terrainPosition.z + terrainData.size.z;
+    }
+
 
     private void DisableActiveMonsters()
     {
@@ -155,16 +209,6 @@ public class NPCSpawner : MonoBehaviour
         ActiveObjectCount = 0;
     }
 
-    //private void OnTransformChildrenChanged()
-    //{
-    //    if (!isInitialized) return;
-
-    //    ActiveObjectCount = GetActiveObjectCount();
-    //    if (ActiveObjectCount == 0)
-    //    {
-    //        TimerManager.Instance.StartTimer(spawnDelayTimer);
-    //    }
-    //}
     private void OnTransformChanged()
     {
         if (!isInitialized) return;

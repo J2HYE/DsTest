@@ -12,6 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de5851d9a68694418d4d727c02eff67, type: 3}
   m_Name: SpawnnerList
   m_EditorClassIdentifier: 
-  spawnMonsterDataLists: []
+  spawnMonsterDataLists:
+  - spwanName: Mushroom
+    spwanType: 2
+    spawnStyle: 2
+    spaawnSize: {x: 20, y: 20}
+    spawnPosition: {x: -145, y: 20.99754, z: 181}
+    spawnObjects:
+    - Mushroom
+    autoSpawn: 1
+    initialDelay: 60
+    spawnInterval: 0.05
+    maxSpawnCount: 10
+    detectionDistance: 100
+    triggerType: 0
+    activeObjectCount: 0
+  - spwanName: Mushroom2
+    spwanType: 2
+    spawnStyle: 2
+    spaawnSize: {x: 10, y: 10}
+    spawnPosition: {x: -191.57526, y: 40, z: 361.50653}
+    spawnObjects:
+    - Mushroom
+    autoSpawn: 1
+    initialDelay: 60
+    spawnInterval: 0.05
+    maxSpawnCount: 10
+    detectionDistance: 100
+    triggerType: 0
+    activeObjectCount: 0
   spawnNPCDataLists: []
   spawnBossDataLists: []

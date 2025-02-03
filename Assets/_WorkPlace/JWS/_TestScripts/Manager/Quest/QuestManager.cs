@@ -10,13 +10,13 @@ public class QuestManager : BaseManager<QuestManager>
     [SerializeField] private List<Quest> mainQuestDatabase = new List<Quest>();
     [SerializeField] private List<Quest> subQuestDatabase = new List<Quest>();
     [SerializeField] private List<Quest> completedQuests = new List<Quest>();
-    [SerializeField] private Dictionary<string, Vector3> questConditionPoint = new Dictionary<string, Vector3>();
+    [SerializeField] private Dictionary<string, Transform> questConditionPoint = new Dictionary<string, Transform>();
 
     public static List<Quest> QuestDatabase => Instance.questDatabase;
     public static List<Quest> CompletedQuests => Instance.completedQuests;
-    public static Dictionary<string, Vector3> QuestConditionPoint => Instance.questConditionPoint;
+    public static Dictionary<string, Transform> QuestConditionPoint => Instance.questConditionPoint;
 
-    public static Vector3 GetQuestConditionPoint(string point) => Instance.questConditionPoint[point];
+    public static Transform GetQuestConditionPoint(string point) => Instance.questConditionPoint[point];
 
     public static NPCList NpcDatabase => Instance.npcDataList;
 
@@ -60,17 +60,17 @@ public class QuestManager : BaseManager<QuestManager>
     {
         if (questDatabase.Exists(q => q.questType == "메인퀘스트"))
         {
-            Debug.LogWarning($"[QuestManager] 이미 진행 중인 메인 퀘스트가 있습니다.");
+            GameStateMachine.Instance.ChangeState(GameSystemState.InfoMessage, $"이미 진행 중인 메인 퀘스트가 있습니다.");
             return;
         }
         if (questDatabase.Exists(q => q.id == quest.id))
         {
-            Debug.LogWarning($"[QuestManager] 퀘스트 '{quest.id}'는 이미 등록되어 있습니다.");
+            GameStateMachine.Instance.ChangeState(GameSystemState.InfoMessage, $"퀘스트 '{quest.id}'는 이미 등록되어 있습니다.");
             return;
         }
         if (completedQuests.Exists(q => q.id == quest.id) && quest.questType == "메인퀘스트")
         {
-            Debug.LogWarning($"[QuestManager] 완료된 메인 퀘스트 '{quest.id}'는 추가할 수 없습니다.");
+            GameStateMachine.Instance.ChangeState(GameSystemState.InfoMessage, $"완료된 메인 퀘스트 '{quest.id}'는 추가할 수 없습니다.");
             return;
         }
         questDatabase.Add(quest);
@@ -83,7 +83,7 @@ public class QuestManager : BaseManager<QuestManager>
         if (quest != null)
         {
             questDatabase.Remove(quest);
-            UIManager.SystemGameMessage($"[QuestManager] 퀘스트 '{quest.name}' 삭제됨", MessageTag.아이템_획득);
+            UIManager.SystemGameMessage($"퀘스트 '{quest.name}' 삭제됨", MessageTag.아이템_획득);
         }
         else
         {
@@ -125,63 +125,18 @@ public class QuestManager : BaseManager<QuestManager>
                     {
                         quest.progress[conditionId] = condition.requiredQuantity;
                         condition.isCompleted = true;
-                        UIManager.SystemGameMessage($"[QuestManager] 퀘스트 조건 '{condition.targetName}' 완료!", MessageTag.아이템_획득);
+                        UIManager.SystemGameMessage($"퀘스트 조건 '{condition.targetName}' 완료!", MessageTag.아이템_획득);
                     }
                 }
             }
             if (IsQuestCompleted(quest))
             {
                 quest.isCompleted = true;
-                UIManager.SystemGameMessage($"[QuestManager] 퀘스트 '{quest.name}' 완료!", MessageTag.아이템_획득);
+                UIManager.SystemGameMessage($"퀘스트 '{quest.name}' 완료!", MessageTag.아이템_획득);
                 UIManager.Instance.QuestUpdate();
             }
         }
     }
-
-    //public void UpdateQuestProgress(QuestConditionType conditionType, string targetId, int quantity = 1)
-    //{
-    //    bool questUpdated = false;
-
-    //    for (int i = questDatabase.Count - 1; i >= 0; i--)
-    //    {
-    //        Quest quest = questDatabase[i];
-    //        if (quest.isCompleted) continue;
-
-    //        foreach (var conditionKeyValue in quest.requiredConditions)
-    //        {
-    //            var conditionId = conditionKeyValue.Key;
-    //            var condition = conditionKeyValue.Value;
-
-    //            if (condition.type == conditionType && condition.targetId == targetId)
-    //            {
-    //                if (!quest.progress.ContainsKey(conditionId))
-    //                {
-    //                    quest.progress[conditionId] = 0;
-    //                }
-
-    //                quest.progress[conditionId] += quantity;
-    //                if (quest.progress[conditionId] >= condition.requiredQuantity)
-    //                {
-    //                    quest.progress[conditionId] = condition.requiredQuantity;
-    //                    condition.isCompleted = true;
-    //                    UIManager.SystemGameMessage($"[QuestManager] 퀘스트 조건 '{condition.targetName}' 완료!", MessageTag.아이템_획득);
-    //                }
-    //            }
-    //        }
-
-    //        if (IsQuestCompleted(quest))
-    //        {
-    //            quest.isCompleted = true;
-    //            questUpdated = true;
-    //            UIManager.SystemGameMessage($"[QuestManager] 퀘스트 '{quest.name}' 완료!", MessageTag.아이템_획득);
-    //        }
-    //    }
-
-    //    if (questUpdated)
-    //    {
-    //        UIManager.Instance.QuestUpdate();
-    //    }
-    //}
 
     private bool IsQuestCompleted(Quest quest)
     {
@@ -215,15 +170,15 @@ public class QuestManager : BaseManager<QuestManager>
                     break;
 
                 case QuestConditionType.Kill:
-                    UIManager.SystemGameMessage($"[QuestManager] 처치 조건 '{condition.Value.targetName}' 완료 처리.", MessageTag.퀘스트);
+                    UIManager.SystemGameMessage($"처치 조건 '{condition.Value.targetName}' 완료 처리.", MessageTag.퀘스트);
                     break;
 
                 case QuestConditionType.Explore:
-                    UIManager.SystemGameMessage($"[QuestManager] 탐험 조건 '{condition.Value.targetName}' 완료 처리.", MessageTag.퀘스트);
+                    UIManager.SystemGameMessage($"탐험 조건 '{condition.Value.targetName}' 완료 처리.", MessageTag.퀘스트);
                     break;
 
                 case QuestConditionType.Meet:
-                    UIManager.SystemGameMessage($"[QuestManager] 만남 조건 '{condition.Value.targetName}' 완료 처리.", MessageTag.퀘스트);
+                    UIManager.SystemGameMessage($"만남 조건 '{condition.Value.targetName}' 완료 처리.", MessageTag.퀘스트);
                     break;
 
                 default:
@@ -237,19 +192,19 @@ public class QuestManager : BaseManager<QuestManager>
             if (!string.IsNullOrEmpty(reward.itemId))
             {
                 ItemManager.Instance.AddItemLogic(reward.itemId, reward.quantity);
-                UIManager.SystemGameMessage($"[QuestManager] 보상 아이템 '{reward.itemId}' {reward.quantity}개 지급됨.", MessageTag.아이템_획득);
+                UIManager.SystemGameMessage($"보상 아이템 '{reward.itemId}' {reward.quantity}개 지급됨.", MessageTag.아이템_획득);
             }
 
             if (reward.experience > 0)
             {
                 CharacterManager.PlayerCharacterData.AddExperience(reward.experience);
-                UIManager.SystemGameMessage($"[QuestManager] 경험치 {reward.experience} 지급됨.", MessageTag.퀘스트);
+                UIManager.SystemGameMessage($"경험치 {reward.experience} 지급됨.", MessageTag.퀘스트);
             }
 
             if (reward.gold > 0)
             {
                 CharacterManager.PlayerCharacterData.AddGold(reward.gold);
-                UIManager.SystemGameMessage($"[QuestManager] 골드 {reward.gold} 지급됨.", MessageTag.금화_획득);
+                UIManager.SystemGameMessage($"골드 {reward.gold} 지급됨.", MessageTag.금화_획득);
             }
         }
         if (quest.questType == "메인퀘스트" && mainQuestDatabase.Count > currentMainQuestIndex)
@@ -261,7 +216,7 @@ public class QuestManager : BaseManager<QuestManager>
         {
             quest.isCompleted = false;
         }
-        UIManager.SystemGameMessage($"[QuestManager] 퀘스트 '{quest.name}' 보상이 지급되었습니다.", MessageTag.퀘스트);
+        UIManager.SystemGameMessage($"퀘스트 '{quest.name}' 보상이 지급되었습니다.", MessageTag.퀘스트);
         UIManager.Instance.QuestUpdate();
     }
 

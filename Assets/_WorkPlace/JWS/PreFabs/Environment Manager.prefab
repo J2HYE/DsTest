@@ -95,6 +95,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionalLight: {fileID: 0}
+  timeOfDay: 19.02
+  daySpeed: 0.1
   sunColorGradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}

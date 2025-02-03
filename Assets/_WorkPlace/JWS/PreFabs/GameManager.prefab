@@ -95,7 +95,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemList: {fileID: 11400000, guid: a6828d70005f0b64783d5a4bc0c5a5b1, type: 2}
   itemSpriteList: []
-  dropItemPrefab: {fileID: 5829863160345447765, guid: 9f24f9f1556ad094489e3067284dc5e3, type: 3}
+  dropItemPrefab: {fileID: 2939739869623886801, guid: 715466210aec975499f1a467f1c14bc4, type: 3}
+  dropItemDestroyTime: 180
+  ItemEffectPrefab:
+  - {fileID: 6532625474870085665, guid: f3b22b81d58646d48bfdbc15c881cf48, type: 3}
+  - {fileID: 7823327091382468809, guid: bd329c39434b274478563aaeb58d4323, type: 3}
+  - {fileID: 6331275906715107345, guid: a67f46416ee8ebd4a893b3ae465afc08, type: 3}
+  - {fileID: 6331275906715107345, guid: 44545d2ae115d314197058f7c8b41220, type: 3}
 --- !u!1 &668412533047110478
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,6 +211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 50298690355487450}
   - component: {fileID: 1772654862862468149}
+  - component: {fileID: 3339144876902757818}
   m_Layer: 0
   m_Name: TimerManager
   m_TagString: Untagged
@@ -239,6 +246,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1721ae53e23eb8438af98232682e05d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3339144876902757818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630219964918139139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab2eb3d85be4ef40a7b8d01f057f84f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  compassBar: {fileID: 0}
+  markerPrefab: {fileID: 8074778755176054646, guid: 4daac7d8ac07d2248b9756d68e1f5e4b, type: 3}
 --- !u!1 &2881707320073850653
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,6 +402,7 @@ MonoBehaviour:
     gold: 0
   dragonData:
     characterName: 
+    characterType: 0
     prefab: {fileID: 0}
     strength: 0
     agility: 0
@@ -388,14 +410,18 @@ MonoBehaviour:
     intelligence: 0
     speed: 0
     attackSpeed: 0
+    attackRange: 0
     bondLevel: 0
     bondExperience: 0
     bondThresholds: 
     statModifier:
-      physicalDamageMultiplier: 1.5
-      magicDamageMultiplier: 2
-      criticalDamageMultiplier: 2
-      skillBonusMultiplier: 1.2
+      strengthMultiplier: 1.5
+      agilityMultiplier: 0.01
+      intelligenceMultiplier: 1.5
+    physicalDamage: 0
+    magicDamage: 0
+    criticalChance: 0
+    criticalDamage: 0
   characterTemplates: {fileID: 11400000, guid: 091e7d62338046b4a8e7ccb7f2fb75c2, type: 2}
   isInitialized: 1
 --- !u!1 &3191311102163359365
@@ -608,6 +634,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7724740018593977126}
   - component: {fileID: 7447877539478144867}
+  - component: {fileID: 3541616797796708315}
   m_Layer: 0
   m_Name: CameraManager
   m_TagString: Untagged
@@ -652,8 +679,8 @@ MonoBehaviour:
   poseTransitionSpeed: 2
   orbitTarget: {fileID: 0}
   orbitTargetOffset: {x: 0, y: 2.5, z: 0}
-  orbitDistance: 8
-  orbitSensitivity: {x: 10, y: 10}
+  orbitDistance: 12
+  orbitSensitivity: {x: 7, y: 7}
   orbitClamp: {x: 0.1, y: 89}
   orbitYaw: 0
   orbitPitch: 0
@@ -661,6 +688,20 @@ MonoBehaviour:
   followOffset: {x: 0, y: 0}
   mouseCursor: 0
   mouseCursorVisible: 0
+  playerLayerName: Ds Player
+  dragonLayerName: Dragon
+--- !u!114 &3541616797796708315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8530091019686272711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41c55a2a7b8489e4d9f10d9b61811f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8949811994207948533
 GameObject:
   m_ObjectHideFlags: 0

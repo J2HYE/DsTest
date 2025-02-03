@@ -277,14 +277,7 @@ public class CharacterData
 
         UpdateDerivedStats();
     }
-
-    // 크리티컬 여부를 판단하여 데미지 반환
-    // 변경 필요 아직 수정중 - 2025-01-26
-    public float CalculateDamage(bool isCritical)
-    {
-        return isCritical ? physicalDamage * criticalDamage : physicalDamage; // 크리티컬이면 데미지 2배, 아니면 기본 데미지
-    }
-
+    
     // 특정 스텟 증가 함수
     public void ModifyStat(StatType statType, int amount)
     {
@@ -491,8 +484,8 @@ public class PlayerData : CharacterData
 public class MonsterData : CharacterData
 {
     public List<string> dropItems = new List<string>(); // 드롭 아이템
-    public int ExperienceReward { get; private set; } // 경험치 보상
-    public int GoldReward { get; private set; }       // 골드 보상
+    public int experienceReward; // 경험치 보상
+    public int goldReward;       // 골드 보상
     [HideInInspector] public GameObject instance;  // 생성된 몬스터 인스턴스를 저장할 필드
 
     public MonsterData(
@@ -515,8 +508,8 @@ public class MonsterData : CharacterData
         : base(name, CharacterType.Monster, prefab, strength, agility, vitality, intelligence, null, speed, attackSpeed, attackRange, stamina, staminaRecoveryRate, mpRecoveryRate)
     {
         this.dropItems = new List<string>(dropItems);
-        ExperienceReward = Mathf.Max(0, experienceReward); // 음수 값 방지
-        GoldReward = Mathf.Max(0, goldReward);             // 음수 값 방지
+        this.experienceReward = experienceReward;
+        this.goldReward = goldReward;
     }
     public new MonsterData Clone()
     {
@@ -535,8 +528,8 @@ public class MonsterData : CharacterData
             this.staminaRecoveryRate,
             this.mpRecoveryRate,
             new List<string>(this.dropItems), // 드롭 아이템 복사
-            this.ExperienceReward,
-            this.GoldReward
+            this.experienceReward,
+            this.goldReward
         );
 
         return clone;
@@ -549,8 +542,8 @@ public class MonsterData : CharacterData
             "<color=red>Experience Reward:</color> {0}\n" +
             "<color=yellow>Gold Reward:</color> {1}\n" +
             "<color=lime>Drop Items:</color> {2}\n",
-            ExperienceReward,                // 0: 경험치 보상
-            GoldReward,                      // 1: 골드 보상
+            experienceReward,                // 0: 경험치 보상
+            goldReward,                      // 1: 골드 보상
             string.Join(", ", dropItems)     // 2: 드롭 아이템 목록
         );
 
@@ -605,8 +598,8 @@ public class BossData : MonsterData
             this.staminaRecoveryRate,
             this.mpRecoveryRate,
             new List<string>(this.dropItems), // 드롭 아이템 복사
-            this.ExperienceReward,
-            this.GoldReward,
+            this.experienceReward,
+            this.goldReward,
             new List<string>(this.SpecialSkills) // 특수 스킬 복사
         );
 
@@ -645,7 +638,9 @@ public class BossData : MonsterData
 public class DragonData
 {
     public string characterName;
+    public CharacterType characterType;
     public GameObject prefab;
+    
     public int strength;       // 힘
     public int agility;        // 민첩
     public int vitality;       // 건강
@@ -653,17 +648,42 @@ public class DragonData
 
     public float speed;        // 이동 속도
     public float attackSpeed;  // 공격 속도
+    public float attackRange;  // 기본 공격 범위
 
     public int bondLevel;      // 유대 레벨
     public int bondExperience; // 유대 경험치
     public int[] bondThresholds; // 레벨 업에 필요한 유대 경험치
+    
+    private bool isLevelingUp = false; // 레벨업 진행 중 여부
 
     // 모디파이어
     public DragonStatModifier statModifier;
+    private DragonStatModifier baseStatModifier = new DragonStatModifier();
+    
+    // 물리 데미지와 마법 데미지 계산을 위한 필드 추가
+    public int physicalDamage;  // 물리 공격력
+    public int magicDamage;     // 마법 공격력
+    public float criticalChance; // 크리티컬 확률
+    public float criticalDamage; // 크리티컬 데미지 배율
 
-    public DragonData(string name, GameObject prefab, int strength, int agility, int vitality, int intelligence, float speed, float attackSpeed, int[] bondThresholds, DragonStatModifier modifier = null)
+
+    public DragonData(
+        string name, 
+        CharacterType type,
+        GameObject prefab, 
+        int strength, 
+        int agility, 
+        int vitality, 
+        int intelligence, 
+        float speed, 
+        float attackSpeed,
+        float attackRange,
+        int[] bondThresholds, 
+        float criticalChance, 
+        DragonStatModifier modifier = null)
     {
         this.characterName = name;
+        this.characterType = type;
         this.prefab = prefab;
         this.strength = strength;
         this.agility = agility;
@@ -671,35 +691,31 @@ public class DragonData
         this.intelligence = intelligence;
         this.speed = speed;
         this.attackSpeed = attackSpeed;
+        this.attackRange = attackRange;
         this.bondLevel = 1;
         this.bondExperience = 0;
         this.bondThresholds = bondThresholds;
+        this.criticalChance = criticalChance;
         this.statModifier = modifier ?? new DragonStatModifier();
+        
+        // 물리 데미지와 마법 데미지 계산
+        UpdateDerivedStats();
     }
-
-    // 물리 공격력 계산 (힘 + 민첩 기준)
-    public int CalculatePhysicalDamage(bool isCritical = false)
+    
+    // 물리 데미지와 마법 데미지 계산
+    public void UpdateDerivedStats()
     {
-        float baseDamage = (strength + agility) * statModifier.physicalDamageMultiplier;
-        if (isCritical)
-        {
-            baseDamage *= statModifier.criticalDamageMultiplier;
-        }
-        return Mathf.RoundToInt(baseDamage);
+        physicalDamage = Mathf.RoundToInt(Mathf.Max(strength * statModifier.strengthMultiplier, 1f)); // 기본값을 1f로 설정하여 0 방지
+        magicDamage = Mathf.RoundToInt(Mathf.Max(intelligence * statModifier.intelligenceMultiplier, 1f)); // 기본값을 1f로 설정
+        criticalChance = Mathf.Min(agility * statModifier.agilityMultiplier, 1f); // 민첩성에 따른 크리티컬 확률
+        criticalDamage = 1.5f; // 크리티컬 데미지 배율 예시 (게임에 맞게 수정 가능)
     }
-
-    // 스킬 데미지 계산 (지능 + 건강 기준)
-    public int CalculateSkillDamage(float skillMultiplier)
-    {
-        float skillDamage = (intelligence + vitality) * statModifier.magicDamageMultiplier;
-        skillDamage *= skillMultiplier; // 스킬 배율 적용
-        skillDamage *= statModifier.skillBonusMultiplier; // 추가 보너스 배율 적용
-        return Mathf.RoundToInt(skillDamage);
-    }
-
+    
     // 유대 경험치 증가
-    public void IncreaseBondExperience(int amount)
+    public void AddBondExperience(int amount)
     {
+        if (amount < 0) return;
+        
         bondExperience += amount;
 
         while (bondLevel - 1 < bondThresholds.Length && bondExperience >= bondThresholds[bondLevel - 1])
@@ -711,11 +727,17 @@ public class DragonData
 
     private void LevelUpBond()
     {
+        isLevelingUp = true; // 레벨업 시작
+        
+        // 레벨 증가
         bondLevel++;
-        strength += 2;
-        vitality += 3;
-        agility += 1;
-        intelligence += 1;
+        
+        strength++;
+        vitality++;
+        agility++;
+        intelligence++;
+        
+        UpdateDerivedStats();
         Debug.Log($"{characterName}의 유대 레벨이 {bondLevel}로 상승했습니다!");
     }
 }
@@ -723,20 +745,18 @@ public class DragonData
 [Serializable]
 public class DragonStatModifier
 {
-    public float physicalDamageMultiplier = 1.5f; // 물리 공격력 배수
-    public float magicDamageMultiplier = 2.0f; // 마법 데미지 배수
-    public float criticalDamageMultiplier = 2.0f; // 크리티컬 데미지 배수
-    public float skillBonusMultiplier = 1.2f; // 스킬 사용 시 추가 데미지 배수
-
+    public float strengthMultiplier = 1.5f;      // 힘에 의한 물리 공격력 배율
+    public float agilityMultiplier = 0.01f;      // 민첩성에 의한 크리티컬 확률 배율
+    public float intelligenceMultiplier = 1.5f;  // 지능에 의한 마법 공격력 배율
+    
     // 클론 메서드
     public DragonStatModifier Clone()
     {
         return new DragonStatModifier
         {
-            physicalDamageMultiplier = this.physicalDamageMultiplier,
-            magicDamageMultiplier = this.magicDamageMultiplier,
-            criticalDamageMultiplier = this.criticalDamageMultiplier,
-            skillBonusMultiplier = this.skillBonusMultiplier,
+            strengthMultiplier = this.strengthMultiplier,
+            agilityMultiplier = this.agilityMultiplier,
+            intelligenceMultiplier = this.intelligenceMultiplier,
         };
     }
 }

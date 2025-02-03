@@ -46,7 +46,7 @@ public class CharacterManager : BaseManager<CharacterManager>
 {
     // 캐릭터 데이터 리스트 (플레이어 + 몬스터/보스)
     [SerializeField] private List<CharacterData> characterList = new List<CharacterData>();
-    public static IReadOnlyList<CharacterData> CharacterList => Instance.characterList.AsReadOnly();
+    public IReadOnlyList<CharacterData> CharacterList => Instance.characterList.AsReadOnly();
     
     // 플레이어 캐릭터 (온리 원)
     public static PlayerData PlayerCharacterData;
@@ -74,7 +74,7 @@ public class CharacterManager : BaseManager<CharacterManager>
         
         // 게임 시작시 강제 초기화 원하면 활성화
         InitialCharacter();
-        // InitialDragon();
+        InitialDragon();
     }
 
     private void Update()
@@ -88,8 +88,6 @@ public class CharacterManager : BaseManager<CharacterManager>
             
             playercharacterData = PlayerCharacterData;
             dragonData = DragonData;
-            
-            Debug.Log(isInitialized);
         }
     }
 
@@ -135,20 +133,25 @@ public class CharacterManager : BaseManager<CharacterManager>
     
     public void InitialDragon()
     {
+        dragonData.statModifier = new DragonStatModifier();
+
         dragonData.characterName = "BabyDragon";
+        dragonData.characterType = CharacterType.Drogon;
         dragonData.prefab = null; // 드래곤 프리팹 (Unity 에디터에서 할당 가능)
         dragonData.strength = 5;
         dragonData.vitality = 8;
         dragonData.agility = 4;
         dragonData.intelligence = 6;
         dragonData.speed = 5.0f;
-        dragonData.attackSpeed = 1.2f;
+        dragonData.attackSpeed = 3f;
+        dragonData.attackRange = 2.5f;
 
         // 유대 레벨 초기화
         dragonData.bondLevel = 1;
         dragonData.bondExperience = 0;
         dragonData.bondThresholds = new[] { 100, 200, 300, 400, 500 }; // 유대 경험치 필요값 설정
-
+        
+        dragonData.UpdateDerivedStats();
         Debug.Log("드래곤 초기화 완료: " + dragonData.characterName);
     }
 
@@ -172,19 +175,6 @@ public class CharacterManager : BaseManager<CharacterManager>
         return characterList;
     }
     
-    // 드래곤 유대 게이지 증가
-    public void IncreaseDragonBond(int amount)
-    {
-        if (DragonData == null)
-        {
-            Debug.LogError("활성 드래곤 데이터가 없습니다.");
-            return;
-        }
-
-        DragonData.IncreaseBondExperience(amount);
-        Debug.Log($"드래곤 {DragonData.characterName}의 유대 게이지 증가: {amount}, 현재 게이지: {DragonData.bondExperience}, 레벨: {DragonData.bondLevel}");
-    }
-
     // 캐릭터 생성 함수: 템플릿을 복사하여 새로운 캐릭터 생성
     public MonsterData CreateCharacterFromTemplate(string Name, string characterName = null)
     {
@@ -293,14 +283,42 @@ public class CharacterManager : BaseManager<CharacterManager>
         // 경험치와 골드 보상 처리
         if (PlayerCharacterData != null)
         {
-            PlayerCharacterData.AddExperience(monster.ExperienceReward);
-            PlayerCharacterData.AddGold(monster.GoldReward);
-            UIManager.SystemGameMessage($"{monster.characterName} 처치! 경험치 +{monster.ExperienceReward}, 골드 +{monster.GoldReward}", MessageTag.아이템_획득);
+            PlayerCharacterData.AddExperience(monster.experienceReward);
+            PlayerCharacterData.AddGold(monster.goldReward);
+            UIManager.SystemGameMessage($"{monster.characterName} 처치! 경험치 +{monster.experienceReward}, 골드 +{monster.goldReward}", MessageTag.아이템_획득);
         }
         
         // 아이템 드롭
         ItemManager.Instance.SpawnItemBox(position + new Vector3(0, 1f, 0), monster, false);
         
         characterList.Remove(monster);
+    }
+    
+    // 가장 가까운 몬스터를 찾는 함수
+    public MonsterData GetNearestMonster(Transform dragonTransform, float detectRange = 10f)
+    {
+        // 가까운 몬스터를 찾기 위한 초기값 설정
+        MonsterData closestMonster = null;
+        float closestDistance = float.MaxValue;
+
+        // 모든 몬스터 리스트에서 가장 가까운 몬스터를 찾기
+        foreach (var character in characterList)
+        {
+            // 몬스터만 필터링
+            if (character is MonsterData monster)
+            {
+                // 드래곤과 몬스터 간의 거리 계산
+                float distanceToMonster = Vector3.Distance(dragonTransform.position, monster.characterPrefab.transform.position);
+
+                // 탐지 범위 내에서 가장 가까운 몬스터를 찾음
+                if (distanceToMonster < closestDistance && distanceToMonster <= detectRange)
+                {
+                    closestDistance = distanceToMonster;
+                    closestMonster = monster;
+                }
+            }
+        }
+
+        return closestMonster; // 가장 가까운 몬스터 반환
     }
 }

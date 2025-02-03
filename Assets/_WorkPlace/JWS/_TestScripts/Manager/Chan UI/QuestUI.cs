@@ -69,15 +69,12 @@ public class QuestUI : MonoBehaviour
     {
         CategorizeItems();
         ClearUI();
-        Debug.Log("ClearUI 완료");
 
-        // 기본 검증
         if (buttons == null || buttons.Length == 0)
         {
             Debug.LogWarning("버튼이 설정되지 않았거나 버튼 배열이 비어있습니다.");
             return;
         }
-
         if (!System.Enum.IsDefined(typeof(CategotyQuestType), currentButtonIndex))
         {
             Debug.LogError($"유효하지 않은 카테고리 인덱스: {currentButtonIndex}");
@@ -88,7 +85,6 @@ public class QuestUI : MonoBehaviour
 
         if (selectedTag == CategotyQuestType.전체퀘스트.ToString())
         {
-            Debug.Log("전체퀘스트 선택됨: 모든 퀘스트 출력");
             foreach (var category in categorizedQuest.Values)
             {
                 foreach (var quest in category)
@@ -99,7 +95,6 @@ public class QuestUI : MonoBehaviour
         }
         else if (selectedTag == CategotyQuestType.완료퀘스트.ToString())
         {
-            Debug.Log("완료된 퀘스트 출력");
             foreach (var completedQuest in QuestManager.CompletedQuests)
             {
                 CreateItemUI(completedQuest);
@@ -107,7 +102,6 @@ public class QuestUI : MonoBehaviour
         }
         else if (categorizedQuest.ContainsKey(selectedTag))
         {
-            Debug.Log($"선택된 태그 '{selectedTag}'에 포함된 퀘스트 개수: {categorizedQuest[selectedTag].Count}");
             foreach (var quest in categorizedQuest[selectedTag])
             {
                 CreateItemUI(quest);
@@ -117,8 +111,6 @@ public class QuestUI : MonoBehaviour
         {
             Debug.LogWarning($"선택된 태그 '{selectedTag}'에 해당하는 퀘스트가 없습니다.");
         }
-
-        Debug.Log("UpdateUI 완료");
     }
 
     private void ClearUI()
@@ -132,10 +124,11 @@ public class QuestUI : MonoBehaviour
     private void CreateItemUI(Quest quest)
     {
         var questItem = Instantiate(questPrefab, questParent);
-        questItem.GetComponentInChildren<TextMeshProUGUI>().text = quest.ToStringTMProforList();
+        questItem.GetComponentsInChildren<TextMeshProUGUI>()[0].text = quest.ToStringTMProforList();
+        questItem.GetComponentsInChildren<TextMeshProUGUI>()[1].text = $"의뢰인 : {quest.questGiver}";
+        questItem.GetComponentsInChildren<TextMeshProUGUI>()[2].text = $"{quest.progress.Count} / {quest.requiredConditions.Count}";
         Button button = questItem.GetComponent<Button>();
         button.onClick.AddListener(() => OuestTitleClick(quest));
-        Debug.Log($"퀘스트 UI 생성: {quest.ToStringTMPro()}");
     }
 
     public void AddButtonListeners()
@@ -209,14 +202,14 @@ public class QuestUI : MonoBehaviour
                     conditionDisplayText[conditionCount].text = $" {status}   {condition.Value.targetName}를 <color=green>{condition.Value.requiredQuantity}</color>개 모으기   ({quest.progress[keyWord]} / {condition.Value.requiredQuantity})";
                     break;
                 case QuestConditionType.Meet:
-                    distance = Vector3.Distance(GameManager.playerTransform.position, QuestManager.GetQuestConditionPoint(keyWord));
+                    distance = Vector3.Distance(GameManager.playerTransform.position, QuestManager.GetQuestConditionPoint(keyWord).position);
                     conditionDisplayText[conditionCount].text = $" {status}   {condition.Value.targetName}를 찾아가기   {distance}";
                     break;
                 case QuestConditionType.Kill:
                     conditionDisplayText[conditionCount].text = $" {status}   {condition.Value.targetName}를 <color=green>{condition.Value.requiredQuantity}</color> 마리 처치하세요   ({quest.progress[keyWord]} / {condition.Value.requiredQuantity})";
                     break;
                 case QuestConditionType.Explore:
-                    distance = Vector3.Distance(GameManager.playerTransform.position, QuestManager.GetQuestConditionPoint(keyWord));
+                    distance = Vector3.Distance(GameManager.playerTransform.position, QuestManager.GetQuestConditionPoint(keyWord).position);
                     string color = QuestManager.GetDistanceColor(distance);
                     string distanceColor = $" <color={color}>{distance:F1}m</color>";
                     conditionDisplayText[conditionCount].text = $" {status}   {condition.Value.targetName}를 찾아가기     {distanceColor}";

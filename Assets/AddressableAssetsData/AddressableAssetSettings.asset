@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: db797d008b89a3b46a6cdc8f5bd151e3
   m_currentHash:
     serializedVersion: 2
-    Hash: 00000000000000000000000000000000
+    Hash: 4aee6df473df8b8b62dc09583f0f7533
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -102,6 +102,7 @@ MonoBehaviour:
     - SFX
     - Music
     - ItemSprites
+    - SpeechData
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 1af2aff2acc174243903c0c45d123d23, type: 2}

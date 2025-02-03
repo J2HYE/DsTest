@@ -22,6 +22,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: pico_clothes_m
   m_Shader: {fileID: 4800000, guid: be891319084e9d147b09d89e80ce60e0, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _DISABLE_OUTLINE
   - _EMISSIVE_SIMPLE
@@ -40,6 +42,7 @@ Material:
   disabledShaderPasses:
   - SRPDEFAULTUNLIT
   - ALWAYS
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -519,8 +522,8 @@ Material:
     - _utsTechnique: 0
     - _utsVersion: 2.08
     - _utsVersionX: 0
-    - _utsVersionY: 10
-    - _utsVersionZ: 2
+    - _utsVersionY: 11
+    - _utsVersionZ: 0
     m_Colors:
     - _1st_ShadeColor: {r: 0.6018156, g: 0.7726358, b: 0.7924528, a: 1}
     - _2nd_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
@@ -559,3 +562,4 @@ Material:
     - _ViewShift: {r: 0, g: 0, b: 0, a: 1}
     - emissive: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

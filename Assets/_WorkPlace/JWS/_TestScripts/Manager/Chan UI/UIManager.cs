@@ -37,6 +37,7 @@ public class UIManager : BaseManager<UIManager>
     public static InteractPopupUI InteractPopupUI;
     public static HistoryUI HistoryUI;
     public static ShopUI ShopUI;
+    public static DialogUI dialogUI;
     public static HistoryWindowUI HistoryWindowUI;
 
     protected override void OnEnable()
@@ -48,6 +49,7 @@ public class UIManager : BaseManager<UIManager>
         MainButtonUI = mainTitleButton.GetComponent<MainButtonUI>();
         InteractPopupUI = interactTextUI.GetComponent<InteractPopupUI>();
         mainCanvas.SetActive(true);
+        mainTitleButton.SetActive(true);
         dialogWindow.SetActive(false);
         questWindow.SetActive(false);
         shopUI.SetActive(false);
@@ -60,6 +62,7 @@ public class UIManager : BaseManager<UIManager>
         HistoryUI = historyLog.GetComponent<HistoryUI>();
         HistoryWindowUI = historyWindow.GetComponent<HistoryWindowUI>();
         ShopUI = shopUI.GetComponent<ShopUI>();
+        dialogUI = dialogWindow.GetComponent<DialogUI>();
     }
 
     private void Update()
@@ -79,7 +82,11 @@ public class UIManager : BaseManager<UIManager>
             InputManager.InputActions.actions["Interact"].Enable();
             InputManager.InputActions.actions["Move"].Enable();
         }
-        if (infoMessageWindow.activeSelf && Input.anyKey) TogglinfoMessageWindow("");
+        if (infoMessageWindow.activeSelf && Input.GetMouseButtonDown(1))
+        {
+            TogglinfoMessageWindow("");
+            GameStateMachine.Instance.ChangeState(GameSystemState.Play);
+        }
     }
 
     private bool IsPointerOverUI()
@@ -93,18 +100,27 @@ public class UIManager : BaseManager<UIManager>
         return results.Count > 0;
     }
 
-    public void ToggleDialog()
+    public void ToggleDialog( bool isOn = false)
     {
-        dialogWindow.SetActive(!dialogWindow.activeSelf);
-        mainCanvas.SetActive(!mainCanvas.activeSelf);
-        quickSlot.SetActive(false);
+        if (isOn)
+        {
+            dialogWindow.SetActive(true);
+            mainCanvas.SetActive(false);
+            quickSlot.SetActive(false);
+        }
+        else
+        {
+            dialogWindow.SetActive(!dialogWindow.activeSelf);
+            mainCanvas.SetActive(!mainCanvas.activeSelf);
+            quickSlot.SetActive(mainCanvas.activeSelf ? true : false);
+        }
     }
 
     public void ToggleHistorylog()
     {
         historyWindow.SetActive(!historyWindow.activeSelf);
         mainCanvas.SetActive(!mainCanvas.activeSelf);
-        quickSlot.SetActive(false);
+        quickSlot.SetActive(true);
     }
 
     public void ToggleInventory()
@@ -118,16 +134,16 @@ public class UIManager : BaseManager<UIManager>
     {
         questWindow.gameObject.SetActive(!questWindow.gameObject.activeSelf);
         mainCanvas.SetActive(!mainCanvas.activeSelf);
-        quickSlot.SetActive(false);
+        quickSlot.SetActive(mainCanvas.activeSelf ? true : false);
     }
-    
+
     public void ToggleStatusWindow()
     {
         characterStaus.gameObject.SetActive(!characterStaus.gameObject.activeSelf);
         mainCanvas.SetActive(!mainCanvas.activeSelf);
-        quickSlot.SetActive(false);
+        quickSlot.SetActive(mainCanvas.activeSelf ? true : false);
     }
-        
+
     public void TogglShopWindow(NPCData nPCData)
     {
         shopUI.gameObject.SetActive(!shopUI.gameObject.activeSelf);
@@ -141,7 +157,6 @@ public class UIManager : BaseManager<UIManager>
         infoMessageWindow.gameObject.SetActive(!infoMessageWindow.gameObject.activeSelf);
         if (infoMessageWindow.gameObject.activeSelf)
         {
-            Debug.Log("토글 : " + message);
             infoMessageWindow.transform.GetComponentInChildren<TextMeshProUGUI>().text = message;
         }
     }
@@ -199,7 +214,6 @@ public class UIManager : BaseManager<UIManager>
                 if (quest.questType == "메인퀘스트")
                 {
                     QuestManager.Instance.CompleteQuest(quest);
-                    //Destroy(gameObj, 2f);
                 }
             }
         }
@@ -226,90 +240,94 @@ public class UIManager : BaseManager<UIManager>
         Canvas.ForceUpdateCanvases();
     }
 
+    public void DisplayDialogText(List<string> commentList, DialogType type)
+    {
+        if (dialogWindow == null) return;
+        ToggleDialog();
+        dialogUI.DisplayDialogText(commentList, type);
+    }
+
     public void DisplayDialogWindow(NPCData nPCData)
     {
         if (dialogWindow == null) return;
         ToggleDialog();
+        dialogUI.DisplayDialogWindow(nPCData);
     }
 
     public void DisplayQuestDialogWindow(string title, Quest quest)
     {
-        if (dialogWindow == null)
-        {
-            return;
-        }
-
-        dialogWindow.SetActive(true);
-        mainCanvas.SetActive(false);
-
-        TextMeshProUGUI[] subDisplay = dialogWindow.GetComponentsInChildren<TextMeshProUGUI>(includeInactive: true);
-        Button acceptButton = dialogWindow.GetComponentInChildren<Button>(includeInactive: true);
-
-        if (subDisplay.Length < 2)
-        {
-            Debug.LogError("텍스트 박스가 없습니다.");
-            return;
-        }
-
-        acceptButton.onClick.RemoveAllListeners();
-        subDisplay[0].text = title;
-
-        bool isCompletedMainQuest = quest.questType == "메인퀘스트" && QuestManager.CompletedQuests.Exists(q => q.id == quest.id);
-        if (isCompletedMainQuest)
-        {
-            SetupDialog(
-                acceptButton,
-                subDisplay[1],
-                "닫기",
-                "완료된 메인 퀘스트입니다. 더 이상 진행할 수 없습니다.",
-                ToggleDialog
-            );
-        }
-        else if (quest.isCompleted)
-        {
-            SetupDialog(
-                acceptButton,
-                subDisplay[1],
-                "보상수령",
-                "감사합니다! 퀘스트 완료에 따른 보상을 지급하겠습니다.",
-                () => HandleQuest(quest, true)
-            );
-        }
-        else
-        {
-            bool isQuestInProgress = QuestManager.QuestDatabase.Contains(quest);
-            bool canAccept = !isQuestInProgress && quest.acceptCount < 3;
-
-            SetupDialog(
-                acceptButton,
-                subDisplay[1],
-                canAccept ? "수락" : "닫기",
-                canAccept ? quest.description : "퀘스트를 완료하고 다시 찾아주세요.",
-                () => HandleQuest(quest, canAccept)
-            );
-        }
+        if (dialogWindow == null) return;
+        ToggleDialog();
+        dialogUI.DisplayQuestDialogWindow(title, quest);
     }
 
-    private void SetupDialog(Button button, TextMeshProUGUI display, string buttonText, string message, UnityEngine.Events.UnityAction onClickAction)
-    {
-        button.GetComponentInChildren<TextMeshProUGUI>().text = buttonText;
-        button.onClick.AddListener(onClickAction);
-        StartCoroutine(AnimateText(button, display, message));
-    }
+    //public void DisplayQuestDialogWindow(string title, Quest quest)
+    //{
+    //    if (dialogWindow == null)
+    //    {
+    //        return;
+    //    }
 
-    private IEnumerator AnimateText(Button button, TextMeshProUGUI display, string message, float delay = 0.05f)
-    {
-        button.gameObject.SetActive(false);
-        display.text = "";
-        foreach (char c in message)
-        {
-            string key = c.ToString().ToUpper();
-            display.text += c;
-            yield return new WaitForSeconds(delay);
-        }
-        yield return new WaitForSeconds(0.5f);
-        button.gameObject.SetActive(true);
-    }
+    //    dialogWindow.SetActive(true);
+    //    mainCanvas.SetActive(false);
+
+    //    TextMeshProUGUI[] subDisplay = dialogWindow.GetComponentsInChildren<TextMeshProUGUI>(includeInactive: true);
+    //    Button acceptButton = dialogWindow.GetComponentInChildren<Button>(includeInactive: true);
+
+    //    if (subDisplay.Length < 2)
+    //    {
+    //        Debug.LogError("텍스트 박스가 없습니다.");
+    //        return;
+    //    }
+
+    //    acceptButton.onClick.RemoveAllListeners();
+    //    subDisplay[0].text = title;
+
+    //    if (quest.isCompleted)
+    //    {
+    //        SetupDialog(
+    //            acceptButton,
+    //            subDisplay[1],
+    //            "보상수령",
+    //            "감사합니다! 퀘스트 완료에 따른 보상을 지급하겠습니다.",
+    //            () => HandleQuest(quest, true)
+    //        );
+    //    }
+    //    else
+    //    {
+    //        bool isQuestInProgress = QuestManager.QuestDatabase.Contains(quest);
+    //        bool canAccept = !isQuestInProgress && quest.acceptCount < 3;
+
+    //        SetupDialog(
+    //            acceptButton,
+    //            subDisplay[1],
+    //            canAccept ? "수락" : "닫기",
+    //            canAccept ? quest.description : "퀘스트를 완료하고 다시 찾아주세요.",
+    //            () => HandleQuest(quest, canAccept)
+    //        );
+    //    }
+    //}
+
+    //private void SetupDialog(Button button, TextMeshProUGUI display, string buttonText, string message, UnityEngine.Events.UnityAction onClickAction)
+    //{
+    //    button.GetComponentInChildren<TextMeshProUGUI>().text = buttonText;
+    //    button.onClick.AddListener(onClickAction);
+    //    StartCoroutine(AnimateText(button, display, message));
+    //}
+
+    //private IEnumerator AnimateText(Button button, TextMeshProUGUI display, string message, float delay = 0.05f)
+    //{
+    //    button.gameObject.SetActive(false);
+    //    display.text = "";
+    //    foreach (char c in message)
+    //    {
+    //        string key = c.ToString().ToUpper();
+    //        display.text += c;
+    //        yield return new WaitForSeconds(delay);
+    //    }
+    //    yield return new WaitForSeconds(0.5f);
+    //    button.gameObject.SetActive(true);
+    //}
 
     private void HandleQuest(Quest quest, bool state)
     {

@@ -78,7 +78,7 @@ Material:
     - _Tiling01: 0.5
     - _Tiling02: 1.13
     - _UseFog: 1
-    - _ViewDistance: 10000
+    - _ViewDistance: 100000
     - __dirty: 0
     - _cloudsHeight: 300
     - _cloudsPosition: 500

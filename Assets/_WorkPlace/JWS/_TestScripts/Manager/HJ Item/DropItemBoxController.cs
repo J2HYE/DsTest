@@ -4,11 +4,12 @@ using System.Collections.Generic;
 public class DropItemBoxController : MonoBehaviour
 {
     public List<string> dropItemIds = new List<string>();
-    [SerializeField] private float detectionDistance = 1f;
+    [SerializeField] private float detectionDistance = 2f;
     public bool isRandomDrop = true;
 
     private void Start()
     {
+        Destroy(this.gameObject, DsConstValue.DROP_ITEM_DESTROY_INTERVAL);
     }
 
     private void Update()

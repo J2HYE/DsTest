@@ -13,7 +13,7 @@ public class InventoryTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [NonSerialized] public Image ItemImage;
     [NonSerialized] public TextMeshProUGUI[] amountCount;
     private int preAmountCount = 0;
-    private string[] condition = { "Consumable001", "Consumable002" };
+    private string[] condition = { "소형 체력포션", "소형 마나포션" };
     private float lastClickTime = 0f;
     private const float doubleClickThreshold = 0.3f;
 

@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 198ffd4e27fc3214abc9bf6952adb29a
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18022
+  packageName: Stone Frog
+  packageVersion: 1.0.1
+  assetPath: Assets/BagIdea/Model/Stone_Frog/Stone_Frog.fbx
+  uploadId: 6918
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable:
@@ -169,7 +176,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -1005,11 +1012,11 @@ ModelImporter:
     globalScale: 0.01
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 1
+  animationType: 2
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 0
@@ -1019,10 +1026,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 18022
-  packageName: Stone Frog
-  packageVersion: 1.0.1
-  assetPath: Assets/BagIdea/Model/Stone_Frog/Stone_Frog.fbx
-  uploadId: 6918

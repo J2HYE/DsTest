@@ -2,9 +2,13 @@ using UnityEngine;
 
 public enum PlayerState
 {
-    PlayerIdle,
-    PlayerMove,
-    PlayerAttack,
-    PlayerHit,
-    PlayerDeath
+    Idle,
+    Move,
+    InAir,
+    Attack,
+    Parry,
+    UseSkill,
+    Climb,
+    Hit,
+    Death
 }

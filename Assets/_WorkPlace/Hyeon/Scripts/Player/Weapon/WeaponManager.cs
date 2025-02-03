@@ -155,7 +155,7 @@ public class WeaponManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F12))
         {
-            var itemsToAdd = new[] { "Item_basicwand", "Item_middlewand", "Item_woodwand", "Item_axe", "Item_sword1", "Item_sword2"};
+            var itemsToAdd = new[] { "완드", "나뭇가지", "나무완드", "도끼", "낡은검", "양손검"};
             foreach (var item in itemsToAdd) ItemManager.Instance.AddItemLogic(item);
         }
     }
@@ -204,6 +204,15 @@ public class WeaponManager : MonoBehaviour
 
     public void SwitchWeapon(int index = -1)
     {
+        Debug.Log($"Index = {index}");
+        if(index == -1)
+        {
+            if(currentWeaponObject != null)
+            {
+                currentWeaponObject.SetActive(!currentWeaponObject.activeSelf);
+            }
+            return;
+        }
         currentWeaponObject = transform.GetChild(index).gameObject;
         currentWeaponObject.SetActive(true);
         var playerCombat = GameManager.playerTransform.GetComponent<PlayerCombat>();
@@ -222,12 +231,12 @@ public class WeaponManager : MonoBehaviour
 
     private enum WeaponName
     {
-        Item_basicwand,
-        Item_middlewand,
-        Item_woodwand,
-        Item_axe,
-        Item_sword1,
-        Item_sword2
+        완드,
+        나뭇가지,
+        나무완드,
+        도끼,
+        낡은검,
+        양손검
     }
 }
 

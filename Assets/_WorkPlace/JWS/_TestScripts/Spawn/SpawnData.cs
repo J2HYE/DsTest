@@ -20,26 +20,3 @@ public class SpawnData
     public Func<bool> triggerCondition;     // 스폰 조건 (함수)
     public int activeObjectCount;
 }
-
-public enum SpawnnerType
-{
-    None,
-    Npc,
-    Monster,
-    Boss
-}
-
-public enum SpawnStyle
-{
-    None,
-    BoxArea,
-    CircleArea,
-    FollowPath
-}
-
-public enum TriggerType
-{
-    Distance,
-    Time,
-    Event
-}

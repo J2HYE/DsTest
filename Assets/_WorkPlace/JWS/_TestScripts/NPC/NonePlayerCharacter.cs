@@ -9,9 +9,10 @@ public class NonePlayerCharacter : MonoBehaviour
     [SerializeField] private int mainIndex = 0;
     [SerializeField] private NPCData currentNPCData = null;
 
-    private CapsuleCollider capsuleCollider;
+    private CapsuleCollider[] capsuleCollider;
     private InterActText interActText = null;
     private Transform targetlook;
+    private float offSetHeight = 0;
     private float interactionRadius = 4f;
     private float turnSpeed = 5f;
     private bool isPlayerInRange = false;
@@ -19,14 +20,35 @@ public class NonePlayerCharacter : MonoBehaviour
 
     private void Start()
     {
-        capsuleCollider = GetComponent<CapsuleCollider>();
+        capsuleCollider = GetComponents<CapsuleCollider>();
         interActText = GetComponentInChildren<InterActText>(true);
-        interActText.gameObject.SetActive(false);
-        if (capsuleCollider != null)
+        if (interActText != null)
         {
-            capsuleCollider.radius = interactionRadius;
+            interActText.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning("interActText가 존재하지 않습니다.");
+        }
+
+        if (capsuleCollider.Length > 0)
+        {
+            capsuleCollider[0].radius = interactionRadius;
+            if (capsuleCollider.Length > 1)
+            {
+                offSetHeight = !capsuleCollider[1].isTrigger ? capsuleCollider[1].bounds.max.y : 0;
+            }
+            else
+            {
+                Debug.LogWarning("두 번째 CapsuleCollider가 없습니다.");
+            }
+        }
+        else
+        {
+            Debug.LogError("이 게임 오브젝트에는 CapsuleCollider가 없습니다.");
         }
     }
+
 
     private void Update()
     {
@@ -99,13 +121,13 @@ public class NonePlayerCharacter : MonoBehaviour
         {
             case NPCType.퀘스트:
                 bool isHasQuestNew = !currentNPCData.quests.Any(quest => quest.isCompleted);
-                interActText.InteractTextSetting("대화하기", 0, isHasQuestNew);
+                interActText.InteractTextSetting("대화하기", 0, offSetHeight,isHasQuestNew);
                 break;
             case NPCType.상점:
-                interActText.InteractTextSetting("상점열기", 0);
+                interActText.InteractTextSetting("상점열기", 0, offSetHeight);
                 break;
             default:
-                capsuleCollider.radius = interactionRadius * 2.5f;
+                capsuleCollider[0].radius = interactionRadius * 2.5f;
                 string msg = string.Empty;
                 if (currentNPCData.dialogue != null)
                 {
@@ -119,7 +141,7 @@ public class NonePlayerCharacter : MonoBehaviour
                 {
                     msg = currentNPCData.description;
                 }
-                interActText.InteractTextSetting(msg, 1);
+                interActText.InteractTextSetting(msg, 1, offSetHeight);
                 break;
         }
         Canvas.ForceUpdateCanvases();

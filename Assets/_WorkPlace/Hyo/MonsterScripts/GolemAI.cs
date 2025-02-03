@@ -16,7 +16,7 @@ public class GolemAI : BaseMonsterAI
         
         // 물리 처리 방식
         StopAllActions();
-        SetAttackingState();
+        
         // 공격 상태로 전환하고 애니메이션 실행
         animator.SetTrigger(Attack);
         
@@ -24,6 +24,7 @@ public class GolemAI : BaseMonsterAI
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         float animationLength = stateInfo.length;
         
+        isAttacking = true;
         StartCoroutine(ResetAttackState(animationLength));
     }
     
@@ -42,34 +43,5 @@ public class GolemAI : BaseMonsterAI
         {
             weaponCollider.EnableWeaponCollider(false);
         }
-    }
-
-    private void SetAttackingState()
-    {
-        // 공격 상태에서는 물리 엔진 비활성화
-        SetCollisionAndPhysics(false);
-        StartCoroutine(ReEnablePhysics()); // 공격 후 물리 엔진 재활성화
-    }
-
-    private void SetCollisionAndPhysics(bool enablePhysics)
-    {
-        // 물리 충돌 및 물리 설정 변경
-        if (col != null)
-        {
-            col.isTrigger = !enablePhysics; // 충돌 여부 설정
-        }
-
-        if (rb != null)
-        {
-            rb.isKinematic = !enablePhysics; // Kinematic 설정
-            rb.collisionDetectionMode = enablePhysics ? CollisionDetectionMode.ContinuousDynamic : CollisionDetectionMode.Discrete;
-        }
-    }
-
-    private IEnumerator ReEnablePhysics()
-    {
-        // 일정 시간 후 물리 계산 재활성화
-        yield return new WaitForSeconds(attackCooldown);
-        SetCollisionAndPhysics(true);
     }
 }

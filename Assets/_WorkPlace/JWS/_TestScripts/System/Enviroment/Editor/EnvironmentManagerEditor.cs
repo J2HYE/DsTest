@@ -37,16 +37,18 @@ namespace JWS
 
             EnvironmentManager EMscript = (EnvironmentManager)target;
 
-            // Lighting Foldout
             EditorGUILayout.Space(10);
             EditorGUILayout.BeginVertical(boxStyle);
             lightingFoldout = EditorGUILayout.Foldout(lightingFoldout, "Global Lighting", foldoutStyle);
             if (lightingFoldout)
             {
-                // Directional Light property
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("directionalLight"), new GUIContent("Directional Light"));
 
-                // Sun Gradient
+                EditorGUILayout.Space(10);
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("timeOfDay"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("daySpeed"));
+
+                EditorGUILayout.Space(10);
                 EditorGUILayout.BeginHorizontal();
                 overrideSunColorProp.boolValue = EditorGUILayout.ToggleLeft("Sun", overrideSunColorProp.boolValue, GUILayout.Width(70));
                 using (new EditorGUI.DisabledScope(!overrideSunColorProp.boolValue))
@@ -55,7 +57,6 @@ namespace JWS
                 }
                 EditorGUILayout.EndHorizontal();
 
-                // Fog Gradient
                 EditorGUILayout.BeginHorizontal();
                 overrideFogColorProp.boolValue = EditorGUILayout.ToggleLeft("Fog", overrideFogColorProp.boolValue, GUILayout.Width(70));
                 using (new EditorGUI.DisabledScope(!overrideFogColorProp.boolValue))
@@ -64,7 +65,6 @@ namespace JWS
                 }
                 EditorGUILayout.EndHorizontal();
 
-                // Clouds Gradient
                 EditorGUILayout.BeginHorizontal();
                 overrideCloudColorProp.boolValue = EditorGUILayout.ToggleLeft("Clouds", overrideCloudColorProp.boolValue, GUILayout.Width(70));
                 using (new EditorGUI.DisabledScope(!overrideCloudColorProp.boolValue))
@@ -74,7 +74,6 @@ namespace JWS
                 Rect gradientRect = GUILayoutUtility.GetLastRect();
                 EditorGUILayout.EndHorizontal();
 
-                // Day & Night icons
                 EditorGUILayout.BeginHorizontal();
                 GUILayout.Space(gradientRect.x + 77);
                 GUILayout.Label("☼", GUILayout.Width(20));
@@ -86,7 +85,6 @@ namespace JWS
             EditorGUILayout.EndVertical();
 
 
-            // Wind Foldout
             EditorGUILayout.Space(10);
             EditorGUILayout.BeginVertical(boxStyle);
             windFoldout = EditorGUILayout.Foldout(windFoldout, "Wind", foldoutStyle);
@@ -103,7 +101,6 @@ namespace JWS
             }
             EditorGUILayout.EndVertical();
 
-            // Grass Foldout
             EditorGUILayout.Space(10);
             EditorGUILayout.BeginVertical(boxStyle);
             grassFoldout = EditorGUILayout.Foldout(grassFoldout, "Grass", foldoutStyle);
@@ -113,7 +110,6 @@ namespace JWS
             }
             EditorGUILayout.EndVertical();
 
-            // Clouds Foldout
             EditorGUILayout.Space(10);
             EditorGUILayout.BeginVertical(boxStyle);
             cloudsFoldout = EditorGUILayout.Foldout(cloudsFoldout, "Clouds", foldoutStyle);
@@ -123,10 +119,8 @@ namespace JWS
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("volumeSamples"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("volumeSize"));
 
-                // Material
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("cloudsMaterial"));
 
-                // Add a space
                 EditorGUILayout.Space(10);
 
                 if (EMscript.cloudsMaterial != null)

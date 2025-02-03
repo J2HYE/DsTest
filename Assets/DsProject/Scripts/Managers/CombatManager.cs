@@ -87,6 +87,14 @@ public class CombatManager : BaseManager<CombatManager>
         // 데미지 적용
         if (damage > 0)
         {
+            // 250131 2:00PM Hyeon ===============================================
+            if (GameManager.playerTransform.GetComponent<PlayerController>().onParry)
+            {
+                Debug.LogWarning("패링 성공");  
+                attackerTransform.GetComponent<BaseMonsterAI>().ChangeState(BaseMonsterAI.AIState.Stun);
+                return;
+            }
+            // 250131 2:00PM Hyeon ===============================================
             actualDefender.TakeDamage(finalDamage, attackerTransform);
         }
         
@@ -114,6 +122,92 @@ public class CombatManager : BaseManager<CombatManager>
             QuestManager.Instance.UpdateQuestProgress(QuestConditionType.Kill, actualDefender.characterName, 1);
         }
     }
+    
+    public void ProcessDragonAttack(DragonData dragonData, CharacterData targetData, Transform targetTransform, bool isMagicAttack, float skillMultiplier = 1f)
+    {
+        
+        // 현재 타겟의 실제높이 계산을 위한부분
+        Collider collider = targetTransform.GetComponent<Collider>();
+        float characterHeight = collider != null ? collider.bounds.size.y : 0f;
+        float targetHeight = targetTransform.position.y + characterHeight;// ( (characterHeight == 0f ? 2f : characterHeight));
+
+        // 현재 타겟의 실제높이 계산을 위한부분
+        Vector3 targetPosition = new Vector3(targetTransform.position.x, targetHeight, targetTransform.position.z);
+        
+        // 타겟의 데이터가 없거나 체력이 0이면 공격하지 않음
+        if (targetData == null || targetData.currentHp <= 0)
+        {
+            Debug.LogWarning($"{targetData.characterName}는 이미 사망했습니다.");
+            return;
+        }
+
+        // 회피율 적용 (타겟이 회피하면 공격하지 않음)
+        if (Random.value < targetData.dodgeChance)
+        {
+            Debug.Log($"{targetData.characterName}는 공격을 회피했습니다.");
+            return;
+        }
+
+        // 방패 블락 확률 처리
+        if (targetData.hasShield)
+        {
+            if (Random.value < targetData.blockChance)
+            {
+                Debug.Log($"{targetData.characterName}는 방패로 공격을 차단했습니다!");
+                return; // 방패 차단
+            }
+        }
+
+        // 데미지 계산
+        float damage = 0f;
+        if (isMagicAttack)
+        {
+            // 마법 공격 처리
+            damage = dragonData.magicDamage * (1 - targetData.magicDamageReduction);
+        }
+        else
+        {
+            // 물리 공격 처리
+            damage = dragonData.physicalDamage * (1 - targetData.physicalDamageReduction);
+        }
+        
+        // 스킬 배율이 있을 때만 적용 (배율이 없으면 기본값 1을 사용)
+        if (skillMultiplier > 1f)
+        {
+            damage *= skillMultiplier;
+        }
+
+        // 크리티컬 체크: 드래곤의 크리티컬 확률
+        bool isCritical = Random.value < dragonData.criticalChance;
+        if (isCritical)
+        {
+            damage *= dragonData.criticalDamage;
+            Debug.Log($"{dragonData.characterName}가 크리티컬 히트를 발생시켰습니다!");
+        }
+
+        // 최소 데미지는 0으로 설정
+        int finalDamage = Mathf.Max(0, (int)damage);
+
+        // 데미지 적용
+        if (damage > 0)
+        {
+            targetData.TakeDamage(finalDamage, targetTransform);
+        }
+
+        // UI에 데미지 표시
+        UIManager.DisplayPopupText(finalDamage.ToString(), targetPosition, MessageTag.적_피해);
+
+        Debug.Log($"{dragonData.characterName}가 {targetData.characterName}에게 {finalDamage}의 데미지를 입혔습니다.");
+        Debug.Log($"{targetData.characterName}의 체력이 {targetData.currentHp} 만큼 남았습니다.");
+
+        // 대상이 사망했는지 확인
+        if (targetData.currentHp <= 0)
+        {
+            HandleDefeated(targetData, targetTransform);
+            QuestManager.Instance.UpdateQuestProgress(QuestConditionType.Kill, dragonData.characterName, 1);
+        }
+    }
+
     
     // 몬스터 사망 처리
     private void HandleDefeated(CharacterData defeatedCharacter, Transform defenderTransform)

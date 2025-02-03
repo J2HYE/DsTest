@@ -18,16 +18,24 @@ public class PlayerCombat : MonoBehaviour
     public bool CanReceiveInput { get; set; } = true;
     public bool hasWeapon;
 
-    public bool inputReceived = false;
+    // public bool inputReceived = false;
+    // private bool inputReceived = false;
 
     public Quaternion targetRotation;
 
-    public HashSet<GameObject> DamagedTargets { get; set; } = new HashSet<GameObject>();
-    private static readonly int[] AttackStateHash = {
-        Animator.StringToHash("Base Layer.ComboAttack.Attack_1"),
-        Animator.StringToHash("Base Layer.ComboAttack.Attack_2"),
-        Animator.StringToHash("Base Layer.ComboAttack.Attack_3")
-    };
+
+
+    ////////////////////////////////////////////////////////////
+    /// /// JWS 2025.01.27 13:00 수정
+    // 사용처가 없어서 주석처리
+    // public HashSet<GameObject> DamagedTargets { get; set; } = new HashSet<GameObject>();
+    //   
+    // private static readonly int[] AttackStateHash = {
+    //    Animator.StringToHash("Base Layer.ComboAttack.Attack_1"),
+    //    Animator.StringToHash("Base Layer.ComboAttack.Attack_2"),
+    //    Animator.StringToHash("Base Layer.ComboAttack.Attack_3")
+    //};
+    ////////////////////////////////////////////////////////////
 
     private static readonly int[] SkillStateHash = {
         Animator.StringToHash("Base Layer.Skill_1"),
@@ -53,12 +61,15 @@ public class PlayerCombat : MonoBehaviour
         // controller.uiCheck UI 켜져있을때 막기위한 추가 확인조건
         /// JWS 2025.01.27 13:00 수정
         if (controller.uiCheck) return;
+        ////////////////////////////////////////////////////////////
 
         //Debug.Log($"Current CanMove : {controller.CanMove}");
 
         HandleAttackInput();
         HandleSkillInput();
-        AttackFinishedCheck();
+
+        // 2025.01.29 JWS 주석처리 사용안해서
+        // AttackFinishedCheck();
         SkillFinishedCheck();
     }
 
@@ -68,35 +79,91 @@ public class PlayerCombat : MonoBehaviour
         if (InputManager.InputActions.actions["Attack"].triggered && CanReceiveInput && hasWeapon)
         {
             Debug.Log("Attack");
-            inputReceived = true;
+
+            // 2025.01.29 JWS 주석처리 사용안해서
+            //inputReceived = true;
 
             PerformComboAttack();
         }
     }
 
+    ////////////////////////////////////////////////////////////
+    // 스테이트머신에서 처리하는걸로 옮겨서 불필요
+    /// JWS 2025.01.29 12:00 수정
+    //private void PerformComboAttack()
+    //{
+    //    controller.isAttack = true;
+    //    closestMonster = GetClosestMonster(attackPerceptionRange);
+    //    if (closestMonster != null)
+    //    {
+    //        //Debug.Log("Closest Monster: " + closestMonster.name);
+    //        LookEnemy();
+    //    }
+
+    //    if (inputReceived)
+    //    {
+    //        inputReceived = false;
+    //        CanReceiveInput = false;
+
+    //        playerAnimator.SetTrigger("NextCombo");
+    //    }
+    //}
+
+    //private void AttackFinishedCheck()
+    //{
+    //    AnimatorStateInfo stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
+    //    if(AttackStateHash.Contains(stateInfo.fullPathHash))
+    //    {
+    //        float normalizedTime = stateInfo.normalizedTime;
+
+    //        if(normalizedTime >= 0.95f)
+    //        {
+    //            controller.CanMove = true;
+    //            controller.isAttack = false;
+    //        }
+    //    }
+    //}
+    ////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////
+    ///// JWS 2025.01.29 12:00 수정
+    //private void PerformComboAttack()
+    //{
+    //    controller.isAttack = true;
+    //    closestMonster = GetClosestMonster(attackPerceptionRange);
+    //    if (closestMonster != null)
+    //    {
+    //        //Debug.Log("Closest Monster: " + closestMonster.name);
+    //        LookEnemy();
+    //    }
+    //    playerAnimator.SetTrigger("NextCombo");
+    //}
     private void PerformComboAttack()
     {
         controller.isAttack = true;
-        closestMonster = GetClosestMonster(attackPerceptionRange);
-        if (closestMonster != null)
-        {
-            //Debug.Log("Closest Monster: " + closestMonster.name);
-            LookEnemy();
-        }
-        
-        if (inputReceived)
-        {
-            inputReceived = false;
-            CanReceiveInput = false;
-
-            playerAnimator.SetTrigger("NextCombo");
-        }
+        LookEnemy();
+        playerAnimator.SetTrigger("NextCombo");
     }
+
+    // 현재 콤보진행상태 받아보는 함수 의미 없음.
+    public void CurrentComboStates(StateComboName stateComboName)
+    {
+        Debug.LogWarning(stateComboName.ToString());
+    }
+
+    // 콤보 끝났을때 받는 함수.
+    public void AttackFinishedCheck()
+    {
+        Debug.LogWarning("콤보종료함");
+        controller.CanMove = true;
+        controller.isAttack = false;
+    }
+    ////////////////////////////////////////////////////////////
 
     private void HandleSkillInput()
     {
         GameObject closestMonster = null;
-        if(GetClosestMonster(skillPerceptionRange) != null)
+        if (GetClosestMonster(skillPerceptionRange) != null)
         {
             closestMonster = GetClosestMonster(skillPerceptionRange).gameObject;
         }
@@ -107,9 +174,7 @@ public class PlayerCombat : MonoBehaviour
                 SkillManager.Instance.ActivateSkill("Fire");
                 if (!SkillManager.Instance.isActivating)
                 {
-                    controller.CanMove = false;
-                    controller.CanAttack = false;
-                    controller.CanUseSkill = false;
+                    controller.isUseSkill = true;
                 }
             }
             else
@@ -131,22 +196,6 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    private void AttackFinishedCheck()
-    {
-        AnimatorStateInfo stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
-        if(AttackStateHash.Contains(stateInfo.fullPathHash))
-        {
-
-            float normalizedTime = stateInfo.normalizedTime;
-
-            if(normalizedTime >= 0.95f)
-            {
-                controller.CanMove = true;
-                controller.isAttack = false;
-            }
-        }
-    }
-
     // 스킬 애니메이션이 끝났는지 검사
     private void SkillFinishedCheck()
     {
@@ -157,9 +206,7 @@ public class PlayerCombat : MonoBehaviour
 
             if (normalizedTime >= 0.95f)
             {
-                controller.CanMove = true;
-                controller.CanAttack = true;   // 막았던 평타 키 활성화
-                controller.CanUseSkill = true;
+                controller.isUseSkill = false;
             }
         }
     }
@@ -185,13 +232,26 @@ public class PlayerCombat : MonoBehaviour
         return closestTransform;
     }
 
-    private void LookEnemy()
+    ////////////////////////////////////////////////////////////
+    ///// JWS 2025.01.29 12:00 수정
+    //private void LookEnemy()
+    //{
+    //    Vector3 dir = (closestMonster.position - transform.position).normalized;
+    //    dir.y = 0f;
+    //    targetRotation = Quaternion.LookRotation(dir);
+    //    controller.transform.rotation = targetRotation;
+    //}
+
+    public void LookEnemy()
     {
+        closestMonster = GetClosestMonster(attackPerceptionRange);
+        if (closestMonster == null) { return; }
         Vector3 dir = (closestMonster.position - transform.position).normalized;
         dir.y = 0f;
         targetRotation = Quaternion.LookRotation(dir);
         controller.transform.rotation = targetRotation;
     }
+    ////////////////////////////////////////////////////////////
 
     private void OnDrawGizmosSelected()
     {

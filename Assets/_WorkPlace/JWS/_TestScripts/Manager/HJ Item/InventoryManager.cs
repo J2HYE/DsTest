@@ -37,7 +37,7 @@ public class InventoryManager : BaseManager<InventoryManager>
     {
         if (!IsCanUseInventory)
         {
-            UIManager.SystemMessage($"[InventoryManager] 인벤토리를 사용할 수 없는 상태입니다.");
+            UIManager.SystemMessage($"인벤토리를 사용할 수 없는 상태입니다.");
             return;
         }
 
@@ -89,15 +89,15 @@ public class InventoryManager : BaseManager<InventoryManager>
             newItem.quantity = addItem.maxStack;
             if (!AddNewItemToInventory(newItem))
             {
-                UIManager.SystemMessage($"[InventoryManager] 인벤토리가 가득 찼습니다. '{newItem.name}' 추가 불가.");
+                UIManager.SystemMessage($"인벤토리가 가득 찼습니다. '{newItem.name}' 추가 불가.");
                 return;
             }
-            UIManager.SystemGameMessage($"[InventoryManager] '{newItem.name}' 추가됨 (현재 수량: {newItem.quantity})", MessageTag.아이템_획득);
+            UIManager.SystemGameMessage($"'{newItem.name}' 추가됨 (현재 수량: {newItem.quantity})", MessageTag.아이템_획득);
         }
         if (remainingQuantity > 0)
         {
             existingItem.quantity = remainingQuantity;
-            UIManager.SystemGameMessage($"[InventoryManager] '{existingItem.name}' 추가됨 (최종 수량: {existingItem.quantity})", MessageTag.아이템_획득);
+            UIManager.SystemGameMessage($"'{existingItem.name}' 추가됨 (최종 수량: {existingItem.quantity})", MessageTag.아이템_획득);
         }
 
         UpdateQuestAndUI(existingItem);
@@ -107,7 +107,7 @@ public class InventoryManager : BaseManager<InventoryManager>
     {
         if (!AddNewItemToInventory(addItem))
         {
-            UIManager.SystemMessage($"[InventoryManager] 인벤토리가 가득 찼습니다. '{addItem.name}' 추가 불가.");
+            UIManager.SystemMessage($"인벤토리가 가득 찼습니다. '{addItem.name}' 추가 불가.");
             return;
         }
 
@@ -142,7 +142,7 @@ public class InventoryManager : BaseManager<InventoryManager>
 
         if (itemsToRemove.Count == 0)
         {
-            UIManager.SystemGameMessage($"[InventoryManager] 아이템 '{itemId}'를 소지하고 있지 않습니다.", MessageTag.아이템_획득);
+            UIManager.SystemGameMessage($"아이템 '{itemId}'를 소지하고 있지 않습니다.", MessageTag.아이템_획득);
             return;
         }
 
@@ -153,14 +153,14 @@ public class InventoryManager : BaseManager<InventoryManager>
             if (item.quantity > quantity)
             {
                 item.quantity -= quantity;
-                UIManager.SystemGameMessage($"[InventoryManager] 아이템 '{item.name}' {quantity}개 제거됨. 남은 수량: {item.quantity}", MessageTag.아이템_획득);
+                UIManager.SystemGameMessage($"아이템 '{item.name}' {quantity}개 제거됨. 남은 수량: {item.quantity}", MessageTag.아이템_획득);
                 quantity = 0;
             }
             else
             {
                 quantity -= item.quantity;
                 inventory.Remove(item);
-                UIManager.SystemGameMessage($"[InventoryManager] 아이템 '{item.name}' 제거됨 (스택 전체 제거)", MessageTag.아이템_획득);
+                UIManager.SystemGameMessage($"아이템 '{item.name}' 제거됨 (스택 전체 제거)", MessageTag.아이템_획득);
             }
         }
         if (quantity > 0)
@@ -215,7 +215,7 @@ public class InventoryManager : BaseManager<InventoryManager>
     {
         int previousCapacity = CurrentCapacity;
         CurrentCapacity = Mathf.Min(CurrentCapacity + expandSize, maxCapacity);
-        UIManager.SystemGameMessage($"[InventoryManager] 인벤토리가 확장되었습니다. 이전 용량: {previousCapacity}, 현재 용량: {CurrentCapacity}/{maxCapacity}", MessageTag.아이템_획득);
+        UIManager.SystemGameMessage($"인벤토리가 확장되었습니다. 이전 용량: {previousCapacity}, 현재 용량: {CurrentCapacity}/{maxCapacity}", MessageTag.아이템_획득);
     }
 
     public void PrintInventory()

@@ -434,7 +434,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8343835499490690820}
-  - component: {fileID: 4426752841863967572}
   m_Layer: 6
   m_Name: Spine1
   m_TagString: Untagged
@@ -460,29 +459,6 @@ Transform:
   - {fileID: 4698849937323105706}
   m_Father: {fileID: 8427896889118362867}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &4426752841863967572
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520379185749822484}
-  m_Material: {fileID: 13400000, guid: 54174b87a6301064ea8788686f85bda8, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.13413955
-  m_Height: 0.31095642
-  m_Direction: 0
-  m_Center: {x: 0.0000000039894643, y: 0.099210545, z: 0.0000000051702598}
 --- !u!1 &1749382413287212057
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,7 +736,7 @@ GameObject:
   m_Component:
   - component: {fileID: 914667545543988445}
   m_Layer: 6
-  m_Name: Fire Ball Point
+  m_Name: FireBallPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1447,7 +1423,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -244.41972, y: 14.996554, z: 232.40196}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6019430957086417825}
@@ -1489,11 +1465,90 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c13f129be690724ab90027590e9b39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dragonData:
+    characterName: 
+    characterType: 3
+    prefab: {fileID: 0}
+    strength: 0
+    agility: 0
+    vitality: 0
+    intelligence: 0
+    speed: 0
+    attackSpeed: 0
+    attackRange: 0
+    bondLevel: 0
+    bondExperience: 0
+    bondThresholds: 
+    statModifier:
+      strengthMultiplier: 1.5
+      agilityMultiplier: 0.01
+      intelligenceMultiplier: 1.5
+    physicalDamage: 0
+    magicDamage: 0
+    criticalChance: 0
+    criticalDamage: 0
+  firePoint: {fileID: 914667545543988445}
+  isMoving: 0
   followDistance: 3
   teleportDistance: 10
   followSpeed: 5
   hoverHeight: 2
   rotationSpeed: 5
+  detectRange: 10
+  meleeRange: 1
+  maxDistanceFromPlayer: 15
+  fireballPrefab: {fileID: 478066477400670348, guid: f1ce9a5f250e288449f4dbd4206d3345, type: 3}
+  skillCooldown: 60
+  rangedCooldown: 10
+  currentTarget:
+    characterName: 
+    characterType: 0
+    characterPrefab: {fileID: 0}
+    level: 0
+    currentExperience: 0
+    experienceToLevelUp: 0
+    strength: 0
+    agility: 0
+    vitality: 0
+    intelligence: 0
+    maxHp: 0
+    currentHp: 0
+    hpRecoveryRate: 0
+    maxMp: 0
+    currentMp: 0
+    mpRecoveryRate: 0
+    stamina: 0
+    staminaCurrent: 0
+    staminaRecoveryRate: 0
+    moveSpeed: 0
+    attackSpeed: 0
+    attackRange: 0
+    physicalDefense: 0
+    magicDefense: 0
+    physicalDamage: 0
+    magicDamage: 0
+    criticalChance: 0
+    criticalDamage: 0
+    dodgeChance: 0
+    hasShield: 0
+    blockChance: 0
+    physicalDamageReduction: 0
+    magicDamageReduction: 0
+    statModifier:
+      vitalityMultiplier: 10
+      mpMultiplier: 5
+      levelMpBonus: 10
+      strengthMultiplier: 1.5
+      agilityMultiplier: 0.01
+      physicalResistanceMultiplier: 1
+      magicResistanceMultiplier: 2
+      intelligenceMultiplier: 1.5
+    dropItems: []
+    experienceReward: 0
+    goldReward: 0
+    instance: {fileID: 0}
+  currentTargetTransform: {fileID: 0}
+  currentState: 0
 --- !u!1 &6947217215586214734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1822,7 +1877,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8427896889118362867}
-  - component: {fileID: 8574279181964920815}
   m_Layer: 6
   m_Name: Spine
   m_TagString: Untagged
@@ -1849,29 +1903,6 @@ Transform:
   - {fileID: 5953207911290600390}
   m_Father: {fileID: 1891881155593102922}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &8574279181964920815
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9064481980428292782}
-  m_Material: {fileID: 13400000, guid: 54174b87a6301064ea8788686f85bda8, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.13503243
-  m_Height: 0.31095642
-  m_Direction: 0
-  m_Center: {x: 0.0000000037239016, y: 0.10010342, z: 0.0000000052168065}
 --- !u!1 &9199315630289760047
 GameObject:
   m_ObjectHideFlags: 0
@@ -1881,7 +1912,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8085194267536908348}
-  - component: {fileID: 5460633164155894127}
   m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
@@ -1909,26 +1939,3 @@ Transform:
   - {fileID: 165101762519832436}
   m_Father: {fileID: 7259398586113793095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &5460633164155894127
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9199315630289760047}
-  m_Material: {fileID: 13400000, guid: 54174b87a6301064ea8788686f85bda8, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.109756656
-  m_Height: 0.3016658
-  m_Direction: 1
-  m_Center: {x: -0.11710774, y: 0.07677387, z: 0.0000000090871675}

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: StoneFrog
+  m_Controller: {fileID: 9100000, guid: 0bb1e1c4a828a914e9aafd1b48aac197, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 78373e72667bb5f428e0382efcf3d91c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 341709b2330d67b45ba36459a49821ca, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 544dc7bc3ae13404ba3bece3b52e9cfd, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 15072a1a1711aa54587383a944823688, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 096cff525c99a0245941b4fd385699ce, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7873afb4979672d408cc8fbbdc1b4020, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 9d80e0b465704464d993a1e396ee09e2, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b7456d176a9f1024180f084bb85e1606, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 39f20c6bdbdbe6645b0c94f444601f27, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d2c7fb26200c53949b8d211eff2ddf6c, type: 2}

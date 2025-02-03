@@ -17,20 +17,20 @@ MonoBehaviour:
     characterType: 0
     characterPrefab: {fileID: 0}
     level: 1
-    currentExperience: 0
+    currentExperience: 40
     experienceToLevelUp: 100
     strength: 10
     agility: 8
     vitality: 15
     intelligence: 12
     maxHp: 150
-    currentHp: 35
+    currentHp: 0
     hpRecoveryRate: 0
     maxMp: 70
-    currentMp: 63
+    currentMp: 70
     mpRecoveryRate: 1
     stamina: 100
-    staminaCurrent: 100
+    staminaCurrent: 98.10003
     staminaRecoveryRate: 0.1
     moveSpeed: 5
     attackSpeed: 1.2
@@ -41,9 +41,11 @@ MonoBehaviour:
     magicDamage: 18
     criticalChance: 0.08
     criticalDamage: 1.5
-    dodgeChance: 0.4
-    blockChance: 0.5
-    damageReduction: 0.212
+    dodgeChance: 0.08
+    hasShield: 0
+    blockChance: 0.099999994
+    physicalDamageReduction: 0.2
+    magicDamageReduction: 0.19354838
     statModifier:
       vitalityMultiplier: 10
       mpMultiplier: 5
@@ -56,7 +58,7 @@ MonoBehaviour:
     skills:
     - Dash
     - Slash
-    gold: 0
+    gold: 20
   monsters:
   - characterName: Mushroom
     characterType: 1
@@ -79,7 +81,7 @@ MonoBehaviour:
     staminaRecoveryRate: 0.1
     moveSpeed: 4
     attackSpeed: 2
-    attackRange: 1.5
+    attackRange: 2
     physicalDefense: 0
     magicDefense: 0
     physicalDamage: 0
@@ -87,8 +89,10 @@ MonoBehaviour:
     criticalChance: 0
     criticalDamage: 0
     dodgeChance: 0
+    hasShield: 0
     blockChance: 0
-    damageReduction: 0
+    physicalDamageReduction: 0
+    magicDamageReduction: 0
     statModifier:
       vitalityMultiplier: 10
       mpMultiplier: 5
@@ -99,17 +103,10 @@ MonoBehaviour:
       magicResistanceMultiplier: 2
       intelligenceMultiplier: 1.5
     dropItems:
-    - Item_strawberry
-    - Item_strawberry
-    - Item_strawberry
-    - Item_strawberry
-    - Item_strawberry
-    - Item_strawberry
-    - Item_strawberry
-    - Item_strawberry
-    - Item_strawberry
-    - Item_strawberry
-    - Main_Quest001
+    - "\uB538\uAE30"
+    - "\uC6A9\uC758\uC54C"
+    experienceReward: 20
+    goldReward: 10
     instance: {fileID: 0}
   - characterName: SlimeRabbit
     characterType: 1
@@ -140,8 +137,10 @@ MonoBehaviour:
     criticalChance: 0
     criticalDamage: 0
     dodgeChance: 0
+    hasShield: 0
     blockChance: 0
-    damageReduction: 0
+    physicalDamageReduction: 0
+    magicDamageReduction: 0
     statModifier:
       vitalityMultiplier: 10
       mpMultiplier: 5
@@ -152,11 +151,10 @@ MonoBehaviour:
       magicResistanceMultiplier: 2
       intelligenceMultiplier: 1.5
     dropItems:
-    - Quest001
-    - Quest001
-    - Quest001
-    - Quest001
-    - Quest001
+    - "\uB3CC"
+    - "\uB098\uBB34"
+    experienceReward: 20
+    goldReward: 20
     instance: {fileID: 0}
   - characterName: Bear
     characterType: 1
@@ -187,8 +185,10 @@ MonoBehaviour:
     criticalChance: 0
     criticalDamage: 0
     dodgeChance: 0
+    hasShield: 0
     blockChance: 0
-    damageReduction: 0
+    physicalDamageReduction: 0
+    magicDamageReduction: 0
     statModifier:
       vitalityMultiplier: 10
       mpMultiplier: 5
@@ -199,6 +199,8 @@ MonoBehaviour:
       magicResistanceMultiplier: 2
       intelligenceMultiplier: 1.5
     dropItems: []
+    experienceReward: 50
+    goldReward: 40
     instance: {fileID: 0}
   - characterName: ZombieGorilla
     characterType: 1
@@ -229,8 +231,10 @@ MonoBehaviour:
     criticalChance: 0
     criticalDamage: 0
     dodgeChance: 0
+    hasShield: 0
     blockChance: 0
-    damageReduction: 0
+    physicalDamageReduction: 0
+    magicDamageReduction: 0
     statModifier:
       vitalityMultiplier: 10
       mpMultiplier: 5
@@ -251,6 +255,8 @@ MonoBehaviour:
     - Item_tree
     - Item_tree
     - Item_tree
+    experienceReward: 0
+    goldReward: 0
     instance: {fileID: 0}
   - characterName: Devil
     characterType: 1
@@ -281,8 +287,10 @@ MonoBehaviour:
     criticalChance: 0
     criticalDamage: 0
     dodgeChance: 0
+    hasShield: 0
     blockChance: 0
-    damageReduction: 0
+    physicalDamageReduction: 0
+    magicDamageReduction: 0
     statModifier:
       vitalityMultiplier: 10
       mpMultiplier: 5
@@ -293,6 +301,8 @@ MonoBehaviour:
       magicResistanceMultiplier: 2
       intelligenceMultiplier: 1.5
     dropItems: []
+    experienceReward: 0
+    goldReward: 0
     instance: {fileID: 0}
   - characterName: Golem
     characterType: 1
@@ -323,8 +333,10 @@ MonoBehaviour:
     criticalChance: 0
     criticalDamage: 0
     dodgeChance: 0
+    hasShield: 0
     blockChance: 0
-    damageReduction: 0
+    physicalDamageReduction: 0
+    magicDamageReduction: 0
     statModifier:
       vitalityMultiplier: 10
       mpMultiplier: 5
@@ -335,6 +347,8 @@ MonoBehaviour:
       magicResistanceMultiplier: 2
       intelligenceMultiplier: 1.5
     dropItems: []
+    experienceReward: 100
+    goldReward: 50
     instance: {fileID: 0}
   - characterName: Bulldog
     characterType: 1
@@ -365,8 +379,10 @@ MonoBehaviour:
     criticalChance: 0
     criticalDamage: 0
     dodgeChance: 0
+    hasShield: 0
     blockChance: 0
-    damageReduction: 0
+    physicalDamageReduction: 0
+    magicDamageReduction: 0
     statModifier:
       vitalityMultiplier: 10
       mpMultiplier: 5
@@ -377,6 +393,8 @@ MonoBehaviour:
       magicResistanceMultiplier: 2
       intelligenceMultiplier: 1.5
     dropItems: []
+    experienceReward: 0
+    goldReward: 0
     instance: {fileID: 0}
   - characterName: MophanS
     characterType: 2
@@ -407,8 +425,10 @@ MonoBehaviour:
     criticalChance: 0
     criticalDamage: 0
     dodgeChance: 0
+    hasShield: 0
     blockChance: 0
-    damageReduction: 0
+    physicalDamageReduction: 0
+    magicDamageReduction: 0
     statModifier:
       vitalityMultiplier: 10
       mpMultiplier: 5
@@ -419,6 +439,8 @@ MonoBehaviour:
       magicResistanceMultiplier: 2
       intelligenceMultiplier: 1.5
     dropItems: []
+    experienceReward: 0
+    goldReward: 0
     instance: {fileID: 0}
   - characterName: MophanSub1
     characterType: 1
@@ -449,8 +471,10 @@ MonoBehaviour:
     criticalChance: 0
     criticalDamage: 0
     dodgeChance: 0
+    hasShield: 0
     blockChance: 0
-    damageReduction: 0
+    physicalDamageReduction: 0
+    magicDamageReduction: 0
     statModifier:
       vitalityMultiplier: 10
       mpMultiplier: 5
@@ -461,6 +485,8 @@ MonoBehaviour:
       magicResistanceMultiplier: 2
       intelligenceMultiplier: 1.5
     dropItems: []
+    experienceReward: 0
+    goldReward: 0
     instance: {fileID: 0}
   - characterName: MophanSub2
     characterType: 1
@@ -491,8 +517,10 @@ MonoBehaviour:
     criticalChance: 0
     criticalDamage: 0
     dodgeChance: 0
+    hasShield: 0
     blockChance: 0
-    damageReduction: 0
+    physicalDamageReduction: 0
+    magicDamageReduction: 0
     statModifier:
       vitalityMultiplier: 10
       mpMultiplier: 5
@@ -503,21 +531,28 @@ MonoBehaviour:
       magicResistanceMultiplier: 2
       intelligenceMultiplier: 1.5
     dropItems: []
+    experienceReward: 0
+    goldReward: 0
     instance: {fileID: 0}
   dragons:
   - characterName: BabyDragon
+    characterType: 3
     prefab: {fileID: 0}
     strength: 5
     agility: 4
     vitality: 8
     intelligence: 6
     speed: 5
-    attackSpeed: 1.2
+    attackSpeed: 3
+    attackRange: 1.5
     bondLevel: 1
     bondExperience: 0
     bondThresholds: 64000000c80000002c01000090010000f4010000
     statModifier:
-      physicalDamageMultiplier: 1.5
-      magicDamageMultiplier: 2
-      criticalDamageMultiplier: 2
-      skillBonusMultiplier: 1.2
+      strengthMultiplier: 1.5
+      agilityMultiplier: 0.01
+      intelligenceMultiplier: 1.5
+    physicalDamage: 8
+    magicDamage: 9
+    criticalChance: 0.04
+    criticalDamage: 1.5

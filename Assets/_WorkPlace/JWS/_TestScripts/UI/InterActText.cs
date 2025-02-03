@@ -7,6 +7,7 @@ public class InterActText : MonoBehaviour
     private RectTransform[] _rectTransforms;
     private TextMeshProUGUI textMsg;
     private string message = string.Empty;
+    private float offsetHeght = 0;
     private int currentIndex = 0;
     private bool isSettings = false;
 
@@ -63,30 +64,30 @@ public class InterActText : MonoBehaviour
     void Update()
     {
         textMsg.text = message;
-        //Material material = textMsg.fontMaterial;
-        //float reflectivity = Mathf.PingPong(Time.time * 4, 10) + 5;
-        //material.SetFloat("_Reflectivity", reflectivity);
+
         Vector3 screenPos = Vector3.zero;
+        Vector3 offsetPosition = new Vector3(transform.parent.position.x, offsetHeght + 0.5f, transform.parent.position.z);
+
         if (currentIndex != 0)
         {
             Vector3 direction = (transform.parent.position - GameManager.playerTransform.position).normalized;
-            float offset = direction.x > 0 ? 1: -1;
-            screenPos = _camera.WorldToScreenPoint(
-                transform.parent.position + Vector3.up * 1.5f + Vector3.right * offset
+            float offset = direction.x > 0 ? 1 : -1;
+            screenPos = _camera.WorldToScreenPoint(offsetPosition + Vector3.right * offset
             );
         }
         else
         {
-            screenPos = _camera.WorldToScreenPoint(transform.parent.position + Vector3.up * 1.5f);
+            screenPos = _camera.WorldToScreenPoint(offsetPosition);
         }
+
         _rectTransforms[currentIndex].position = screenPos;
     }
 
-
-    public void InteractTextSetting(string text, int index, bool hasQuest = false)
+    public void InteractTextSetting(string text, int index, float height, bool hasQuest = false)
     {
         this.message = text;
         this.currentIndex = index;
+        this.offsetHeght = height;
         Settings();
         ChildTransformOff();
         ActivateCurrentIndex();

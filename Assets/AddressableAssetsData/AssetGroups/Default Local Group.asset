@@ -33,6 +33,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Music
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fd12a3d5526dbab4a9696e4cc1cf50d0
+    m_Address: Data/SpeechDataBase
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpeechData
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e9afe2d152eeb57479eab53a0fa3b502, type: 2}
   m_SchemaSet:

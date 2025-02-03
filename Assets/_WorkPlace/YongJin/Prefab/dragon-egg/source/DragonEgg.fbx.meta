@@ -3,7 +3,12 @@ guid: 464970cf2881567449bb7e2641b7f11a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DragonEgg_material
+    second: {fileID: 2100000, guid: fc1a549076f580144a4cc473db10fb35, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

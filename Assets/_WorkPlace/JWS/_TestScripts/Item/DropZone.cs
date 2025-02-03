@@ -24,11 +24,11 @@ public class DropZone : MonoBehaviour, IDropHandler
                 {
                     switch ( dropItem )
                     {
-                        case "Consumable001":
+                        case "소형 체력포션":
                             quickSlotsUI.SetSlotItem(0);
 
                             break;
-                        case "Consumable002":
+                        case "소형 마나포션":
                             quickSlotsUI.SetSlotItem(1);
                             break;
                     }

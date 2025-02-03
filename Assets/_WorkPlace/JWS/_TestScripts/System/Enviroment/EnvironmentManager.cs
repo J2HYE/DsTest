@@ -2,10 +2,13 @@ using UnityEngine;
 
 namespace JWS
 {
-    [ExecuteInEditMode]
     public class EnvironmentManager : MonoBehaviour
     {
         public Light directionalLight;
+        
+        [Header("데이 나이트 시스템")][Range(0f, 24f)] public float timeOfDay = 12f; // 현재 시간 (0~24)
+        public float daySpeed = 0.1f; // 시간 흐름 속도
+        private bool sunWaiting = false; // 해가 -35도 이하로 내려갔을 때 대기
 
         public Gradient sunColorGradient;
         public Gradient fogColorGradient;
@@ -51,6 +54,7 @@ namespace JWS
 
         private bool hasIssuedMaterialWarning = false;
 
+
         void Awake()
         {
             quadMesh = Resources.GetBuiltinResource<Mesh>("Quad.fbx");
@@ -59,9 +63,19 @@ namespace JWS
 
         void Update()
         {
+            UpdateTime(); // 🌞 시간 업데이트 추가
             UpdateEnvironment();
             UpdateCloudsVolume();
             UpdateLighting();
+        }
+
+        private void UpdateTime()
+        {
+            if (!sunWaiting)
+            {
+                timeOfDay += Time.deltaTime * daySpeed;
+                if (timeOfDay >= 24f) timeOfDay = 0f;
+            }
         }
 
         private void UpdateEnvironment()
@@ -121,26 +135,51 @@ namespace JWS
             Graphics.DrawMeshInstanced(quadMesh, 0, cloudsMaterial, matrices, volumeSamples);
         }
 
+        private bool reserveNormal = false;
+
         private void UpdateLighting()
         {
             if (directionalLight == null) return;
 
-            float dot = Vector3.Dot(directionalLight.transform.forward, Vector3.up);
-            float time = (dot + 1f) / 2f;
+            float normalizedTime = timeOfDay / 24f;
 
-            if (overrideFogColor)
-                RenderSettings.fogColor = fogColorGradient.Evaluate(time);
-            if (overrideSunColor)
-                directionalLight.color = sunColorGradient.Evaluate(time);
+            if (Mathf.Approximately(normalizedTime, 0f)) reserveNormal = !reserveNormal;
+
+            float adjustedTime = !reserveNormal ? normalizedTime : 1f - normalizedTime;
+
+            // 🌞 태양 각도 설정
+            float sunAngle = Mathf.Lerp(-90f, 270f, normalizedTime);
+            directionalLight.transform.rotation = Quaternion.Euler(sunAngle, 0, 0);
+
+            // 🌞 색상 업데이트
+            if (overrideFogColor) RenderSettings.fogColor = fogColorGradient.Evaluate(adjustedTime);
+
+            Color scatteringColor = sunColorGradient.Evaluate(adjustedTime);
+
+            scatteringColor.r = Mathf.Max(scatteringColor.r, 0.01f);
+            scatteringColor.g = Mathf.Max(scatteringColor.g, 0.01f);
+            scatteringColor.b = Mathf.Max(scatteringColor.b, 0.01f);
+            scatteringColor.a = Mathf.Max(scatteringColor.a, 0.05f);
+
+            if (overrideSunColor) directionalLight.color = scatteringColor;
 
             if (cloudsMaterial != null && cloudsMaterial.HasProperty("_ScatteringColor") && overrideCloudColor)
             {
-                cloudsMaterial.SetColor("_ScatteringColor", scatteringColorGradient.Evaluate(time));
+                cloudsMaterial.SetColor("_ScatteringColor", scatteringColorGradient.Evaluate(adjustedTime));
             }
             else if (cloudsMaterial == null)
             {
                 Debug.LogError("cloudsMaterial is null. Please assign a material.");
             }
+
+            Debug.Log($"Gradient Color: {scatteringColor}");
+        }
+
+
+
+        private void ResumeSunMovement()
+        {
+            sunWaiting = false;
         }
     }
 }

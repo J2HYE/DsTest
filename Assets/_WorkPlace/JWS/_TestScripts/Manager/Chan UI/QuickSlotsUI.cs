@@ -10,7 +10,7 @@ public class QuickSlotsUI : MonoBehaviour
     private PlayerData playerData;
     private Item[] quickSlotItems = new Item[2];
     private BasicTimer[] quickSlotTimer = new BasicTimer[2];
-    private string[] condition = { "Consumable001", "Consumable002" };
+    private string[] condition = { "소형 체력포션", "소형 마나포션" };
 
     private void Start()
     {

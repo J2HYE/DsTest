@@ -11,18 +11,20 @@ public class MainCutSceneManager : BaseManager<MainCutSceneManager>
     
     private Image fadeBg;
     public AnimationCurve curve;
-    private int id;
+    private int mainSceneId;
+    private int chapterId;
 
     
-    public void OnCutScene(int id)// 1 : 메인1, 2 : 메인2
+    public void OnCutScene(int mainSceneId, int chapterId)
     {
-        if(this.id > 0)
+        if(this.mainSceneId > 0)
         {
             Debug.Log($"컷 씬 진행중 이따 신호 보내세요");    
             return;
         }
         Debug.Log($"컷 씬 시작");    
-        this.id = id;
+        this.mainSceneId = mainSceneId;
+        this.chapterId = chapterId;
         StartCoroutine(CutSceneFadeOut());
     }
 
@@ -55,18 +57,29 @@ public class MainCutSceneManager : BaseManager<MainCutSceneManager>
     private void CutSceneStart()
     {
         
-        Debug.Log($"메인{id}컷 씬 시작");
+        Debug.Log($"메인{mainSceneId}, 챕터{chapterId} 컷 씬 시작");
         fadeBgTransform.gameObject.SetActive(false);
         Bg.gameObject.SetActive(true);
-        
-        timeLineManager.GetChild(id-1).gameObject.SetActive(true);
+        var mainScene = timeLineManager.GetChild(mainSceneId-1);
+        mainScene.gameObject.SetActive(true);
+        for(int i = 0; i < timeLineManager.GetChild(mainSceneId-1).childCount; i++)//혹시 모를 초기화
+        {
+            mainScene.GetChild(i).gameObject.SetActive(false);
+        }
+        mainScene.GetChild(chapterId-1).gameObject.SetActive(true);
     }
     public void CutSceneEndSignal()
     {
         
-        timeLineManager.GetChild(id-1).gameObject.SetActive(false);
-        id = 0;
-        Debug.Log($"메인{id}컷 씬 종료됨");
+        Debug.Log($"메인{mainSceneId}컷 씬 종료됨");
+        var mainScene = timeLineManager.GetChild(mainSceneId-1);
+        mainScene.gameObject.SetActive(false);
+        for(int i = 0; i < timeLineManager.GetChild(mainSceneId-1).childCount; i++)//혹시 모를 초기화
+        {
+            mainScene.GetChild(i).gameObject.SetActive(false);
+        }
+        mainSceneId = 0;
+        chapterId = 0;
         fadeBgTransform.gameObject.SetActive(true);
         Bg.gameObject.SetActive(false);
         StartCoroutine(CutSceneFadeIn());

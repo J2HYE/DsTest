@@ -16,21 +16,21 @@ public class empty : MonoBehaviour
 
     private void EnableCollider()
     {
-        transform.GetComponentInParent<PlayerCombat>().weaponCollider.enabled = true;
+        //transform.GetComponentInParent<PlayerCombat>().weaponCollider.enabled = true;
     }
 
     private void DisableCollider()
     {
-        transform.GetComponentInParent<PlayerCombat>().weaponCollider.enabled = false;
+        //transform.GetComponentInParent<PlayerCombat>().weaponCollider.enabled = false;
     }
 
     private void EnableComboInput()
     {
-        transform.GetComponentInParent<PlayerCombat>().CanReceiveInput = true;
+        //transform.GetComponentInParent<PlayerCombat>().CanReceiveInput = true;
     }
 
     private void StartCombo()
     {
-        transform.GetComponentInParent<PlayerCombat>().CanReceiveInput = false;
+        //transform.GetComponentInParent<PlayerCombat>().CanReceiveInput = false;
     }
 }

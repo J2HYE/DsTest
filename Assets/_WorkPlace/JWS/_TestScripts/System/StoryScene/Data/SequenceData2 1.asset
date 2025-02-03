@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc041429ec71af842983867a8ab5d538, type: 3}
+  m_Name: SequenceData2 1
+  m_EditorClassIdentifier: 
+  sequenceIndex: 1
+  sequenceCount: 3
+  targetObject: 
+  cameraType: 2
+  sequencesDialog:
+  - speakerName: "\uBA54\uC778\uC2A4\uD1A0\uB9AC113"
+    dialogText: "\uC6A9\uC0AC\uC758 \uB9C8\uC9C0\uB9C9 \uC804\uD22C\uB97C \uBAA9\uACA9\uD558\uBA70,
+      \uC6A9\uC0AC\uAC00 \uB0A8\uAE34 \uAC80\uC758 \uBE5B\uC774 \uC232\uC73C\uB85C
+      \uD5A5\uD558\uB294 \uC7A5\uBA74\uC744 \uD655\uC778."
+  - speakerName: "\uBA54\uC778\uC2A4\uD1A0\uB9AC223"
+    dialogText: "\uC6A9\uC0AC\uC758 \uB9C8\uC9C0\uB9C9 \uC804\uD22C\uB97C \uBAA9\uACA9\uD558\uBA70,
+      \uC6A9\uC0AC\uAC00 \uB0A8\uAE34 \uAC80\uC758 \uBE5B\uC774 \uC232\uC73C\uB85C
+      \uD5A5\uD558\uB294 \uC7A5\uBA74\uC744 \uD655\uC778."
+  - speakerName: "\uBA54\uC778\uC2A4\uD1A0\uB9AC333"
+    dialogText: "\uC6A9\uC0AC\uC758 \uB9C8\uC9C0\uB9C9 \uC804\uD22C\uB97C \uBAA9\uACA9\uD558\uBA70,
+      \uC6A9\uC0AC\uAC00 \uB0A8\uAE34 \uAC80\uC758 \uBE5B\uC774 \uC232\uC73C\uB85C
+      \uD5A5\uD558\uB294 \uC7A5\uBA74\uC744 \uD655\uC778."
+  isComplete: 1
+  characterAction: 1
+  triggerType: 2
+  events: 0300000006000000
+  cameraPoseList:
+    transitionType: 0
+    poseList: []
+  cameraEffect:
+    enableShake: 0
+    shakeIntensity: 2
+    shakeDuration: 2
+    enableZoom: 1
+    zoomAmount: 5
+    zoomSpeed: 2
+  moveData:
+    charStoryNPC: 
+    startPosition: {x: 0, y: 0, z: 0}
+    endPosition: {x: 0, y: 0, z: 0}
+    moveSpeed: 3
+    shouldMove: 1
+  soundData:
+    bgmClip: {fileID: 0}
+    bgmVolume: 1
+    loopBgm: 0
+    sfxClip: {fileID: 0}
+    sfxVolume: 1
+  screenEffect:
+    enableFade: 0
+    fadeDuration: 3
+    fadeColor: {r: 0, g: 0, b: 0, a: 1}

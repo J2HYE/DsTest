@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private WeaponManager weapon;
     [SerializeField] private float staminaRecoveryRate;
 
-    public PlayerState CurrentState { get; private set; } = PlayerState.PlayerIdle;
+    public PlayerState currentState = PlayerState.Idle;
     private CharacterController characterController;
     [SerializeField] private Animator playerAnimator;
     public Animator PlayerAnimator => playerAnimator;
@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveDirection;
     public bool CanMove;
     [SerializeField] private bool isGrounded;
+    [SerializeField] private bool isMove;
     private bool isSprinting;
 
     [Header("점프 / 중력")]
@@ -67,6 +68,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float currentStamina;
     [SerializeField] private bool isEnoughMana;
     [SerializeField] private bool isRecovery;
+    [SerializeField] private bool isHit;
+    public bool onParry;
     public bool CanWeaponSwitch;
 
     private BasicTimer RecoveryTimer;
@@ -92,10 +95,7 @@ public class PlayerController : MonoBehaviour
         playerCombat = GetComponent<PlayerCombat>();
         weapon = playerCombat.weapon;
 
-        CanMove = true;
-        CanAttack = true;
-        CanUseSkill = true;
-        CanParry = true;
+        SetState(PlayerState.Idle);
         CanWeaponSwitch = true;
         playerData = CharacterManager.PlayerCharacterData;
         RecoveryTimer = new BasicTimer(RecoveryTime);
@@ -122,8 +122,10 @@ public class PlayerController : MonoBehaviour
             uiCheck = UIManager.Instance.IsUIWindowOpen();
         }
         if (uiCheck) return;
-        
+
         DeathCheck();
+        HitFinishedCheck();
+        StateCheck();
         isGrounded = characterController.isGrounded;
         playerAnimator.SetBool("Grounded", isGrounded);
 
@@ -131,9 +133,8 @@ public class PlayerController : MonoBehaviour
         HandleGravity();
         AvoidKeyInput();
 
-
-        DetectCliff();
-        UpdateClimbState();
+        //DetectCliff();
+        //UpdateClimbState();
         if (!isDodging)
         {
             ControlMovement();
@@ -142,29 +143,69 @@ public class PlayerController : MonoBehaviour
             OnParry();
         }
 
-        CanGlidingCheck();
-        OnGliding();
+        //CanGlidingCheck();
+        //OnGliding();
 
-        switch (CurrentState)
+        switch (currentState)
         {
-            case PlayerState.PlayerIdle:
+            case PlayerState.Idle:
+                CanMove = true;
+                CanAttack = true;
+                CanUseSkill = true;
+                CanParry = true;
                 break;
-            case PlayerState.PlayerMove:
+            case PlayerState.Move:
+                CanMove = true;
+                CanAttack = true;
+                CanUseSkill = true;
+                CanParry = true;
                 break;
-            case PlayerState.PlayerAttack:
+            case PlayerState.InAir:
+                CanMove = true;
+                CanAttack = false;
+                CanUseSkill = false;
+                CanParry = false;
                 break;
-            case PlayerState.PlayerHit:
+            case PlayerState.Attack:
+                CanMove = false;
+                CanAttack = true;
+                CanUseSkill = true;
+                CanParry = false;
                 break;
-            case PlayerState.PlayerDeath:
+            case PlayerState.Parry:
+                CanMove = false;
+                CanAttack = false;
+                CanUseSkill = false;
+                CanParry = false;
+                break;
+            case PlayerState.UseSkill:
+                CanMove = false;
+                CanAttack = false;
+                CanUseSkill = false;
+                CanParry = false;
+                break;
+            case PlayerState.Climb:
+                CanMove = true;
+                CanAttack = false;
+                CanUseSkill = false;
+                CanParry = false;
+                break;
+            case PlayerState.Hit:
+                CanMove = false;
+                CanAttack = false;
+                CanUseSkill = false;
+                CanParry = false;
+                break;
+            case PlayerState.Death:
                 break;
         }
     }
 
-    private void SetState(PlayerState newState)
+    public void SetState(PlayerState newState)
     {
-        if (CurrentState == newState) return;
+        if (currentState == newState) return;
 
-        CurrentState = newState;
+        currentState = newState;
     }
 
     // PlayerStats 초기화
@@ -265,7 +306,7 @@ public class PlayerController : MonoBehaviour
 
         if (!isGrounded)
         {
-            CanAttack = false; CanUseSkill = false; CanParry = false;
+            //SetState(PlayerState.InAir);
             if (verticalVelocity.y <= fallDamageThreshold && !isFreefall && !isClimb)
             {
                 isFreefall = true;
@@ -286,6 +327,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            
             if (isFreefall)
             {
                 float fallDistance = lastGroundHeight - transform.position.y;
@@ -297,12 +339,6 @@ public class PlayerController : MonoBehaviour
             }
             isFreefall = false;
             isGliding = false;
-            if (!isAttack && !isUseSkill && !isParry)
-            {
-                CanAttack = true;
-                CanUseSkill = true;
-                CanParry = true;
-            }
             playerAnimator.SetBool("Freefall", false);
             playerAnimator.SetBool("Jump", false);
             if (verticalVelocity.y < 0)
@@ -323,32 +359,61 @@ public class PlayerController : MonoBehaviour
 
     private void StateCheck()
     {
-        if(isGrounded && moveInput == Vector2.zero)
+        if (isHit)
         {
-            SetState(PlayerState.PlayerIdle);
-        }
-    }
-
-    private bool animFinishCheck(string animName)
-    {
-        AnimatorStateInfo stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
-        AnimatorClipInfo[] clipInfo = playerAnimator.GetCurrentAnimatorClipInfo(0);
-        AnimationClip currentClip = clipInfo[0].clip;
-        float normalize = stateInfo.normalizedTime;
-        if(currentClip.name == animName)
-        {
-            if (normalize >= 0.95f)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            SetState(PlayerState.Hit);
         }
         else
         {
+            if (isGrounded && !isMove)
+            {
+                SetState(PlayerState.Idle);
+            }
+            else if (isGrounded && isMove && !isParry)
+            {
+                SetState(PlayerState.Move);
+
+            }
+            else if (!isGrounded && !isClimb)
+            {
+                SetState(PlayerState.InAir);
+            }
+
+            if (isAttack)
+            {
+                SetState(PlayerState.Attack);
+            }
+            else if (isParry)
+            {
+                SetState(PlayerState.Parry);
+            }
+            else if (isUseSkill)
+            {
+                SetState(PlayerState.UseSkill);
+            }
+            else if (isClimb)
+            {
+                SetState(PlayerState.Climb);
+            }
+        }
+        
+    }
+
+    AnimatorStateInfo stateInfo;
+    AnimatorClipInfo[] clipInfo;
+    AnimationClip currentClip;
+
+    private bool AnimFinishCheck()
+    {
+        stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
+        float normalize = stateInfo.normalizedTime;
+        if (normalize >= 0.95f)
+        {
             return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
@@ -362,8 +427,6 @@ public class PlayerController : MonoBehaviour
         {
             forward = cameraTransform.forward;
             right = cameraTransform.right;
-
-            
         }
         else
         {
@@ -409,12 +472,18 @@ public class PlayerController : MonoBehaviour
         {
             playerAnimator.SetFloat("MotionSpeed", 1);
             playerAnimator.SetFloat("Speed", 0);
-
+            isMove = false;
+            //SetState(PlayerState.Idle);
         }
         else
         {
             playerAnimator.SetFloat("MotionSpeed", 1);
             playerAnimator.SetFloat("Speed", currentSpeed);
+            isMove = true;
+            //if (currentState != PlayerState.InAir || isGrounded)
+            //{
+            //    SetState(PlayerState.Move);
+            //}
         }
 
         characterController.Move(moveDirection * currentSpeed * Time.deltaTime);
@@ -422,16 +491,11 @@ public class PlayerController : MonoBehaviour
 
         if (direction != Vector3.zero)
         {
-            if(transform.rotation.eulerAngles.y != cameraTransform.rotation.eulerAngles.y)
-            {
-
-            }
             Vector3 forward = transform.forward;
             float angle = Vector3.SignedAngle(forward, direction, Vector3.up);
 
             if(Mathf.Abs(angle) > 0.1f)
             {
-
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 0.2f);
             }
         }
@@ -568,11 +632,12 @@ public class PlayerController : MonoBehaviour
     // 키 활성화 변경
     private void AvoidKeyInput()
     {
-        //if (uiCheck != UIManager.Instance.IsUIWindowOpen())
-        //{
-        //    uiCheck = UIManager.Instance.IsUIWindowOpen();
-        //    SetActionStates(!uiCheck);
-        //}
+        if (uiCheck != UIManager.Instance.IsUIWindowOpen())
+        {
+            uiCheck = UIManager.Instance.IsUIWindowOpen();
+            SetActionStates(!uiCheck);
+            Debug.LogWarning($"uiCheck : {uiCheck}");
+        }
         UpdateInputActions(CanMove, "Move");
         UpdateInputActions(CanAttack, "Attack");
         UpdateInputActions(CanUseSkill, "PlayerSkill_1", "PlayerSkill_2", "PlayerSkill_3");
@@ -606,35 +671,35 @@ public class PlayerController : MonoBehaviour
     // 패링
     private void OnParry()
     {
-        if (InputManager.InputActions.actions["Parry"].triggered)
+        if (InputManager.InputActions.actions["Parry"].triggered && CanParry)
         {
             playerAnimator.SetTrigger("Parry");
+            isParry = true;
         }
-        AnimatorStateInfo stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
-        AnimatorClipInfo[] clipInfo = playerAnimator.GetCurrentAnimatorClipInfo(0);
-        if (clipInfo.Length > 0)
+        if (isParry)
         {
-            AnimationClip currentClip = clipInfo[0].clip;
-            if (currentClip.name == "Parry")
+            ParryCheck();
+            if (AnimFinishCheck())
             {
-                CanAttack = false;
-                CanMove = false;
-                CanUseSkill = false;
-                float normalizedTime = stateInfo.normalizedTime;
-                if (normalizedTime < 0.2f)
-                {
-                    // TODO
-                }
-                if(normalizedTime > 0.95f)
-                {
-                    CanAttack = true;
-                    CanMove = true;
-                    CanUseSkill = true;
-                }
+                isParry = false;
+                onParry = false;
             }
-
         }
-        
+    }
+
+    private void ParryCheck()
+    {
+        stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
+        float normalized = stateInfo.normalizedTime;
+
+        if (normalized >= 0.2f && normalized <= 0.5f)
+        {
+            onParry = true;
+        }
+        else
+        {
+            onParry = false;
+        }
     }
 
     #region ---------------Climb---------------
@@ -688,6 +753,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isClimb) return;
         Debug.Log("StartClimbing");
+        //SetState(PlayerState.Climb);
         isClimb = true;
         isFreefall = false;
         isGliding = false;
@@ -741,7 +807,6 @@ public class PlayerController : MonoBehaviour
 
             CanWeaponSwitch = true;
 
-            // weapon.SwitchWeapon(-1, true);
             weapon.SwitchWeapon(-1);
 
             StartCoroutine(FinishingClimbing());
@@ -753,8 +818,8 @@ public class PlayerController : MonoBehaviour
             Debug.Log("절벽타기 취소됨");
             CanWeaponSwitch = true;
 
-            //weapon.SwitchWeapon(-1, true);
             weapon.SwitchWeapon(-1);
+            //SetState(PlayerState.Idle);
         }
 
         // Anim
@@ -780,7 +845,7 @@ public class PlayerController : MonoBehaviour
 
         playerAnimator.SetBool("Climb", false);
         playerAnimator.SetBool("ClimbUp", false);
-        CanMove = true;
+        //SetState(PlayerState.Idle);
     }
 
     private void HandleClimbJump()
@@ -862,7 +927,27 @@ public class PlayerController : MonoBehaviour
     //
     private void HitCheck(Transform Attacker)
     {
-        playerAnimator.SetTrigger("Hit");
+        if (onParry)
+        {
+            Debug.LogWarning("Parring!!!");
+        }
+        else
+        {
+            playerAnimator.SetTrigger("Hit");
+            isHit = true;
+        }
+    }
+
+    private void HitFinishedCheck()
+    {
+        if (currentState != PlayerState.Hit)
+            return;
+
+        if (isHit && AnimFinishCheck())
+        {
+            isHit = false;
+        }
+
     }
 
     private void DeathCheck()

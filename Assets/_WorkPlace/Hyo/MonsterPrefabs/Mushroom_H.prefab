@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4162405467240868}
-  - component: {fileID: 2593068888325796535}
-  - component: {fileID: 4734444243389737722}
   - component: {fileID: 1566052467807922105}
   - component: {fileID: 2884683775759641259}
+  - component: {fileID: 1847688059845651123}
   m_Layer: 10
   m_Name: Mushroom_H
   m_TagString: Monster
@@ -37,54 +36,6 @@ Transform:
   - {fileID: 4110470248468810}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180.00002, z: 0}
---- !u!65 &2593068888325796535
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1382258774799692}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.6302068, y: 4.5988045, z: 3.5871174}
-  m_Center: {x: -0.006837845, y: 2.2415504, z: -0.017487407}
---- !u!54 &4734444243389737722
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1382258774799692}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0.1
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
 --- !u!95 &1566052467807922105
 Animator:
   serializedVersion: 7
@@ -123,11 +74,36 @@ MonoBehaviour:
   idleTime: 2
   turnSpeed: 10
   maxPatrolDistance: 50
+  arrivedDistance: 1
   searchRange: 8
-  attackRange: 2
   currentState: 0
   spawnPosition: {x: 0, y: 0, z: 0}
   respawn: 0
+--- !u!143 &1847688059845651123
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382258774799692}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 6.94
+  m_Radius: 2
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 3.3, z: 0}
 --- !u!1 &1643898645384686
 GameObject:
   m_ObjectHideFlags: 0

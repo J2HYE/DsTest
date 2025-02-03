@@ -139,8 +139,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 0.0054689837, y: 0.0065320223, z: 0.0114532905}
-  m_Center: {x: 0.0011914404, y: 0.000001776975, z: 0.0016637658}
+  m_Size: {x: 0.008831546, y: 0.009177338, z: 0.01464852}
+  m_Center: {x: 0.0007631743, y: 0.00012806852, z: 0.003261377}
 --- !u!114 &4645688819532855944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,9 +677,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3312499663655723257}
   - component: {fileID: 8869962818903947907}
-  - component: {fileID: -4171347472914059304}
-  - component: {fileID: 633293199729943880}
   - component: {fileID: 8751356391053983087}
+  - component: {fileID: 2081737841792769105}
   m_Layer: 10
   m_Name: Bear_H
   m_TagString: Monster
@@ -726,56 +725,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!54 &-4171347472914059304
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2788726836488354371}
-  serializedVersion: 4
-  m_Mass: 2
-  m_Drag: 0.1
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
---- !u!136 &633293199729943880
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2788726836488354371}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1.9
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0.1}
 --- !u!114 &8751356391053983087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -792,10 +741,36 @@ MonoBehaviour:
   idleTime: 2
   turnSpeed: 10
   maxPatrolDistance: 50
+  arrivedDistance: 1
   searchRange: 7
   currentState: 0
   spawnPosition: {x: 0, y: 0, z: 0}
   respawn: 0
+--- !u!143 &2081737841792769105
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2788726836488354371}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 1.9
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.89, z: 0}
 --- !u!1 &2901057818819817089
 GameObject:
   m_ObjectHideFlags: 0
